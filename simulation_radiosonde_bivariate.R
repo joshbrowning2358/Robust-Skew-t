@@ -1,7 +1,7 @@
 cArgs = commandArgs(trailingOnly=TRUE)
 #cArgs = c("obs", "300", "T")
 if(length(cArgs)!=3)
-  stop("Exactly two args are required, obs/MVN/EX and pressure level!")
+  stop("Exactly three args are required: obs/MVN/EX, pressure level, and restrict (logical)!")
 if(!cArgs[1] %in% c("obs", "MVN", "EX"))
   stop("First argument must be obs or MVN or EX!")
 if(!cArgs[2] %in% c(700, 500, 400, 300, 250, 200, 100, 70))
