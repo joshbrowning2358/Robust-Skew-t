@@ -30,7 +30,7 @@ if(Sys.info()[1]=="Linux" & grepl("ch120", Sys.info()[4]))
   setwd("~/Research/Robust Estimators")
 source("Code/functions.R")
 
-prefix = paste0("Results/Simulation 20140822/type_", type, "_pressure_",pressure,"_outlier_restrict_",restrict)
+prefix = paste0("Results/Simulation 20141107/type_", type, "_pressure_",pressure,"_outlier_restrict_",restrict)
 
 ##########################################################################
 # Run the simulation
@@ -38,9 +38,9 @@ prefix = paste0("Results/Simulation 20140822/type_", type, "_pressure_",pressure
 
 params = data.frame(outPct=c(0,.01,.05))
 params = merge(params, data.frame(n=c(100,300,500)))
-params = merge(params, data.frame(repl=1:50))
+params = merge(params, data.frame(repl=1:200))
 for(i in 1:nrow(params)){
-  out = runSim(n=params[i,"n"], outPct=params[i,"outPct"], k=seq(4,18,2), outSigma=5
+  out = runSim(n=params[i,"n"], outPct=params[i,"outPct"], k=seq(4,26,2), outSigma=5
       ,pressure=pressure, type=type, restrict=restrict)
   out$runNo = i
   if(exists("results"))
@@ -59,27 +59,27 @@ save(results, params, file=paste0(prefix,".RData"))
 ##################################################################
 # Analyzing results
 ##################################################################
-
-table( results$estimator[!is.na(results$xiEst)] )/max(results$runNo)
-#results = results[results$estimator!="nlmRob",]
-noNA = ddply(results, "runNo", function(df){
-  !any(is.na(df))
-} )
-results = merge(results, noNA, by="runNo")
-colnames(results)[colnames(results)=="V1"] = "noNA"
-noNA2 = ddply(results, "runNo", function(df){
-  !any(is.na(df[df$estimator!="nlmRob",]))
-} )
-results = merge(results, noNA2, by="runNo")
-colnames(results)[colnames(results)=="V1"] = "noNA2"
-
-results$outPct = results$outCnt / results$n
-results$n = as.numeric(results$n)
-
-ggsave(paste0(prefix,"_convergence.png"),
-  ggplot(results, aes(x=estimator, y=runNo, fill=!is.na(xiEst)) ) + geom_tile() +
-    labs(fill="Converged?") + scale_y_continuous(limits=c(1,nrow(params)))
-  ,width=6, height=8)
-
-plot_results( results[results$noNA2 & results$estimator!="nlmRob",], prefix=paste0(prefix,"_no_NlmRob"), alpha=alpha, nu=nu)
-plot_results( results[results$noNA,], prefix=paste0(prefix,"_all"), alpha=alpha, nu=nu)
+# 
+# table( results$estimator[!is.na(results$xiEst)] )/max(results$runNo)
+# #results = results[results$estimator!="nlmRob",]
+# noNA = ddply(results, "runNo", function(df){
+#   !any(is.na(df))
+# } )
+# results = merge(results, noNA, by="runNo")
+# colnames(results)[colnames(results)=="V1"] = "noNA"
+# noNA2 = ddply(results, "runNo", function(df){
+#   !any(is.na(df[df$estimator!="nlmRob",]))
+# } )
+# results = merge(results, noNA2, by="runNo")
+# colnames(results)[colnames(results)=="V1"] = "noNA2"
+# 
+# results$outPct = results$outCnt / results$n
+# results$n = as.numeric(results$n)
+# 
+# ggsave(paste0(prefix,"_convergence.png"),
+#   ggplot(results, aes(x=estimator, y=runNo, fill=!is.na(xiEst)) ) + geom_tile() +
+#     labs(fill="Converged?") + scale_y_continuous(limits=c(1,nrow(params)))
+#   ,width=6, height=8)
+# 
+# plot_results( results[results$noNA2 & results$estimator!="nlmRob",], prefix=paste0(prefix,"_no_NlmRob"), alpha=alpha, nu=nu)
+# plot_results( results[results$noNA,], prefix=paste0(prefix,"_all"), alpha=alpha, nu=nu)
