@@ -30,7 +30,7 @@
 
 robustST = function(y, x=matrix(1,nrow=NROW(y)), robust=T, method=c("nlminb", "constrOptim"), w=rep(1,nrow(x)), k=10
                     ,start=NULL){
-    library(sn)
+    #library(sn)
     
     #Data quality checks
     if(any(is.na(y))){

@@ -28,7 +28,7 @@ mst.pdev.grad.robust = function(param, x, y, k=2, ...){
     #If -LogLikelihood>k, we change -LL to Psi(-LL).  Thus, gradient becomes Psi'(-LL)*(-LL)'=psi(-LL)*(-LL)'
     robustGH = nonRobustGH
     if(any(nonRobust>k))
-        robustGH[nonRobust>k,] = robustGH[nonRobust>k,]*sapply(nonRobust[nonRobust>k], psi, k=k)
+        robustGH[nonRobust>k,] = robustGH[nonRobust>k,]*sapply(nonRobust[nonRobust>k], psi.grad, k=k)
     #Some NA's can occur from st.pdev.gh.  Set them to 0, since I have no better idea as to why they occur (presumably really small density values)
     robustGH[is.na(robustGH)] = 0
     return( colSums(robustGH) )  

@@ -10,10 +10,12 @@
 ##' @param k A numeric vector of constants to use in "capping" the likelihood
 ##' function.  Each constant is tried in turn, and results are returned for all
 ##' values.
-##' @param xi Center parameter of the skew-t to simulate.
-##' @param omega Scale parameter of the skew-t to simulate.
-##' @param alpha Skewness parameter of the skew-t to simulate.
-##' @param nu Heaviness of tails parameter of the skew-t to simulate.
+##' @param fast.k A vector of k values for the fastTLE algorithm.  Each value
+##' should represent the proportion of data to be used in estimating the MLE.
+##' @param xi0 Simulated center parameter of the skew-t to simulate.
+##' @param omega0 Simulated scale parameter of the skew-t to simulate.
+##' @param alpha0 Simulated skewness parameter of the skew-t to simulate.
+##' @param nu0 Simulated heaviness of tails parameter of the skew-t to simulate.
 ##' @param pressure Use Denver station data at this pressure level, and
 ##' simulate the skew-t using Ying's code
 ##' @param type The type of skewness to use.  Must be "MVN", "obs", or "EX".
@@ -71,7 +73,7 @@ runSim = function(n=100, outPct=0, outSigma=0, k=6:10, fast.k=c(.99,.98,.95,.9)
         x = matrix(rep(1,n))
         p = length(xi0)
         if(p==1){ #Univariate data
-            y = as.vector(rst(n, xi0, Omega0, alpha0, nu0))    
+            y = as.vector(sn:::rst(n, xi0, Omega0, alpha0, nu0))    
             #Contaminate with outliers?
             outRows = c()
             if(outPct>0){

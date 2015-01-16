@@ -24,6 +24,6 @@ n.dev.gh.robust = function(dp, y, k=2){
     # If -LogLikelihood>k, we change -LL to Psi(-LL).  Thus, gradient becomes Psi'(-LL)*(-LL)'=psi(-LL)*(-LL)'
     robustGH = nonRobustGH
     if(any(nonRobust>k))
-        robustGH[nonRobust>k,] = robustGH[nonRobust>k,]*sapply(nonRobust[nonRobust>k], psi, k=k)
+        robustGH[nonRobust>k,] = robustGH[nonRobust>k,]*sapply(nonRobust[nonRobust>k], psi.grad, k=k)
     return( colSums(robustGH) )
 }

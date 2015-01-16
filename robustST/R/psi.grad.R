@@ -20,7 +20,7 @@
 ##' @export
 ##' 
 
-psi = function(originalNLL, k){
+psi.grad = function(originalNLL, k){
     ifelse(originalNLL>k,
            exp(-originalNLL/k+1),
            1)
