@@ -9,6 +9,7 @@ if(!cArgs[2] %in% c(700, 500, 400, 300, 250, 200, 100, 70))
 if(!cArgs[3] %in% c("T","F"))
   stop("Third argument must be in c(T,F)!")
 
+## Read in the command arguments and assign them to appropriate variables
 type = cArgs[1]
 pressure = as.numeric(cArgs[2])
 restrict = as.logical(cArgs[3])
@@ -22,6 +23,11 @@ library(scales)
 library(plyr)
 library(reshape)
 
+## Check System information to determine which working directory to use.
+## JOSH to MANDY: You'll need to update this
+## Your chosen working directory should have a subdirectory called "Code" where functions.R is stored.
+## Also, a Results/Simulation 20141107 (you can change the date below) directory is required, where
+## the output from this simulation will be written.
 if(Sys.info()[1]=="Windows")
   setwd("C:/Users/rockc_000/Documents/Professional Files/Mines/Research/Robust Estimators/")
 if(Sys.info()[1]=="Linux" & Sys.info()[4]=="jb")
@@ -30,16 +36,20 @@ if(Sys.info()[1]=="Linux" & grepl("ch120", Sys.info()[4]))
   setwd("~/Research/Robust Estimators")
 source("Code/functions.R")
 
+## Update this date with the appropriate date/subdirectory.
 prefix = paste0("Results/Simulation 20141107/type_", type, "_pressure_",pressure,"_outlier_restrict_",restrict)
 
 ##########################################################################
 # Run the simulation
 ##########################################################################
 
+## Create a data.frame with all the parameters that should be used for the
+## various simulations.
 params = data.frame(outPct=c(0,.01,.05))
 params = merge(params, data.frame(n=c(100,300,500)))
 params = merge(params, data.frame(repl=1:200))
 for(i in 1:nrow(params)){
+  ## runSim contains the main driver script for this analysis
   out = runSim(n=params[i,"n"], outPct=params[i,"outPct"], k=seq(4,26,2), outSigma=5
       ,pressure=pressure, type=type, restrict=restrict)
   out$runNo = i
@@ -48,6 +58,7 @@ for(i in 1:nrow(params)){
   else
     results = out
 
+  ## Save results out to a file after every 10 runs, and print a line every time.
   if(i%%1==0 )
     cat("Run",i,"completed out of",nrow(params),"\n")
   if(i%%10==0 )
