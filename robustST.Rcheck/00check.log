@@ -1,10 +1,10 @@
-* using log directory ‘/home/josh/Documents/Github/Robust-Skew-t/robustST.Rcheck’
-* using R version 3.0.2 (2013-09-25)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* checking for file ‘robustST/DESCRIPTION’ ... OK
+* using log directory 'C:/Users/rockc_000/Documents/GitHub/MCLE/Robust-Skew-t/robustST.Rcheck'
+* using R version 3.1.0 (2014-04-10)
+* using platform: x86_64-w64-mingw32 (64-bit)
+* using session charset: ISO8859-1
+* checking for file 'robustST/DESCRIPTION' ... OK
 * checking extension type ... Package
-* this is package ‘robustST’ version ‘1.0.0’
+* this is package 'robustST' version '1.0.0'
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -12,8 +12,12 @@
 * checking for executable files ... OK
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
-* checking whether package ‘robustST’ can be installed ... OK
+* checking whether package 'robustST' can be installed ... WARNING
+Found the following significant warnings:
+  Warning: package 'sn' was built under R version 3.1.2
+  Warning: package 'sn' was built under R version 3.1.2
+  Warning: package 'sn' was built under R version 3.1.2
+See 'C:/Users/rockc_000/Documents/GitHub/MCLE/Robust-Skew-t/robustST.Rcheck/00install.out' for details.
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -30,48 +34,51 @@
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
 * checking dependencies in R code ... NOTE
-‘:::’ call which should be ‘::’: ‘sn:::rst’
+Package in Depends field not imported from: 'sn'
+  These packages need to be imported from (in the NAMESPACE file)
+  for when this namespace is loaded but not attached.
+':::' call which should be '::': 'sn:::rst'
   See the note in ?`:::` about the use of this operator.
-See the information on DESCRIPTION files in the chapter ‘Creating R
-packages’ of the ‘Writing R Extensions’ manual.
+See the information on DESCRIPTION files in the chapter 'Creating R
+packages' of the 'Writing R Extensions' manual.
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
 * checking R code for possible problems ... NOTE
 fast.TLE.BST : negLogLik: no visible global function definition for
-  ‘dplist2optpar’
+  'dplist2optpar'
 fast.TLE.BST : negLogLik : <anonymous>: no visible global function
-  definition for ‘mst.pdev’
+  definition for 'mst.pdev'
 fast.TLE.ST : negLogLik: no visible binding for global variable
-  ‘st.pdev’
+  'st.pdev'
 mst.pdev.grad.robust : <anonymous>: no visible global function
-  definition for ‘mst.pdev.grad’
+  definition for 'mst.pdev.grad'
 mst.pdev.grad.robust : <anonymous>: no visible global function
-  definition for ‘mst.pdev’
+  definition for 'mst.pdev'
 mst.pdev.robust : <anonymous>: no visible global function definition
-  for ‘mst.pdev’
-plot_results: no visible binding for global variable ‘xiEst’
-plot_results: no visible binding for global variable ‘estimator’
-plot_results: no visible binding for global variable ‘omegaEst’
-plot_results: no visible binding for global variable ‘alphaEst’
-plot_results: no visible binding for global variable ‘nuEst’
-robustST: no visible global function definition for ‘st.cp2dp’
+  for 'mst.pdev'
+plot_results: no visible binding for global variable 'xiEst'
+plot_results: no visible binding for global variable 'estimator'
+plot_results: no visible binding for global variable 'omegaEst'
+plot_results: no visible binding for global variable 'alphaEst'
+plot_results: no visible binding for global variable 'nuEst'
+robustST: no visible global function definition for 'st.cp2dp'
 robustST : <anonymous>: no visible global function definition for
-  ‘st.pdev’
+  'st.pdev'
 robustST : <anonymous>: no visible global function definition for
-  ‘st.pdev.gh’
-robustST: no visible global function definition for ‘dplist2optpar’
+  'st.pdev.gh'
+robustST: no visible global function definition for 'dplist2optpar'
 robustST : <anonymous>: no visible global function definition for
-  ‘mst.pdev’
+  'mst.pdev'
 robustST : <anonymous>: no visible global function definition for
-  ‘mst.pdev.grad’
-robustST: no visible global function definition for ‘optpar2dplist’
-runSim: no visible global function definition for ‘denverParams’
-runSim: no visible global function definition for ‘m2Angle’
-runSim: no visible global function definition for ‘m2AngleRestrict’
-st.pdev.gh.robust: no visible binding for global variable ‘st.pdev.gh’
-st.pdev.gh.robust: no visible binding for global variable ‘st.pdev’
-st.pdev.robust: no visible binding for global variable ‘st.pdev’
+  'mst.pdev.grad'
+robustST: no visible global function definition for 'optpar2dplist'
+runSim: no visible global function definition for 'denverParams'
+runSim: no visible global function definition for 'm2Angle'
+runSim: no visible global function definition for 'm2AngleRestrict'
+st.pdev.gh.robust: no visible binding for global variable 'st.pdev.gh'
+st.pdev.gh.robust: no visible binding for global variable 'st.pdev'
+st.pdev.robust: no visible binding for global variable 'st.pdev'
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
@@ -79,38 +86,38 @@ st.pdev.robust: no visible binding for global variable ‘st.pdev’
 * checking for code/documentation mismatches ... OK
 * checking Rd \usage sections ... WARNING
 Undocumented arguments in documentation object 'fast.TLE.BST'
-  ‘...’
+  '...'
 
 Undocumented arguments in documentation object 'fast.TLE.ST'
-  ‘...’
+  '...'
 
 Undocumented arguments in documentation object 'mst.pdev.grad.robust'
-  ‘...’
+  '...'
 
 Undocumented arguments in documentation object 'mst.pdev.robust'
-  ‘...’
+  '...'
 
 Undocumented arguments in documentation object 'robustST'
-  ‘method’
+  'method'
 Documented arguments not in \usage in documentation object 'robustST':
-  ‘method:’
+  'method:'
 
 Undocumented arguments in documentation object 'runSim'
-  ‘outSigma’ ‘Omega0’
+  'outSigma' 'Omega0'
 Documented arguments not in \usage in documentation object 'runSim':
-  ‘outSigma:’ ‘omega0’
+  'outSigma:' 'omega0'
 
 Undocumented arguments in documentation object 'st.pdev.robust'
-  ‘...’
+  '...'
 
 Functions with \usage entries need to have the appropriate \alias
 entries, and all their arguments documented.
 The \usage entries must correspond to syntactically valid R code.
-See the chapter ‘Writing R documentation files’ in the ‘Writing R
-Extensions’ manual.
+See the chapter 'Writing R documentation files' in the 'Writing R
+Extensions' manual.
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
 * checking examples ... NONE
 * checking PDF version of manual ... OK
-WARNING: There was 1 warning.
+WARNING: There were 2 warnings.
 NOTE: There were 2 notes.

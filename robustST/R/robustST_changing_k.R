@@ -13,10 +13,12 @@
 ##' for multivariate data.  For univariate, constrOptim is recommended.  For
 ##' multivariate, constrOptim is also recommended as it appears to be faster.
 ##' @param w A vector of case weights, defaults to a vector of ones.
-##' @param k A parameter controlling the "robustness" of the fit.  The maximum
-##' value for the negative log-likelihood for any observation is 2*k.  Thus, as
-##' k->Inf the estimator approaches the MLE.  k values around 8 or 10 seem to
-##' perform well.
+##' @param alpha A parameter controlling the "robustness" of the fit.  Given
+##' current parameter estimates, a (1-alpha)% confidence region can be
+##' constructed, and observations in this region will not be adjusted during
+##' the optimization.  However, values outside this region will have their
+##' likelihood adjusted down, and hence will have less influence on the
+##' M-estimator.  As alpha->1 the estimator approaches the MLE.
 ##' @param start The starting values for the optimization.  If NULL, reasonable
 ##' values are automatically chosen.
 ##' 
@@ -30,7 +32,7 @@
 
 robustST = function(y, x = matrix(1, nrow = NROW(y)), robust = T,
                     method = c("nlminb", "constrOptim"), w = rep(1,nrow(x)),
-                    k = 10, start = NULL){
+                    alpha = 0.01, start = NULL){
     #library(sn)
     
     #Data quality checks

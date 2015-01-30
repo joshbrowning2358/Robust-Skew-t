@@ -15,9 +15,9 @@
 ##' @export
 ##' 
 
-st.pdev.robust = function(dp, x, y, k = 2, ...){
-    nonRobust = sapply(1:length(y), sn:::st.pdev, y = y[i],
-                       x = x[i, , drop = FALSE], dp = dp, w = 1)
-    robust = ifelse(nonRobust > k, sapply(nonRobust, Psi, k = k), nonRobust)
-    return(sum(robust))
+st.pdev.robust = function(dp, x, y, k=2, ...){
+    nonRobust = lapply(y, st.pdev, dp=dp, x=matrix(1,nrow=1))
+    nonRobust = do.call("c", nonRobust)
+    robust = ifelse(nonRobust>k, sapply(nonRobust, Psi, k=k), nonRobust)
+    return( sum(robust) )
 }

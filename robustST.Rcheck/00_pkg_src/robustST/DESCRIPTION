@@ -16,4 +16,3 @@ ZipData: no
 VignetteBuilder: knitr
 Suggests: knitr, ggplot2
 Packaged: 2015-01-16 13:47:44 UTC; josh
-Built: R 3.1.0; ; 2015-01-25 04:23:22 UTC; windows
