@@ -72,19 +72,7 @@ robustST = function(y, x = matrix(1, nrow = NROW(y)), robust = T,
     #Treat univariate separately
     if(d == 1){
         if(is.null(start)){
-            #Determine starting estimate (via logic from sn::st.mple function)
-            ls <- lm.wfit(x, y, w)
-            res <- ls$residuals
-            s <- sqrt(sum(w * res^2)/nw)
-            gamma1 <- sum(w * res^3)/(nw * s^3)
-            gamma2 <- sum(res^4)/(nw * s^4) - 3
-            cp <- c(ls$coef, s, gamma1, gamma2)
-            dp <- st.cp2dp(cp, silent = TRUE)
-            if (is.null(dp)) 
-                dp <- rep(NA, length(cp))
-            if (any(is.na(dp))) 
-                dp <- c(cp[1:(p + 1)], 0, 10)
-            names(dp) = c("xi", "omega", "alpha", "nu")
+            getStartingEstimate(y = y, x = x, w = w)
         } else {
             dp = start
         }
@@ -147,16 +135,7 @@ robustST = function(y, x = matrix(1, nrow = NROW(y)), robust = T,
         
     } else { #Now multivariate case
         if(is.null(start)){
-            #Determine starting estimate (via logic from mst.mple function in sn)
-            ls <- lm.wfit(x, y, w, singular.ok = FALSE)
-            beta <- coef(ls)
-            Omega <-  var(resid(ls))
-            omega <- sqrt(diag(Omega))
-            alpha <- rep(0, d)
-            nu <- 8
-            param <- dplist2optpar(list(beta = beta, Omega = Omega,
-                                        alpha = alpha))
-            param <- c(param, log(nu))
+            getStartingEstimate(y = y, x = x, w = w)
         } else {
             param = start
         }

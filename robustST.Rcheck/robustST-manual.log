@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.4.21)  25 JAN 2015 05:24
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.4.21)  5 FEB 2015 06:21
 entering extended mode
-**C:/Users/ROCKC_?1/AppData/Local/Temp/RtmpG8ktiA/Rd2pdf4382add4a17/Rd2.tex
-(C:/Users/ROCKC_~1/AppData/Local/Temp/RtmpG8ktiA/Rd2pdf4382add4a17/Rd2.tex
+**C:/Users/ROCKC_?1/AppData/Local/Temp/RtmpWY6sT9/Rd2pdf2d94579e7512/Rd2.tex
+(C:/Users/ROCKC_~1/AppData/Local/Temp/RtmpWY6sT9/Rd2pdf2d94579e7512/Rd2.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -624,7 +624,7 @@ File: latin1.def 2008/03/30 v1.1d Input encoding file
 \@indexfile=\write3
 
 Writing index file Rd2.idx
-(C:\Users\ROCKC_~1\AppData\Local\Temp\RtmpG8ktiA\Rd2pdf4382add4a17\Rd2.aux)
+(C:\Users\ROCKC_~1\AppData\Local\Temp\RtmpWY6sT9\Rd2pdf2d94579e7512\Rd2.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
 LaTeX Font Info:    ... okay on input line 8.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
@@ -683,8 +683,8 @@ LaTeX Info: Redefining \ref on input line 8.
 LaTeX Info: Redefining \pageref on input line 8.
 LaTeX Info: Redefining \nameref on input line 8.
 
-(C:\Users\ROCKC_~1\AppData\Local\Temp\RtmpG8ktiA\Rd2pdf4382add4a17\Rd2.out)
-(C:\Users\ROCKC_~1\AppData\Local\Temp\RtmpG8ktiA\Rd2pdf4382add4a17\Rd2.out)
+(C:\Users\ROCKC_~1\AppData\Local\Temp\RtmpWY6sT9\Rd2pdf2d94579e7512\Rd2.out)
+(C:\Users\ROCKC_~1\AppData\Local\Temp\RtmpWY6sT9\Rd2pdf2d94579e7512\Rd2.out)
 \@outlinefile=\write4
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 9.
@@ -708,7 +708,7 @@ LaTeX Font Info:    Try loading font information for T1+phv on input line 33.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\t1phv.fd"
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
-(C:\Users\ROCKC_~1\AppData\Local\Temp\RtmpG8ktiA\Rd2pdf4382add4a17\Rd2.toc
+(C:\Users\ROCKC_~1\AppData\Local\Temp\RtmpWY6sT9\Rd2pdf2d94579e7512\Rd2.toc
 [1
 
 
@@ -755,53 +755,65 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ) [7]
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-) [8]
+)
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-Overfull \hbox (4.25778pt too wide) in paragraph at lines 455--458
-[]\T1/ptm/m/n/10 The pa-ram-e-ter con-trol-ling the amount of ro-bus-ti-fi-ca-t
-ion. Neg-a-tive log-likelihoods
- []
-
+) [8]
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ) [9]
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
+Overfull \hbox (4.25778pt too wide) in paragraph at lines 524--527
+[]\T1/ptm/m/n/10 The pa-ram-e-ter con-trol-ling the amount of ro-bus-ti-fi-ca-t
+ion. Neg-a-tive log-likelihoods
+ []
+
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ) [10]
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ) [11]
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+) [12]
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+) [13]
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+) [14]
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
-(C:\Users\ROCKC_~1\AppData\Local\Temp\RtmpG8ktiA\Rd2pdf4382add4a17\Rd2.ind
-[12] [13
+(C:\Users\ROCKC_~1\AppData\Local\Temp\RtmpWY6sT9\Rd2pdf2d94579e7512\Rd2.ind
+[15] [16
 
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 673.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 673.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 846.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 846.
 
-(C:\Users\ROCKC_~1\AppData\Local\Temp\RtmpG8ktiA\Rd2pdf4382add4a17\Rd2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 673.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 673.
+(C:\Users\ROCKC_~1\AppData\Local\Temp\RtmpWY6sT9\Rd2pdf2d94579e7512\Rd2.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 846.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 846.
 Package rerunfilecheck Info: File `Rd2.out' has not changed.
-(rerunfilecheck)             Checksum: 2EBCAC694C08C4CD9EBE567B9A7FE997;1042.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 673.
+(rerunfilecheck)             Checksum: CB76962F838A88AB532900B89A50D2F1;1318.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 846.
  ) 
 Here is how much of TeX's memory you used:
- 6483 strings out of 493921
- 94040 string characters out of 3147270
+ 6523 strings out of 493921
+ 94953 string characters out of 3147270
  167264 words of memory out of 3000000
- 9518 multiletter control sequences out of 15000+200000
+ 9522 multiletter control sequences out of 15000+200000
  35928 words of font info for 45 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 38i,6n,27p,284b,505s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,6n,27p,285b,558s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}{C:/Program File
 s/MiKTeX 2.9/fonts/enc/dvips/inconsolata/i4-t1-0.enc}<C:/Program Files/MiKTeX 2
 .9/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><C:/Program Files/MiKTeX
@@ -809,9 +821,9 @@ s/MiKTeX 2.9/fonts/enc/dvips/inconsolata/i4-t1-0.enc}<C:/Program Files/MiKTeX 2
 e1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr
 8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Progra
 m Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (13 pages, 124816 bytes).
+Output written on Rd2.pdf (16 pages, 138833 bytes).
 PDF statistics:
- 323 PDF objects out of 1000 (max. 8388607)
- 127 named destinations out of 1000 (max. 500000)
- 153 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 385 PDF objects out of 1000 (max. 8388607)
+ 155 named destinations out of 1000 (max. 500000)
+ 185 words of extra memory for PDF output out of 10000 (max. 10000000)
 

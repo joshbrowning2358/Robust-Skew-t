@@ -15,4 +15,4 @@ LazyData: yes
 ZipData: no
 VignetteBuilder: knitr
 Suggests: knitr, ggplot2
-Packaged: 2015-01-16 13:47:44 UTC; josh
+Packaged: 2015-02-05 05:20:30 UTC; rockc_000

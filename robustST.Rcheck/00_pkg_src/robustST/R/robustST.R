@@ -28,8 +28,9 @@
 ##' @export
 ##' 
 
-robustST = function(y, x=matrix(1,nrow=NROW(y)), robust=T, method=c("nlminb", "constrOptim"), w=rep(1,nrow(x)), k=10
-                    ,start=NULL){
+robustST = function(y, x = matrix(1, nrow = NROW(y)), robust = T,
+                    method = c("nlminb", "constrOptim"), w = rep(1,nrow(x)),
+                    k = 10, start = NULL){
     #library(sn)
     
     #Data quality checks
@@ -39,26 +40,26 @@ robustST = function(y, x=matrix(1,nrow=NROW(y)), robust=T, method=c("nlminb", "c
         else
             filt = !apply(y, 1, function(x){any(is.na(x))})
         
-        x = x[filt,]
+        x = x[filt, ]
         w = w[filt]
         if(is.null(dim(y)))
             y = y[filt]
         else
-            y = y[filt,]
+            y = y[filt, ]
     }
-    if(!is(x,"matrix"))
+    if(!is(x, "matrix"))
         stop("x must be a matrix!")
     if(!is.matrix(y) & !is.numeric(y))
         stop("y must be a matrix or numeric vector!")
     if(!is(robust,"logical"))
         stop("robust must be a logical!")
-    if(nrow(x)!=NROW(y))
+    if(nrow(x) != NROW(y))
         stop("x and y must have the same number of observations!")
     if(!is.numeric(w))
         stop("w must be numeric!")
-    if(length(w)!=nrow(x))
+    if(length(w) != nrow(x))
         stop("w must have the same length as ncol(x)!")
-    if(length(method)>1)
+    if(length(method) > 1)
         method = method[1]
     if(!method %in% c("nlminb", "constrOptim"))
         stop("method must be one of nlminb or constrOptim!")
@@ -69,71 +70,64 @@ robustST = function(y, x=matrix(1,nrow=NROW(y)), robust=T, method=c("nlminb", "c
     nw = sum(w)
     
     #Treat univariate separately
-    if(d==1){
+    if(d == 1){
         if(is.null(start)){
-            #Determine starting estimate (via logic from st.mple function in sn)
-            ls <- lm.wfit(x, y, w)
-            res <- ls$residuals
-            s <- sqrt(sum(w * res^2)/nw)
-            gamma1 <- sum(w * res^3)/(nw * s^3)
-            gamma2 <- sum(res^4)/(nw * s^4) - 3
-            cp <- c(ls$coef, s, gamma1, gamma2)
-            dp <- st.cp2dp(cp, silent = TRUE)
-            if (is.null(dp)) 
-                dp <- rep(NA, length(cp))
-            if (any(is.na(dp))) 
-                dp <- c(cp[1:(p + 1)], 0, 10)
-            names(dp) = c("xi", "omega", "alpha", "nu")
+            getStartingEstimate(y = y, x = x, w = w)
         } else {
             dp = start
         }
         
-        if(!robust & method=="nlminb"){
-            nlmEst = try(nlminb( start=dp
-                                 ,function(dp){st.pdev(dp, x, y, w=w)}
-                                 ,gradient=function(dp){st.pdev.gh(dp, x, y)}))
+        if(!robust & method == "nlminb"){
+            nlmEst = try(nlminb(start = dp,
+                                function(dp){st.pdev(dp, x, y, w = w)},
+                                gradient = function(dp){st.pdev.gh(dp, x, y)}))
             if(is(nlmEst, "try-error")){
-                fit = rep(NA, length(dp)+1)
+                fit = rep(NA, length(dp) + 1)
             } else {
-                fit = c( nlmEst$par, convergence=nlmEst$convergence )
+                fit = c(nlmEst$par, convergence = nlmEst$convergence)
             }
         }
         
-        if(!robust & method=="constrOptim"){
-            conEst = try(constrOptim(theta=dp
-                                     ,f=function(dp){st.pdev(dp, x, y)}
-                                     ,grad=function(dp){st.pdev.gh(dp, x, y)}
+        if(!robust & method == "constrOptim"){
+            conEst = try(constrOptim(theta = dp,
+                                     f = function(dp){st.pdev(dp, x, y)},
+                                     grad = function(dp){st.pdev.gh(dp, x, y)},
                                      #Constraints: force omega>0 and nu>0
-                                     ,ui=matrix(c(0,0,1,0,0,0,0,1), nrow=2)
-                                     ,ci=rep(0,2)))
+                                     ui = matrix(c(0,0,1,0,0,0,0,1), nrow=2),
+                                     ci = rep(0,2)))
             if(is(conEst, "try-error")){
-                fit = rep(NA, length(dp)+1)
+                fit = rep(NA, length(dp) + 1)
             } else {
-                fit = c( conEst$par, convergence=conEst$convergence )
+                fit = c(conEst$par, convergence = conEst$convergence)
             }
         }
         
-        if(robust & method=="nlminb"){
-            nlmRobEst = try(nlminb( start=dp
-                                    ,function(dp){st.pdev.robust(dp, x, y, k=k)}
-                                    ,gradient=function(dp){st.pdev.gh.robust(dp, x, y, k=k)}))
+        if(robust & method == "nlminb"){
+            nlmRobEst = try(nlminb( start = dp,
+                                    function(dp){
+                                        st.pdev.robust(dp, x, y, k = k)},
+                                    gradient = function(dp){
+                                        st.pdev.gh.robust(dp, x, y, k = k)}))
             if(is(nlmRobEst, "try-error")){
-                fit = rep(NA, length(dp)+1)
+                fit = rep(NA, length(dp) + 1)
             } else {
-                fit = c( nlmRobEst$par, convergence=nlmRobEst$convergence )
+                fit = c(nlmRobEst$par, convergence = nlmRobEst$convergence)
             }
         }
         
-        if(robust & method=="constrOptim"){
-            conRobEst = try(constrOptim(theta=dp
-                                        ,f=function(dp){st.pdev.robust(dp, x, y, k=k)}
-                                        ,grad=function(dp){st.pdev.gh.robust(dp, x, y, k=k)}
-                                        ,ui=matrix(c(0,0,1,0,0,0,0,1), nrow=2)
-                                        ,ci=rep(0,2)))
+        if(robust & method == "constrOptim"){
+            conRobEst = try(constrOptim(theta = dp,
+                                        f = function(dp){
+                                            st.pdev.robust(dp, x, y, k = k)},
+                                        grad = function(dp){
+                                            st.pdev.gh.robust(dp, x, y, k = k)},
+                                        ui = matrix(c(0, 0, 1, 0, 0, 0, 0, 1),
+                                                    nrow = 2),
+                                        ci = rep(0,2)))
             if(is(conRobEst, "try-error")){
-                fit = rep(NA, length(dp)+1)
+                fit = rep(NA, length(dp) + 1)
             } else {
-                fit = c( conRobEst$par, convergence=conRobEst$convergence )
+                fit = c(conRobEst$par, convergence = conRobEst$convergence)
             }
         }
         
@@ -141,15 +135,7 @@ robustST = function(y, x=matrix(1,nrow=NROW(y)), robust=T, method=c("nlminb", "c
         
     } else { #Now multivariate case
         if(is.null(start)){
-            #Determine starting estimate (via logic from mst.mple function in sn)
-            ls <- lm.wfit(x, y, w, singular.ok=FALSE)
-            beta <- coef(ls)
-            Omega <-  var(resid(ls))
-            omega <- sqrt(diag(Omega))
-            alpha <- rep(0, d)
-            nu <- 8
-            param <- dplist2optpar(list(beta=beta, Omega=Omega, alpha=alpha))
-            param <- c(param, log(nu))
+            getStartingEstimate(y = y, x = x, w = w)
         } else {
             param = start
         }
@@ -208,7 +194,9 @@ robustST = function(y, x=matrix(1,nrow=NROW(y)), robust=T, method=c("nlminb", "c
             }
         }
         
-        optpar = optpar2dplist(fit[-length(fit)], p=p, d=d)
-        return( list(beta=optpar$beta, Omega=optpar$Omega, alpha=optpar$alpha, nu=optpar$nu, convergence=fit[length(fit)] ) )
+        optpar = optpar2dplist(fit[-length(fit)], p = p, d = d)
+        return(list(beta = optpar$beta, Omega = optpar$Omega,
+                    alpha = optpar$alpha, nu = optpar$nu,
+                    convergence = fit[length(fit)]))
     }
 }

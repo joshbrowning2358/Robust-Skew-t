@@ -19,10 +19,10 @@
 
 mst.pdev.grad.robust = function(param, x, y, k=2, ...){
     nonRobustGH = t( sapply(1:NROW(y), function(i){
-        mst.pdev.grad(param=param, x=x[i,,drop=F], y=y[i,,drop=F], w=1)
+        sn:::mst.pdev.grad(param=param, x=x[i,,drop=F], y=y[i,,drop=F], w=1)
     }) )
     nonRobust = sapply(1:NROW(y), function(i){
-        mst.pdev(param=param, x=x[i,,drop=F], y=y[i,,drop=F], w=1)
+        sn:::mst.pdev(param=param, x=x[i,,drop=F], y=y[i,,drop=F], w=1)
     })
     #If -LogLikelihood<k, we don't adjust at all.  Thus, gradient doesn't change for that case.
     #If -LogLikelihood>k, we change -LL to Psi(-LL).  Thus, gradient becomes Psi'(-LL)*(-LL)'=psi(-LL)*(-LL)'

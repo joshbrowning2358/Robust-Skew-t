@@ -7,6 +7,7 @@
 ##' @param y A vector or matrix of observations to fit the skew-t to.
 ##' @param x A matrix of ones, or matrix of independent variables for skew-t
 ##' regression (use caution, as this feature has not been tested!)
+##' @param robust Should the robust estimator be used?
 ##' @param method: constrOptim uses a constrained algorithm, forcing nu and
 ##' omega>0.  However, the implementation for multivariate skew-t fitting
 ##' enforces this by default, so nlminb and constrOptim should be very similar
@@ -30,7 +31,7 @@
 ##' @export
 ##' 
 
-robustSTChangingK = function(y, x = matrix(1, nrow = NROW(y)),
+robustSTChangingK = function(y, x = matrix(1, nrow = NROW(y)), robust = T,
                              method = c("nlminb", "constrOptim"),
                              w = rep(1, nrow(x)), pValue = 0.01,
                              start = NULL){
@@ -54,6 +55,8 @@ robustSTChangingK = function(y, x = matrix(1, nrow = NROW(y)),
         stop("x must be a matrix!")
     if(!is.matrix(y) & !is.numeric(y))
         stop("y must be a matrix or numeric vector!")
+    if(!is(robust,"logical"))
+        stop("robust must be a logical!")
     if(nrow(x) != NROW(y))
         stop("x and y must have the same number of observations!")
     if(!is.numeric(w))
@@ -65,20 +68,17 @@ robustSTChangingK = function(y, x = matrix(1, nrow = NROW(y)),
     if(!method %in% c("nlminb", "constrOptim"))
         stop("method must be one of nlminb or constrOptim!")
     
-    ## Assign useful variables
     n = nrow(x)
     p = ncol(x)
     d = NCOL(y)
     nw = sum(w)
     
-    ## Compute starting estimate if needed
     if(is.null(start)){
-        param = getStartingEstimate(y = y, x = x, w = w)
+        getStartingEstimate(y = y, x = x, w = w)
     } else {
         param = start
     }
     
-    ## Fit the models until k converges
     kValues = NULL
     kDelta = Inf
     while(kDelta > .01){

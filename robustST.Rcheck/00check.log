@@ -32,12 +32,15 @@ See 'C:/Users/rockc_000/Documents/GitHub/MCLE/Robust-Skew-t/robustST.Rcheck/00in
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
 * checking dependencies in R code ... NOTE
 Package in Depends field not imported from: 'sn'
   These packages need to be imported from (in the NAMESPACE file)
   for when this namespace is loaded but not attached.
 ':::' call which should be '::': 'sn:::rst'
+  See the note in ?`:::` about the use of this operator.
+Unexported objects imported by ':::' calls:
+  'sn:::dplist2optpar' 'sn:::mst.pdev' 'sn:::mst.pdev.grad'
+  'sn:::optpar2dplist' 'sn:::st.pdev'
   See the note in ?`:::` about the use of this operator.
 See the information on DESCRIPTION files in the chapter 'Creating R
 packages' of the 'Writing R Extensions' manual.
@@ -51,34 +54,36 @@ fast.TLE.BST : negLogLik : <anonymous>: no visible global function
   definition for 'mst.pdev'
 fast.TLE.ST : negLogLik: no visible binding for global variable
   'st.pdev'
-mst.pdev.grad.robust : <anonymous>: no visible global function
-  definition for 'mst.pdev.grad'
-mst.pdev.grad.robust : <anonymous>: no visible global function
-  definition for 'mst.pdev'
-mst.pdev.robust : <anonymous>: no visible global function definition
-  for 'mst.pdev'
+getStartingEstimate: no visible binding for global variable 'nw'
+getStartingEstimate: no visible global function definition for
+  'st.cp2dp'
+getStartingEstimate: no visible binding for global variable 'p'
 plot_results: no visible binding for global variable 'xiEst'
 plot_results: no visible binding for global variable 'estimator'
 plot_results: no visible binding for global variable 'omegaEst'
 plot_results: no visible binding for global variable 'alphaEst'
 plot_results: no visible binding for global variable 'nuEst'
-robustST: no visible global function definition for 'st.cp2dp'
 robustST : <anonymous>: no visible global function definition for
   'st.pdev'
 robustST : <anonymous>: no visible global function definition for
   'st.pdev.gh'
-robustST: no visible global function definition for 'dplist2optpar'
 robustST : <anonymous>: no visible global function definition for
   'mst.pdev'
 robustST : <anonymous>: no visible global function definition for
   'mst.pdev.grad'
 robustST: no visible global function definition for 'optpar2dplist'
+robustSTChangingK: no visible binding for global variable 'dp'
+robustSTChangingK: no visible global function definition for
+  'optpar2dplist'
+robustSTOnceK: no visible binding for global variable 'dp'
+robustSTOnceK: no visible global function definition for
+  'optpar2dplist'
 runSim: no visible global function definition for 'denverParams'
 runSim: no visible global function definition for 'm2Angle'
 runSim: no visible global function definition for 'm2AngleRestrict'
 st.pdev.gh.robust: no visible binding for global variable 'st.pdev.gh'
 st.pdev.gh.robust: no visible binding for global variable 'st.pdev'
-st.pdev.robust: no visible binding for global variable 'st.pdev'
+st.pdev.robust: no visible binding for global variable 'i'
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
@@ -100,6 +105,16 @@ Undocumented arguments in documentation object 'mst.pdev.robust'
 Undocumented arguments in documentation object 'robustST'
   'method'
 Documented arguments not in \usage in documentation object 'robustST':
+  'method:'
+
+Undocumented arguments in documentation object 'robustSTChangingK'
+  'method'
+Documented arguments not in \usage in documentation object 'robustSTChangingK':
+  'method:'
+
+Undocumented arguments in documentation object 'robustSTOnceK'
+  'method'
+Documented arguments not in \usage in documentation object 'robustSTOnceK':
   'method:'
 
 Undocumented arguments in documentation object 'runSim'

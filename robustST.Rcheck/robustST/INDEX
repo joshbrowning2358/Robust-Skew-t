@@ -6,6 +6,8 @@ fast.TLE.ST             Wrapper to fastTLE assuming univariate skew-t
                         data.
 fast.TLE.normal         Wrapper to fastTLE assuming normal data.
 fastTLE                 Fast TLE
+getLogLikelihoodBound   Get Log Likelihood Bound
+getStartingEstimate     Get Starting Estimate
 marginal                Convert multivariate skew-t parameters into
                         bivariate
 mst.pdev.grad.robust    Gradient of robust, penalized deviance for
@@ -21,6 +23,8 @@ plot_results            Plot results
 psi.grad                Robust adjustment of the derivative of the
                         negative log-likelihood
 robustST                Fit a robust Skew-t
+robustSTChangingK       Fit a robust Skew-t, iteratively update k
+robustSTOnceK           Fit a robust Skew-t, estimate k once
 runSim                  Run simulation
 st.pdev.gh.robust       Gradient of the robust-ified, penalized
                         deviance for the univariate skew-t.

@@ -2,6 +2,8 @@ fast.TLE.BST	fast.TLE.BST
 fast.TLE.normal	fast.TLE.normal
 fast.TLE.ST	fast.TLE.ST
 fastTLE	fastTLE
+getLogLikelihoodBound	getLogLikelihoodBound
+getStartingEstimate	getStartingEstimate
 marginal	marginal
 mst.pdev.grad.robust	mst.pdev.grad.robust
 mst.pdev.robust	mst.pdev.robust
@@ -13,6 +15,8 @@ plot_results	plot_results
 Psi	Psi
 psi.grad	psi.grad
 robustST	robustST
+robustSTChangingK	robustSTChangingK
+robustSTOnceK	robustSTOnceK
 runSim	runSim
 st.pdev.gh.robust	st.pdev.gh.robust
 st.pdev.robust	st.pdev.robust

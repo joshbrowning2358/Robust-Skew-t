@@ -17,7 +17,7 @@
 
 mst.pdev.robust = function(param, x, y, k=2, ...){
     nonRobust = sapply(1:NROW(y), function(i){
-        mst.pdev( param, x=matrix(1), y=y[i,,drop=F], w=1 )
+        sn:::mst.pdev( param, x=matrix(1), y=y[i,,drop=F], w=1 )
     })
     robust = ifelse(nonRobust>k, sapply(nonRobust, Psi, k=k), nonRobust)
     return( sum(robust) )
