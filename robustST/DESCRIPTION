@@ -10,8 +10,7 @@ Description: This package provides functions for robust fitting of the skew-t
 URL: https://github.com/rockclimber112358/Robust-Skew-T
 License: GPL (>= 3)
 Imports:
-Depends:
-    sn (>= 1.1-2)
+Depends: sn (>= 1.1-2)
 LazyData: yes
 ZipData: no
 VignetteBuilder: knitr
