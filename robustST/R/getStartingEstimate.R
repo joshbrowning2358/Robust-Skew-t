@@ -29,7 +29,7 @@ getStartingEstimate = function(y, family,
         gamma1 <- sum(w * res^3)/(nw * s^3)
         gamma2 <- sum(res^4)/(nw * s^4) - 3
         cp <- c(ls$coef, s, gamma1, gamma2)
-        dp <- st.cp2dp(cp, silent = TRUE)
+        dp <- sn:::st.cp2dp(cp, silent = TRUE)
         if (is.null(dp)) 
             dp <- rep(NA, length(cp))
         if (any(is.na(dp))) 

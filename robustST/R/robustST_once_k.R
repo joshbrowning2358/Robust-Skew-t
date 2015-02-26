@@ -21,6 +21,8 @@
 ##' M-estimator.  As pValue->1 the estimator approaches the MLE.
 ##' @param start The starting values for the optimization.  If NULL, reasonable
 ##' values are automatically chosen.
+##' @param cooptimize If TRUE, then the k-value is updated during optimization.
+##' Essentially, the density function being optimized varies with k.
 ##' 
 ##' @return A named list containing the results of the fit.  beta vector is
 ##' equivalent to the mean estimate if x = matrix of 1's, and omega/alpha/nu
@@ -31,15 +33,16 @@
 ##' 
 
 #################################### TO DO ####################################
-# - This function does not work in it's current state.  We need to use
-#   getDensityFunction to define the family of interest and then optimize the
-#   log-likelihood of the family we're provided.
+# - family is currently only implemented for ST
+# - getLogLikelihoodBound is currently only implemented for d = 2.
+# - implement cooptimization
 ###############################################################################
 
 robustSTOnceK = function(y, x = matrix(1, nrow = NROW(y)),
-                         family = c("ST", "SN", "T"),
+                         family = c("ST", "SN", "T", "N"),
                          method = c("nlminb", "constrOptim"),
-                         w = rep(1, nrow(x)), pValue = 0.01, start = NULL){
+                         w = rep(1, nrow(x)), pValue = 0.01, start = NULL,
+                         cooptimize = FALSE){
 
     ## Data quality checks
     if(any(is.na(y))){
@@ -72,9 +75,22 @@ robustSTOnceK = function(y, x = matrix(1, nrow = NROW(y)),
     
     ## Get the denisty functions based on the family, and assign to current
     ## environment
-    func = getDensityFunctions(family = family, environment = environment())
+    func = getDensityFunction(family = family, dimension = NCOL(y),
+                              robust = TRUE)
     densityFunction = func[[1]]
     gradientFunction = func[[2]]
+    
+    ## If cooptimize, update densityFunction
+    if(cooptimize){
+        oldDensityFunction = densityFunction
+        densityFunction = function(param, x, y, k, ...){
+            ## Passed k value is ignored, instead the update is computed
+            k = getLogLikelihoodBound(
+                dp = sn:::optpar2dplist(param, d = d, p = p)$dp,
+                alpha = pValue)
+            oldDensityFunction(param = param, x = x, y = y, k = k, ...)
+        }
+    }
     
     ## Assign useful variables
     n = nrow(x)
@@ -103,7 +119,7 @@ robustSTOnceK = function(y, x = matrix(1, nrow = NROW(y)),
         fit = try(constrOptim(theta = dp, f = function(dp){
                         densityFunction(dp, x, y, k = k)},
                     gradient = function(dp){
-                        gradientFunction(dp, x, y, k = k)})),
+                        gradientFunction(dp, x, y, k = k)},
             ui = matrix(c(0, 0, 1, 0, 0, 0, 0, 1),
                         nrow = 2),
             ci = rep(0,2)))
@@ -135,7 +151,7 @@ robustSTOnceK = function(y, x = matrix(1, nrow = NROW(y)),
                   kValues = k)
             
     ## Post-process the parameters and output them
-    optpar = optpar2dplist(output$parameters, p = p, d = d)
+    optpar = sn:::optpar2dplist(output$parameters, p = p, d = d)
     output$beta = optpar$beta
     output$Omega = optpar$Omega
     output$alpha = optpar$alpha
