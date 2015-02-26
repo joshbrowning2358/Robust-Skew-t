@@ -30,6 +30,14 @@
 ##' @export
 ##' 
 
+#################################### TO DO ####################################
+# - Implement other likelihoods, such as normal, t, skew normal.  These should
+#   be fairly simple by just fixing parameters
+# - Currently getStartingEstimate only works for 2 dimensions.  This needs to
+#   be improved to work with more.
+# - Work on robustSTonceK first!
+###############################################################################
+
 robustSTChangingK = function(y, x = matrix(1, nrow = NROW(y)),
                              method = c("nlminb", "constrOptim"),
                              w = rep(1, nrow(x)), pValue = 0.01,

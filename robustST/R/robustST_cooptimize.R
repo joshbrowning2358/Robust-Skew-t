@@ -1,8 +1,8 @@
 ##' Fit a robust Skew-t, estimate k once
 ##' 
 ##' Fits a robust version of the multivariate skew-t, done by bounding the
-##' negative log-likelihood for each observation.  Compute the value of k once
-##' based on the initial (non-robust) estimates of the parameters.
+##' negative log-likelihood for each observation.  The value of k is a function
+##' of the parameters, so assign k during optimization.
 ##' 
 ##' @param y A vector or matrix of observations to fit the skew-t to.
 ##' @param x A matrix of ones, or matrix of independent variables for skew-t
@@ -30,7 +30,14 @@
 ##' @export
 ##' 
 
-robustSTOnceK = function(y, x = matrix(1, nrow = NROW(y)), 
+#################################### TO DO ####################################
+# - This function is currently a copy of robustSTonceK, which fits k once and
+#   leaves it.  Update it so that k is automatically set during optimization,
+#   as it's a function of the parameters.
+# - Work on robustSTonceK first!
+###############################################################################
+
+robustSTcoopK = function(y, x = matrix(1, nrow = NROW(y)), 
                          method = c("nlminb", "constrOptim"),
                          w = rep(1, nrow(x)), pValue = 0.01, start = NULL){
     #library(sn)

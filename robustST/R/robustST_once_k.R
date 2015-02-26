@@ -30,6 +30,12 @@
 ##' @export
 ##' 
 
+#################################### TO DO ####################################
+# - This function does not work in it's current state.  We need to use
+#   getDensityFunction to define the family of interest and then optimize the
+#   log-likelihood of the family we're provided.
+###############################################################################
+
 robustSTOnceK = function(y, x = matrix(1, nrow = NROW(y)),
                          family = c("ST", "SN", "T"),
                          method = c("nlminb", "constrOptim"),
