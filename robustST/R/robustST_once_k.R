@@ -72,7 +72,7 @@ robustSTOnceK = function(y, x = matrix(1, nrow = NROW(y)),
     
     ## Get the denisty functions based on the family, and assign to current
     ## environment
-    func = getDensityFunctions(family = family, environment = environment())
+    func = getDensityFunction(family = family, dimension = NCOL(y), robust = T)
     densityFunction = func[[1]]
     gradientFunction = func[[2]]
     
@@ -90,11 +90,9 @@ robustSTOnceK = function(y, x = matrix(1, nrow = NROW(y)),
     }
     
     ## Fit the models
-    k = getLogLikelihoodBound(
-        dp = sn:::optpar2dplist(param, d = d, p = p)$dp,
-        alpha = pValue)
-    if(method == "nlminb" & d == 1){
-        fit = try(nlminb( start = dp,
+    k = getLogLikelihoodBound(dp = param, alpha = pValue)
+    if(method == "nlminb"){
+        fit = try(nlminb(start = dp,
                     function(dp){
                         densityFunction(dp, x, y, k = k)},
                     gradient = function(dp){
@@ -103,15 +101,10 @@ robustSTOnceK = function(y, x = matrix(1, nrow = NROW(y)),
         fit = try(constrOptim(theta = dp, f = function(dp){
                         densityFunction(dp, x, y, k = k)},
                     gradient = function(dp){
-                        gradientFunction(dp, x, y, k = k)})),
+                        gradientFunction(dp, x, y, k = k)}),
             ui = matrix(c(0, 0, 1, 0, 0, 0, 0, 1),
                         nrow = 2),
-            ci = rep(0,2)))
-    } else if(method == "nlminb" & d > 1){
-        fit = try(nlminb(start = param, function(dp){
-                        densityFunction(dp, x, y, k = k)},
-                    gradient = function(dp){
-                        gradientFunction(dp, x, y, k = k)}))
+            ci = rep(0,2))
     } else if(method == "constrOptim" & d > 1){
         fit = try(constrOptim(theta=param ,f = function(dp){
                         densityFunction(dp, x, y, k = k)},
@@ -119,7 +112,7 @@ robustSTOnceK = function(y, x = matrix(1, nrow = NROW(y)),
                         gradientFunction(dp, x, y, k = k)}
             # No need for constraints as optpar2dplist ensures nu>0 and
             # Omega is pos. def. So, set u_i to all 0's, and force this
-            # to always be greater than -1 (which it always will).
+            # to always be greater than -1 (which it always will be).
             ,ui=matrix(0,ncol=length(param))
             ,ci=-1))
     } else {

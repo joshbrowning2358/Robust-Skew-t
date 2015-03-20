@@ -12,7 +12,7 @@
 ##' scenario of much importance as we tend to be more interested in the case of
 ##' alpha close to 0 (i.e. the tails) rather than 1.
 ##' 
-##' @param dp The density parameters of the skew-t.
+##' @param dp A named list of the density parameters of the skew-t.
 ##' @param alpha The quantile of the negative log-likelihood.
 ##' 
 ##' @return The value of the negative log-likelihood that corresponds to the
@@ -30,8 +30,8 @@ getLogLikelihoodBound = function(dp, alpha=.01){
   if(names(dp)[1] == "beta")
     names(dp)[1] = "xi"
   dimension = length(dp$xi)
-  if(dimension != 2)
-      stop("Function currently only implemented for bivariate!")
+  if(dimension > 2)
+      stop("Function currently only implemented for univariate & bivariate!")
   stopifnot(dim(dp$Omega) == c(dimension, dimension))
   stopifnot(length(dp$alpha) == dimension)
   stopifnot(length(dp$nu) == 1)
@@ -41,31 +41,34 @@ getLogLikelihoodBound = function(dp, alpha=.01){
   ### Rename alpha, since Azzalini's code uses alpha
   pValue = alpha
 
-  ### Mimic Azzalini's code for cutoff levels.  See sn:::plot.SECdistrMv and
-  ### sn:::plot.SECdistrBv
-  nu <- dp$nu
-  Omega <- dp[[2]]
-  Omega.bar <- cov2cor(Omega)
-  alpha <- dp[[3]]
-  alpha.star <- sqrt(sum(alpha * as.vector(Omega.bar %*% alpha)))
-  # Values of 0 cause problems, but setting to a small value fixes these
-  # without causing other problems
-  if(alpha.star == 0)
-    alpha.star = .00001
-  omega <- sqrt(diag(Omega))
-  l.nu <- (-1.3/nu - 4.93)
-  h <- 100 * log(exp(((1.005 * alpha.star - 0.045) * l.nu - 
+  if(dimension == 1){
+    return(sn::qst(p = alpha, dp = do.call("c", dp)))
+  } else if(dimension == 2){
+    ### Mimic Azzalini's code for cutoff levels.  See sn:::plot.SECdistrMv and
+    ### sn:::plot.SECdistrBv
+    nu <- dp$nu
+    Omega <- dp[[2]]
+    Omega.bar <- cov2cor(Omega)
+    alpha <- dp[[3]]
+    alpha.star <- sqrt(sum(alpha * as.vector(Omega.bar %*% alpha)))
+    # Values of 0 cause problems, but setting to a small value fixes these
+    # without causing other problems
+    if(alpha.star == 0)
+      alpha.star = .00001
+    omega <- sqrt(diag(Omega))
+    l.nu <- (-1.3/nu - 4.93)
+    h <- 100 * log(exp(((1.005 * alpha.star - 0.045) * l.nu - 
       1.5)/alpha.star) + 1)
-  K <- h * (1.005 * alpha.star - 0.1) * (1 + nu)/(alpha.star * 
+    K <- h * (1.005 * alpha.star - 0.1) * (1 + nu)/(alpha.star * 
       nu)
-  qF <- qf(pValue, 2, nu)
-  # log.levels gives the value of the (positive) log-likelihood corresponding
-  # to the provided value of alpha (or pValue, as it was renamed).
-  log.levels <- (lgamma(nu/2 + 1) - lgamma(nu/2) - log(pi * 
+    qF <- qf(pValue, 2, nu)
+    # log.levels gives the value of the (positive) log-likelihood corresponding
+    # to the provided value of alpha (or pValue, as it was renamed).
+    log.levels <- (lgamma(nu/2 + 1) - lgamma(nu/2) - log(pi * 
       nu) - 0.5 * log(1 - Omega.bar[1, 2]^2) - (nu/2 + 
       1) * log(2 * qF/nu + 1) + K - sum(log(omega)))
-
-  return(-log.levels)
+    return(-log.levels)
+  }
 }
 
 
