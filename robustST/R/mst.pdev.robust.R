@@ -14,7 +14,7 @@
 ##' 
 
 mst.pdev.robust = function(param, y, k=2, ...){
-    dp = sn:::optpar2dplist(param, p = 1, d = 1)
+    dp = sn:::optpar2dplist(param, p = 1, d = 1)$dp
     nonRobust = -2 * log(sn::dmst(x = y, dp = dp))
     robust = ifelse(nonRobust > k, sapply(nonRobust, Psi, k = k), nonRobust)
     return(sum(robust))

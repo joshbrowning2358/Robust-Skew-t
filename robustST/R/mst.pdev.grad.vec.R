@@ -26,7 +26,7 @@
 
 mst.pdev.grad.vec <- function (param, y, fixed.nu = NULL, symmetr = FALSE) 
 {
-    d <- ncol(y)
+    d <- NCOL(y)
     p <- 1
     beta <- matrix(param[1:(p * d)], p, d)
     D <- exp(-2 * param[(p * d + 1):(p * d + d)])
@@ -42,7 +42,7 @@ mst.pdev.grad.vec <- function (param, y, fixed.nu = NULL, symmetr = FALSE)
         exp(param[length(param)])
     else fixed.nu
     Oinv <- t(A) %*% diag(D, d, d) %*% A
-    u <- y - x %*% beta
+    u <- y - matrix(rep(beta, times = NROW(y)), nrow = NROW(y), byrow = TRUE)
     Q <- as.vector(rowSums((u %*% Oinv) * u))
     L <- as.vector(u %*% eta)
     sf <- if (nu < 10000) 

@@ -5,8 +5,6 @@
 ##' based on the initial (non-robust) estimates of the parameters.
 ##' 
 ##' @param y A vector or matrix of observations to fit the skew-t to.
-##' @param x A matrix of ones, or matrix of independent variables for skew-t
-##' regression (use caution, as this feature has not been tested!)
 ##' @param method: constrOptim uses a constrained algorithm, forcing nu and
 ##' omega>0.  However, the implementation for multivariate skew-t fitting
 ##' enforces this by default, so nlminb and constrOptim should be very similar
@@ -22,25 +20,17 @@
 ##' @param start The starting values for the optimization.  If NULL, reasonable
 ##' values are automatically chosen.
 ##' 
-##' @return A named list containing the results of the fit.  beta vector is
-##' equivalent to the mean estimate if x = matrix of 1's, and omega/alpha/nu
+##' @return A named list containing the results of the fit.  xi/omega/alpha/nu
 ##' are the parameters of the skew-t.  A convergence flag is also returned,
 ##' indicating if the solution is a true optimum.
 ##' 
 ##' @export
 ##' 
 
-#################################### TO DO ####################################
-# - This function does not work in it's current state.  We need to use
-#   getDensityFunction to define the family of interest and then optimize the
-#   log-likelihood of the family we're provided.
-###############################################################################
-
-robustSTOnceK = function(y, x = matrix(1, nrow = NROW(y)),
-                         family = c("ST", "SN", "T"),
+robustSTOnceK = function(y, family = c("ST", "SN", "T", "N"),
                          method = c("nlminb", "constrOptim"),
-                         w = rep(1, nrow(x)), pValue = 0.01, start = NULL){
-
+                         w = rep(1, NROW(y)), pValue = 0.01, start = NULL){
+    
     ## Data quality checks
     if(any(is.na(y))){
         if(is.null(dim(y)))
@@ -48,68 +38,55 @@ robustSTOnceK = function(y, x = matrix(1, nrow = NROW(y)),
         else
             filt = !apply(y, 1, function(x){any(is.na(x))})
         
-        x = x[filt, ]
         w = w[filt]
         if(is.null(dim(y)))
             y = y[filt]
         else
             y = y[filt, ]
     }
-    if(!is(x, "matrix"))
-        stop("x must be a matrix!")
     if(!is.matrix(y) & !is.numeric(y))
         stop("y must be a matrix or numeric vector!")
-    if(nrow(x) != NROW(y))
-        stop("x and y must have the same number of observations!")
     if(!is.numeric(w))
         stop("w must be numeric!")
-    if(length(w) != nrow(x))
-        stop("w must have the same length as ncol(x)!")
     if(length(method) > 1)
         method = method[1]
     if(!method %in% c("nlminb", "constrOptim"))
         stop("method must be one of nlminb or constrOptim!")
+    if(length(family) > 1)
+        family = family[1]
     
-    ## Get the denisty functions based on the family, and assign to current
-    ## environment
+    ## Get the density functions based on the family
     func = getDensityFunction(family = family, dimension = NCOL(y), robust = T)
     densityFunction = func[[1]]
     gradientFunction = func[[2]]
     
     ## Assign useful variables
-    n = nrow(x)
-    p = ncol(x)
+    n = NROW(y)
+    p = 1
     d = NCOL(y)
     nw = sum(w)
     
     ## Compute starting estimate if needed
     if(is.null(start)){
-        param = getStartingEstimate(y = y, family = family, x = x, w = w)
+        dp = getStartingEstimate(y = y, family = family, w = w)
     } else {
-        param = start
+        dp = start
     }
+    param = dplist2optpar(dp)
     
     ## Fit the models
-    k = getLogLikelihoodBound(dp = param, alpha = pValue)
+    k = getLogLikelihoodBound(dp = dp, alpha = pValue)
     if(method == "nlminb"){
-        fit = try(nlminb(start = dp,
-                    function(dp){
-                        densityFunction(dp, x, y, k = k)},
-                    gradient = function(dp){
-                        gradientFunction(dp, x, y, k = k)}))
-    } else if(method == "constrOptim" & d == 1){
-        fit = try(constrOptim(theta = dp, f = function(dp){
-                        densityFunction(dp, x, y, k = k)},
-                    gradient = function(dp){
-                        gradientFunction(dp, x, y, k = k)}),
-            ui = matrix(c(0, 0, 1, 0, 0, 0, 0, 1),
-                        nrow = 2),
-            ci = rep(0,2))
-    } else if(method == "constrOptim" & d > 1){
-        fit = try(constrOptim(theta=param ,f = function(dp){
-                        densityFunction(dp, x, y, k = k)},
-                    gradient = function(dp){
-                        gradientFunction(dp, x, y, k = k)}
+        fit = try(nlminb(start = param,
+                    function(param){
+                        densityFunction(param = param, y = y, k = k)},
+                    gradient = function(param){
+                        gradientFunction(param = param, y = y, k = k)}))
+    } else if(method == "constrOptim"){
+        fit = try(constrOptim(theta = param ,f = function(dp){
+                        densityFunction(param = param, y = y, k = k)},
+                    grad = function(dp){
+                        gradientFunction(param = param, y = y, k = k)}
             # No need for constraints as optpar2dplist ensures nu>0 and
             # Omega is pos. def. So, set u_i to all 0's, and force this
             # to always be greater than -1 (which it always will be).
@@ -128,8 +105,8 @@ robustSTOnceK = function(y, x = matrix(1, nrow = NROW(y)),
                   kValues = k)
             
     ## Post-process the parameters and output them
-    optpar = optpar2dplist(output$parameters, p = p, d = d)
-    output$beta = optpar$beta
+    optpar = sn:::optpar2dplist(output$parameters, p = p, d = d)
+    output$xi = optpar$beta
     output$Omega = optpar$Omega
     output$alpha = optpar$alpha
     output$nu = optpar$nu

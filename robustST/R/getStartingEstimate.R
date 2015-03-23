@@ -17,12 +17,12 @@
 ##' @return An initial estimate for the density parameters.
 ##' 
 
-getStartingEstimate = function(y, family,
-                               x = matrix(1, nrow = NROW(y), ncol = 1),
-                               w = rep(1, NROW(y))){
+getStartingEstimate = function(y, family, w = rep(1, NROW(y))){
+    x = matrix(1, nrow = NROW(y), ncol = 1)
     d = NCOL(y)
     #Determine starting estimate (via logic from sn::st.mple function)
     if(d == 1){
+        nw = sum(w)
         ls <- lm.wfit(x, y, w)
         res <- ls$residuals
         s <- sqrt(sum(w * res^2)/nw)
@@ -35,13 +35,14 @@ getStartingEstimate = function(y, family,
         if (any(is.na(dp))) 
             dp <- c(cp[1:2], 0, 10)
         if(family == "N")
-            return(list(xi = dp[1], Omega = dp[2]))
+            return(list(xi = dp[1], Omega = matrix(dp[2])))
         if(family == "T")
-            return(list(xi = dp[1], Omega = dp[2], nu = dp[4]))
+            return(list(xi = dp[1], Omega = matrix(dp[2]), nu = dp[4]))
         if(family == "SN")
-            return(list(xi = dp[1], Omega = dp[2], alpha = dp[3]))
+            return(list(xi = dp[1], Omega = matrix(dp[2]), alpha = dp[3]))
         if(family == "ST")
-            return(list(xi = dp[1], Omega = dp[2], alpha = dp[3], nu = dp[4]))
+            return(list(xi = dp[1], Omega = matrix(dp[2]), alpha = dp[3],
+                        nu = dp[4]))
     } else {
         ls <- lm.wfit(x, y, w, singular.ok = FALSE)
         beta <- as.numeric(coef(ls))

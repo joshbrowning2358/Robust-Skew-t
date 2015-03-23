@@ -15,42 +15,107 @@
 ##' usage of this function, see ?robustSTOnceK.
 ##' 
 
+## Test that this function works for all distributions
+
 getDensityFunction = function(family, dimension, robust = TRUE){
     ## Data quality checks
     if(! family %in% c("N", "T", "SN", "ST"))
         stop("Invalid family provided.  Must be 'N', 'T', 'SN' or 'ST'")
     
     if(family == "N"){
-        if(robust & dimension == 1)
-            return(list(density = n.dev.robust,
-                        gradient = n.dev.gh.robust))
-        else if(!robust & dimension == 1)
-            return(list(density = n.dev,
-                        gradient = n.dev.gh))
-        stop("Current family/inputs not yet implemented")                            
+        if(robust){
+            density = function(param, y, k){
+                p = NCOL(y)
+                ## Add alpha and nu to param vector
+                param = c(param, rep(0, p), Inf)
+                mst.pdev.robust(param, y, k, symmetr = TRUE, fixed.nu = TRUE)
+            }
+            gradient = function(param, y, k){
+                p = NCOL(y)
+                ## Add alpha and nu to param vector
+                param = c(param, rep(0, p), Inf)
+                mst.pdev.grad.robust(param, y, k, symmetr = TRUE,
+                                     fixed.nu = TRUE)
+            }
+        } else {
+            density = function(param, y, k){
+                p = NCOL(y)
+                ## Add alpha and nu to param vector
+                param = c(param, rep(0, p), Inf)
+                sn:::mst.pdev(param, x = matrix(1, nrow = NROW(y)), y, w,
+                              symmetr = TRUE, fixed.nu = TRUE)
+            }
+            gradient = function(param, y, w = rep(1, NROW(y))){
+                p = NCOL(y)
+                ## Add alpha and nu to param vector
+                param = c(param, rep(0, p), Inf)
+                sn:::mst.pdev.grad(param, x = matrix(1, nrow = NROW(y)), y, w,
+                                   symmetr = TRUE, fixed.nu = TRUE)
+            }
+        }
     } else if(family == "T"){
-        stop("Current family not yet implemented")                            
+        if(robust){
+            density = function(param, y, k){
+                p = NCOL(y)
+                ## Add alpha to param vector
+                param = c(param[-length(param)], rep(0, p),
+                          param[length(param)])
+                mst.pdev.robust(param, y, k, symmetr = TRUE)
+            }
+            gradient = function(param, y, k){
+                p = NCOL(y)
+                ## Add alpha to param vector
+                param = c(param[-length(param)], rep(0, p),
+                          param[length(param)])
+                mst.pdev.grad.robust(param, y, k, symmetr = TRUE)
+            }
+        } else {
+            density = function(param, y, k){
+                p = NCOL(y)
+                ## Add alpha to param vector
+                param = c(param[-length(param)], rep(0, p),
+                          param[length(param)])
+                sn:::mst.pdev(param, x = matrix(1, nrow = NROW(y)), y, w,
+                              symmetr = TRUE)
+            }
+            gradient = function(param, y, w = rep(1, NROW(y))){
+                p = NCOL(y)
+                ## Add alpha to param vector
+                param = c(param[-length(param)], rep(0, p),
+                          param[length(param)])
+                sn:::mst.pdev.grad(param, x = matrix(1, nrow = NROW(y)), y, w,
+                                   symmetr = TRUE)
+            }
+        }
     } else if(family == "SN"){
-        if(!robust & dimension == 1)
-            return(list(density = sn:::sn.pdev,
-                        gradient = sn:::sn.pdev.gh))
-        else if(!robust & dimension > 1)
-            return(list(density = sn:::msn.dev,
-                        gradient = sn:::msn.dev.grad))
-        stop("Current family not yet implemented")                            
+        if(robust){
+            density = function(param, y, k){
+                param = c(param, Inf)
+                mst.pdev.robust(param, y, k, fixed.nu = Inf)
+            }
+            gradient = function(param, y, k){
+                param = c(param, Inf)
+                mst.pdev.grad.robust(param, y, k, fixed.nu = Inf)
+            }
+        } else {
+            density = function(param, y, k){
+                param = c(param, Inf)
+                sn:::mst.pdev(param, x = matrix(1, nrow = NROW(y)), y, w,
+                              fixed.nu = Inf)
+            }
+            gradient = function(param, y, w = rep(1, NROW(y))){
+                param = c(param, Inf)
+                sn:::mst.pdev.grad(param, x = matrix(1, nrow = NROW(y)), y, w,
+                                   fixed.nu = Inf)
+            }
+        }
     } else if(family == "ST"){
-        if(dimension == 1 & robust)
-            return(list(density = st.pdev.robust,
-                        gradient = st.pdev.gh.robust))
-        else if(dimension > 1 & robust)
+        if(robust)
             return(list(density = mst.pdev.robust,
                         gradient = mst.pdev.grad.robust))
-        else if(dimension == 1 & !robust)
-            return(list(density = sn:::st.pdev,
-                        gradient = sn:::st.pdev.grad))
-        else if(dimension > 1 & !robust)
-            return(list(density = sn:::st.pdev,
-                        gradient = sn:::st.pdev.gh))
+        else
+            return(list(density = sn:::mst.pdev,
+                        gradient = sn:::mst.pdev.grad))
     } else {
         stop("Current family not yet implemented")
     }
