@@ -31,7 +31,7 @@ getStartingEstimate = function(y, family, w = rep(1, NROW(y))){
         cp <- c(ls$coef, s, gamma1, gamma2)
         dp <- sn:::st.cp2dp(cp, silent = TRUE)
         if (is.null(dp))
-            dp <- rep(NA, length(cp))
+           dp <- rep(NA, length(cp))
         if (any(is.na(dp))) 
             dp <- c(cp[1:2], 0, 10)
         if(family == "N")

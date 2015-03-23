@@ -19,6 +19,8 @@
 ##' M-estimator.  As pValue->1 the estimator approaches the MLE.
 ##' @param start The starting values for the optimization.  If NULL, reasonable
 ##' values are automatically chosen.
+##' @param cooptimize If TRUE, then the k-value is updated during optimization.
+##' Essentially, the density function being optimized varies with k.
 ##' 
 ##' @return A named list containing the results of the fit.  xi/omega/alpha/nu
 ##' are the parameters of the skew-t.  A convergence flag is also returned,
@@ -31,6 +33,12 @@ robustSTOnceK = function(y, family = c("ST", "SN", "T", "N"),
                          method = c("nlminb", "constrOptim"),
                          w = rep(1, NROW(y)), pValue = 0.01, start = NULL){
     
+#################################### TO DO ####################################
+# - family is currently only implemented for ST
+# - getLogLikelihoodBound is currently only implemented for d = 2.
+# - implement cooptimization
+###############################################################################
+
     ## Data quality checks
     if(any(is.na(y))){
         if(is.null(dim(y)))
@@ -55,10 +63,23 @@ robustSTOnceK = function(y, family = c("ST", "SN", "T", "N"),
     if(length(family) > 1)
         family = family[1]
     
+<<<<<<< HEAD
     ## Get the density functions based on the family
     func = getDensityFunction(family = family, dimension = NCOL(y), robust = T)
     densityFunction = func[[1]]
     gradientFunction = func[[2]]
+    
+    ## If cooptimize, update densityFunction
+    if(cooptimize){
+        oldDensityFunction = densityFunction
+        densityFunction = function(param, x, y, k, ...){
+            ## Passed k value is ignored, instead the update is computed
+            k = getLogLikelihoodBound(
+                dp = sn:::optpar2dplist(param, d = d, p = p)$dp,
+                alpha = pValue)
+            oldDensityFunction(param = param, x = x, y = y, k = k, ...)
+        }
+    }
     
     ## Assign useful variables
     n = NROW(y)
