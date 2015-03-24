@@ -14,7 +14,7 @@ dmst <- function (x, xi = rep(0, length(alpha)), Omega, alpha, nu = Inf,
     if (any(abs(alpha) == Inf)) 
         stop("Inf's in alpha are not allowed")
     if (nu == Inf) 
-        return(sn:::dmsn(x, xi, Omega, alpha, log = log))
+        return(dmsn(x, xi, Omega, alpha, log = log))
     d <- length(alpha)
     Omega <- matrix(Omega, d, d)
     if (!all(Omega - t(Omega) == 0)) 
@@ -52,4 +52,3 @@ dmst <- function (x, xi = rep(0, length(alpha)), Omega, alpha, nu = Inf,
         return(exp(logPDF))
     }
 }
-

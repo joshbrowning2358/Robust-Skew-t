@@ -13,7 +13,6 @@
 ##' data, and k is the parameter controlling the robustness of the fit.
 ##' 
 ##' @param family The family to use, should be "N", "T", "SN" or "ST".
-##' @param dimension How many columns does y have?
 ##' @param robust A logical value indicating whether the density and gradient
 ##' returned should correspond to the robust estimators or not.
 ##' 
@@ -24,7 +23,7 @@
 
 ## Test that this function works for all distributions
 
-getDensityFunction = function(family, dimension, robust = TRUE){
+getDensityFunction = function(family, robust = TRUE){
     ## Data quality checks
     if(! family %in% c("N", "T", "SN", "ST"))
         stop("Invalid family provided.  Must be 'N', 'T', 'SN' or 'ST'")
@@ -55,31 +54,29 @@ getDensityFunction = function(family, dimension, robust = TRUE){
     
     if(robust){
         density = function(param, y, k){
-            param = paramAdj(param)
+            d = NCOL(y)
+            param = paramAdj(param, d = d)
             args = c(defaultArgs, list(y = y, k = k, param = param))
             do.call("mst.pdev.robust", args = args)
         }
         gradient = function(param, y, k){
-            param = paramAdj(param)
+            d = NCOL(y)
+            param = paramAdj(param, d = d)
             args = c(defaultArgs, list(y = y, k = k, param = param))
-            do.call("mst.pdev.robust", args = args)
+            do.call("mst.pdev.grad.robust", args = args)
         }
     } else {
         density = function(param, y, k){
-            param = paramAdj(param)
-            args = c(defaultArgs, list(y = y, param = param,
-                                       w = rep(1, NROW(y)),
-                                       x = matrix(1, NROW(y))))
+            d = NCOL(y)
+            param = paramAdj(param, d = d)
+            args = c(defaultArgs, list(y = y, param = param))
             do.call("mst.pdev", args = args)
         }
-        density = function(param, y, k){
-            param = paramAdj(param)
-            mst.pdev(param, x = matrix(1, nrow = NROW(y)), y, w,
-                          fixed.nu = Inf)
-        }
         gradient = function(param, y, w = rep(1, NROW(y))){
-            param = paramAdj(param)
-            mst.pdev.grad(param, x = matrix(1, nrow = NROW(y)), y, w)
+            d = NCOL(y)
+            param = paramAdj(param, d = d)
+            args = c(defaultArgs, list(y = y, param = param))
+            do.call("mst.pdev.grad", args = args)
         }
     }
     return(list(density = density, gradient = gradient))

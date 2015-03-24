@@ -1,5 +1,6 @@
-mst.pdev.grad <- function (param, x, y, w, fixed.nu = NULL, symmetr = FALSE, penalty = NULL, 
-    trace = FALSE) 
+mst.pdev.grad <- function (param, y, x = matrix(1, NROW(y)),
+                           w = rep(1, NROW(y)), fixed.nu = NULL,
+                           symmetr = FALSE)
 {
     d <- NCOL(y)
     p <- ncol(x)
@@ -65,21 +66,6 @@ mst.pdev.grad <- function (param, x, y, w, fixed.nu = NULL, symmetr = FALSE, pen
         Ddf <- sum((dlogft.ddf + dlogT.ddf) * w)
         grad <- c(grad, -2 * Ddf * df0)
     }
-    if (!is.null(penalty)) {
-        if (symmetr) 
-            stop("penalized log-likelihood not allowed when alpha=0")
-        Ainv <- backsolve(A, diag(d))
-        Omega <- Ainv %*% diag(1/D, d, d) %*% t(Ainv)
-        omega <- diag(Omega)
-        alpha <- eta * omega
-        Q <- sn:::Qpenalty(list(alpha, cov2cor(Omega)), nu, der = 1)
-        comp <- 1:(length(alpha) + is.null(fixed.nu))
-        Qder <- attr(Q, "der1") * c(1/omega, 1)[comp]
-        grad <- grad + 2 * c(rep(0, p * d + d * (d + 1)/2), Qder)
-    }
-    if (trace) 
-        cat("mst.pdev.grad: norm is ", format(sqrt(sum(grad^2))), 
-            "\n")
     return(grad)
 }
 

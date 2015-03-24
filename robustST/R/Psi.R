@@ -9,7 +9,7 @@
 ##' @param originalNLL The original negative log-likelihood
 ##' @param k The parameter controlling the amount of robustification.  Negative
 ##' log-likelihoods larger than k are reduced, and the adjusted value is always
-##' less than 2*k.
+##' less than k+1.
 ##' 
 ##' @return The adjusted negative log-likelihood.
 ##' 
@@ -18,6 +18,6 @@
 
 Psi = function(originalNLL, k){
     ifelse(originalNLL > k,
-           2 * k - k * exp(-originalNLL / k + 1),
+           k + (1 - exp(-(originalNLL - k))),
            originalNLL)
 }

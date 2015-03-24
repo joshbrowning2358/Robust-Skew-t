@@ -13,9 +13,17 @@
 ##' @export
 ##' 
 
-mst.pdev.robust = function(param, y, k=2, ...){
-    dp = sn:::optpar2dplist(param = param, p = 1, d = 1)$dp
-    nonRobust = -2 * log(sapply(y, dmst, dp = dp))
+mst.pdev.robust = function(param, y, k = 2, ...){
+
+    ## Data Quality Checks
+    d = NCOL(y)
+    paramDim = dimensionFromParamSize(length(param))
+    if(d != paramDim)
+        stop("parameter suggests a different dimension of y than what is ",
+             "observed.")
+    
+    dp = sn:::optpar2dplist(param = param, p = 1, d = d)$dp
+    nonRobust = -2 * log(dmst(x = y, dp = dp))
     robust = ifelse(nonRobust > k, Psi(nonRobust, k = k), nonRobust)
     return(sum(robust))
 }
