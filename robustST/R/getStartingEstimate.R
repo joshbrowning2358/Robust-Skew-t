@@ -18,6 +18,7 @@
 ##' 
 
 getStartingEstimate = function(y, family, w = rep(1, NROW(y))){
+    
     x = matrix(1, nrow = NROW(y), ncol = 1)
     d = NCOL(y)
     #Determine starting estimate (via logic from sn::st.mple function)
@@ -34,14 +35,17 @@ getStartingEstimate = function(y, family, w = rep(1, NROW(y))){
            dp <- rep(NA, length(cp))
         if (any(is.na(dp))) 
             dp <- c(cp[1:2], 0, 10)
+        ## Note: sn has dp[2] as the standard deviation, not the variance.  We
+        ## want the variance as that's what is used for higher dimensions, so
+        ## we need to quare dp[2] here
         if(family == "N")
-            return(list(xi = dp[1], Omega = matrix(dp[2])))
+            return(list(xi = dp[1], Omega = matrix(dp[2]^2)))
         if(family == "T")
-            return(list(xi = dp[1], Omega = matrix(dp[2]), nu = dp[4]))
+            return(list(xi = dp[1], Omega = matrix(dp[2]^2), nu = dp[4]))
         if(family == "SN")
-            return(list(xi = dp[1], Omega = matrix(dp[2]), alpha = dp[3]))
+            return(list(xi = dp[1], Omega = matrix(dp[2]^2), alpha = dp[3]))
         if(family == "ST")
-            return(list(xi = dp[1], Omega = matrix(dp[2]), alpha = dp[3],
+            return(list(xi = dp[1], Omega = matrix(dp[2]^2), alpha = dp[3],
                         nu = dp[4]))
     } else {
         ls <- lm.wfit(x, y, w, singular.ok = FALSE)

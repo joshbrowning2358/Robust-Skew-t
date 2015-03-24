@@ -21,6 +21,8 @@
 
 getLogLikelihoodBound = function(dp, alpha=.01){
 
+  if(alpha == 0)
+    return(-1e10)
   ### Data Quality Checks
   stopifnot(setequal(names(dp), c("xi", "Omega", "alpha", "nu")) |
             setequal(names(dp), c("beta", "Omega", "alpha", "nu")))

@@ -5,7 +5,10 @@
 ##' based on the initial (non-robust) estimates of the parameters.
 ##' 
 ##' @param y A vector or matrix of observations to fit the skew-t to.
-##' @param method: constrOptim uses a constrained algorithm, forcing nu and
+##' @param family A character string indicating which distributional family
+##' should be used for fitting.  Current options are "N" (normal), "T"
+##' (Student's-t), "SN" (skew normal) or "ST" (Skew-t).
+##' @param method constrOptim uses a constrained algorithm, forcing nu and
 ##' omega>0.  However, the implementation for multivariate skew-t fitting
 ##' enforces this by default, so nlminb and constrOptim should be very similar
 ##' for multivariate data.  For univariate, constrOptim is recommended.  For
@@ -21,6 +24,7 @@
 ##' values are automatically chosen.
 ##' @param cooptimize If TRUE, then the k-value is updated during optimization.
 ##' Essentially, the density function being optimized varies with k.
+##' @param ... Further arguments to be passed to mst
 ##' 
 ##' @return A named list containing the results of the fit.  xi/omega/alpha/nu
 ##' are the parameters of the skew-t.  A convergence flag is also returned,
@@ -31,7 +35,8 @@
 
 robustSTOnceK = function(y, family = c("ST", "SN", "T", "N"),
                          method = c("nlminb", "constrOptim"),
-                         w = rep(1, NROW(y)), pValue = 0.01, start = NULL){
+                         w = rep(1, NROW(y)), pValue = 0.01, start = NULL,
+                         cooptimize = FALSE, ...){
     
 #################################### TO DO ####################################
 # - family is currently only implemented for ST
@@ -63,7 +68,6 @@ robustSTOnceK = function(y, family = c("ST", "SN", "T", "N"),
     if(length(family) > 1)
         family = family[1]
     
-<<<<<<< HEAD
     ## Get the density functions based on the family
     func = getDensityFunction(family = family, dimension = NCOL(y), robust = T)
     densityFunction = func[[1]]
@@ -104,9 +108,9 @@ robustSTOnceK = function(y, family = c("ST", "SN", "T", "N"),
                     gradient = function(param){
                         gradientFunction(param = param, y = y, k = k)}))
     } else if(method == "constrOptim"){
-        fit = try(constrOptim(theta = param ,f = function(dp){
+        fit = try(constrOptim(theta = param, f = function(param){
                         densityFunction(param = param, y = y, k = k)},
-                    grad = function(dp){
+                    grad = function(param){
                         gradientFunction(param = param, y = y, k = k)}
             # No need for constraints as optpar2dplist ensures nu>0 and
             # Omega is pos. def. So, set u_i to all 0's, and force this
@@ -114,8 +118,8 @@ robustSTOnceK = function(y, family = c("ST", "SN", "T", "N"),
             ,ui=matrix(0,ncol=length(param))
             ,ci=-1))
     } else {
-        stop("Invalid values of method and/or d!  method must be ",
-             "'constrOptim' or 'nlminb' and d must be 1 or 2")
+        stop("Invalid values of method!  method must be ",
+             "'constrOptim' or 'nlminb'!")
     }
     if(is(fit, "try-error")){
         output = list(parameters = rep(NA, length(param)),

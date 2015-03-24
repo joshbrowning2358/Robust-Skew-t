@@ -20,7 +20,7 @@
 mst.pdev.grad.robust = function(param, y, k = 2, ...){
     nonRobustGH = mst.pdev.grad.vec(param = param, y = y, ...)
     dp = sn:::optpar2dplist(param, p = 1, d = NCOL(y))$dp
-    nonRobust = -2 * sn:::dmst(x = y, dp = dp)
+    nonRobust = -2 * dmst(x = y, dp = dp)
     # If -LogLikelihood<k, we don't adjust at all.  Thus, gradient doesn't
     # change for that case.
     # If -LogLikelihood>k, we change -LL to Psi(-LL).  Thus, gradient becomes
