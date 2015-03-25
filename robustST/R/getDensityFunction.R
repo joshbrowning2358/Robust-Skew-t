@@ -72,7 +72,7 @@ getDensityFunction = function(family, robust = TRUE){
             args = c(defaultArgs, list(y = y, param = param))
             do.call("mst.pdev", args = args)
         }
-        gradient = function(param, y, w = rep(1, NROW(y))){
+        gradient = function(param, y, k){
             d = NCOL(y)
             param = paramAdj(param, d = d)
             args = c(defaultArgs, list(y = y, param = param))

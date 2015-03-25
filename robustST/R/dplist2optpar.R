@@ -1,12 +1,19 @@
-dplist2optpar <- function (dp, Omega.inv = NULL) 
+dplist2optpar <- function (dp, family, Omega.inv = NULL) 
 {
-    beta <- dp[[1]]
-    Omega <- as.matrix(dp[[2]])
-    alpha <- dp[[3]]
+    
+    ## Data Quality Checks
+    stopifnot(family %in% c("N", "T", "SN", "ST"))
+    stopifnot(names(dp) %in% c("xi", "Omega", "alpha", "nu"))
+    
+    beta <- dp$xi
+    Omega <- as.matrix(dp$Omega)
+    if(family %in% c("N", "T"))
+        dp$alpha = rep(0, length(beta))
+    if(family %in% c("N", "SN"))
+        dp$nu = Inf
+    alpha <- dp$alpha
     d <- length(alpha)
-    nu <- if (is.null(dp$nu)) 
-        NULL
-    else dp$nu
+    nu = dp$nu
     eta <- alpha/sqrt(diag(Omega))
     Oinv <- if (is.null(Omega.inv)) 
         mnormt:::pd.solve(Omega)
@@ -25,5 +32,11 @@ dplist2optpar <- function (dp, Omega.inv = NULL)
     param <- as.numeric(param)
     attr(param, "ind") <- cumsum(c(length(beta), d, d * (d - 
         1)/2, d, length(dp$nu)))
+    if(family == "N")
+        param = param[1:(d+d*(d+1)/2)]
+    if(family == "T")
+        param = c(param[1:(d+d*(d+1)/2)], param[length(param)])
+    if(family == "SN")
+        param = param[-length(param)]
     return(param)
 }

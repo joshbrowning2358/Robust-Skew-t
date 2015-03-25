@@ -39,11 +39,14 @@ getStartingEstimate = function(y, family, w = rep(1, NROW(y))){
         ## want the variance as that's what is used for higher dimensions, so
         ## we need to quare dp[2] here
         if(family == "N")
-            return(list(xi = dp[1], Omega = matrix(dp[2]^2)))
+            return(list(xi = dp[1], Omega = matrix(dp[2]^2), alpha = 0,
+                        nu = Inf))
         if(family == "T")
-            return(list(xi = dp[1], Omega = matrix(dp[2]^2), nu = dp[4]))
+            return(list(xi = dp[1], Omega = matrix(dp[2]^2), alpha = 0,
+                        nu = dp[4]))
         if(family == "SN")
-            return(list(xi = dp[1], Omega = matrix(dp[2]^2), alpha = dp[3]))
+            return(list(xi = dp[1], Omega = matrix(dp[2]^2), alpha = dp[3],
+                        nu = Inf))
         if(family == "ST")
             return(list(xi = dp[1], Omega = matrix(dp[2]^2), alpha = dp[3],
                         nu = dp[4]))
@@ -55,11 +58,11 @@ getStartingEstimate = function(y, family, w = rep(1, NROW(y))){
         alpha <- rep(0, d)
         nu <- 8
         if(family == "N")
-            return(list(xi = beta, Omega = Omega))
+            return(list(xi = beta, Omega = Omega, alpha = c(0, 0), nu = Inf))
         if(family == "T")
-            return(list(xi = beta, Omega = Omega, nu = nu))
+            return(list(xi = beta, Omega = Omega, alpha = c(0, 0), nu = nu))
         if(family == "SN")
-            return(list(xi = beta, Omega = Omega, alpha = alpha))
+            return(list(xi = beta, Omega = Omega, alpha = alpha, nu = Inf))
         if(family == "ST")
             return(list(xi = beta, Omega = Omega, alpha = alpha, nu = nu))
     }

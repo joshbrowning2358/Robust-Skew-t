@@ -50,7 +50,6 @@ robustSTOnceK = function(y, family = c("ST", "SN", "T", "N"),
             filt = !is.na(y)
         else
             filt = !apply(y, 1, function(x){any(is.na(x))})
-        
         w = w[filt]
         if(is.null(dim(y)))
             y = y[filt]
@@ -69,7 +68,7 @@ robustSTOnceK = function(y, family = c("ST", "SN", "T", "N"),
         family = family[1]
     
     ## Get the density functions based on the family
-    func = getDensityFunction(family = family, dimension = NCOL(y), robust = T)
+    func = getDensityFunction(family = family, robust = T)
     densityFunction = func[[1]]
     gradientFunction = func[[2]]
     
@@ -97,7 +96,7 @@ robustSTOnceK = function(y, family = c("ST", "SN", "T", "N"),
     } else {
         dp = start
     }
-    param = dplist2optpar(dp)
+    param = dplist2optpar(dp, family = family)
     
     ## Fit the models
     k = getLogLikelihoodBound(dp = dp, alpha = pValue)
