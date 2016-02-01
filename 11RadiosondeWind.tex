@@ -1,0 +1,1389 @@
+\documentclass[12pt]{article}
+\usepackage{epsfig, epsf, graphicx, subfigure}
+ \usepackage{graphicx}
+\usepackage{pstricks, pst-node, psfrag}
+\usepackage{amssymb,amsmath}
+\usepackage{verbatim,enumerate}
+\usepackage{rotating, lscape}
+\usepackage{multirow}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{lineno}
+\linenumbers
+
+\usepackage[hang, flushmargin]{footmisc}
+
+\setlength{\oddsidemargin}{-0.125in}
+\setlength{\topmargin}{-0.5in} \setlength{\textwidth}{6.5in}
+\setlength{\textheight}{9in}
+
+\setlength{\textheight}{9in} \setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-40pt} \setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+  
+\setlength{\textheight}{9.4in} \setlength{\textwidth}{6.8in}
+\setlength{\topmargin}{-71pt} \setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{-6pt} \tolerance=500
+%\input psfig.tex
+\setlength{\topmargin}{-56pt} \setlength{\oddsidemargin}{-6pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\wt{\widetilde}
+\def\diag{\hbox{diag}}
+\def\wh{\widehat}
+\def\AIC{\hbox{AIC}}
+\def\BIC{\hbox{BIC}}
+\def\sm{\footnotesize}
+%- Makes the section title start with Appendix in the appendix environment
+\newcommand{\Appendix}
+{%\appendix
+\def\thesection{Appendix~\Alph{section}}
+%\def\thesubsection{\Alph{section}.\arabic{subsection}}
+\def\thesubsection{A.\arabic{subsection}}
+}
+\def\diag{\hbox{diag}}
+\def\log{\hbox{log}}
+\def\bias{\hbox{bias}}
+\def\Siuu{\boldSigma_{i,uu}}
+\def\ANNALS{{\it Annals of Statistics}}
+\def\BIOK{{\it Biometrika}}
+\def\whT{\widehat{\Theta}}
+\def\STATMED{{\it Statistics in Medicine}}
+\def\STATSCI{{\it Statistical Science}}
+\def\JSPI{{\it Journal of Statistical Planning \&amp; Inference}}
+\def\JRSSB{{\it Journal of the Royal Statistical Society, Series B}}
+\def\BMCS{{\it Biometrics}}
+\def\COMMS{{\it Communications in Statistics, Theory \& Methods}}
+\def\JQT{{\it Journal of Quality Technology}}
+\def\STIM{{\it Statistics in Medicine}}
+\def\TECH{{\it Technometrics}}
+\def\AJE{{\it American Journal of Epidemiology}}
+\def\JASA{{\it Journal of the American Statistical Association}}
+\def\CDA{{\it Computational Statistics \& Data Analysis}}
+\def\JCGS{{\it Journal of Computational and Graphical Statistics}}
+\def\JCB{{\it Journal of Computational Biology}}
+\def\BIOINF{{\it Bioinformatics}}
+\def\JAMA{{\it Journal of the American Medical Association}}
+\def\JNUTR{{\it Journal of Nutrition}}
+\def\JCGS{{\it Journal of Computational and Graphical Statistics}}
+\def\LETTERS{{\it Letters in Probability and Statistics}}
+\def\JABES{{\it Journal of Agricultural and
+                      Environmental Statistics}}
+\def\JASA{{\it Journal of the American Statistical Association}}
+\def\ANNALS{{\it Annals of Statistics}}
+\def\JSPI{{\it Journal of Statistical Planning \& Inference}}
+\def\TECH{{\it Technometrics}}
+\def\BIOK{{\it Bio\-me\-tri\-ka}}
+\def\JRSSB{{\it Journal of the Royal Statistical Society, Series B}}
+\def\BMCS{{\it Biometrics}}
+\def\COMMS{{\it Communications in Statistics, Series A}}
+\def\JQT{{\it Journal of Quality Technology}}
+\def\SCAN{{\it Scandinavian Journal of Statistics}}
+\def\AJE{{\it American Journal of Epidemiology}}
+\def\STIM{{\it Statistics in Medicine}}
+\def\ANNALS{{\it Annals of Statistics}}
+\def\whT{\widehat{\Theta}}
+\def\STATMED{{\it Statistics in Medicine}}
+\def\STATSCI{{\it Statistical Science}}
+\def\JSPI{{\it Journal of Statistical Planning \& Inference}}
+\def\JRSSB{{\it Journal of the Royal Statistical Society, Series B}}
+\def\BMCS{{\it Biometrics}}
+\def\COMMS{{\it Communications in Statistics, Theory \& Methods}}
+\def\JQT{{\it Journal of Quality Technology}}
+\def\STIM{{\it Statistics in Medicine}}
+\def\TECH{{\it Technometrics}}
+\def\AJE{{\it American Journal of Epidemiology}}
+\def\JASA{{\it Journal of the American Statistical Association}}
+\def\CDA{{\it Computational Statistics \& Data Analysis}}
+\def\dfrac#1#2{{\displaystyle{#1\over#2}}}
+\def\VS{{\vskip 3mm\noindent}}
+\def\boxit#1{\vbox{\hrule\hbox{\vrule\kern6pt
+          \vbox{\kern6pt#1\kern6pt}\kern6pt\vrule}\hrule}}
+\def\refhg{\hangindent=20pt\hangafter=1}
+\def\refmark{\par\vskip 2mm\noindent\refhg}
+\def\naive{\hbox{naive}}
+\def\itemitem{\par\indent \hangindent2\pahttprindent \textindent}
+\def\var{\hbox{var}}
+\def\cov{\hbox{cov}}
+\def\corr{\hbox{corr}}
+\def\trace{\hbox{trace}}
+\def\refhg{\hangindent=20pt\hangafter=1}
+\def\refmark{\par\vskip 2mm\noindent\refhg}
+\def\Normal{\hbox{Normal}}
+\def\povr{\buildrel p\over\longrightarrow}
+\def\ccdot{{\bullet}}
+\def\bse{\begin{eqnarray*}}
+\def\ese{\end{eqnarray*}}
+\def\be{\begin{eqnarray}}
+\def\ee{\end{eqnarray}}
+\def\bq{\begin{equation}}
+\def\eq{\end{equation}}
+\def\bse{\begin{eqnarray*}}
+\def\ese{\end{eqnarray*}}
+\def\pr{\hbox{pr}}
+\def\wh{\widehat}
+\def\trans{^{\rm T}}
+\def\myalpha{{\cal A}}
+\def\th{^{th}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Marc Definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\baselinestretch}{1.2} % Change this 1.5 or whatever
+\newcommand{\qed}{\hfill\hfill\vbox{\hrule\hbox{\vrule\squarebox
+   {.667em}\vrule}\hrule}\smallskip}
+\newtheorem{Th}{Theorem}
+\newtheorem{Proof}{Proof}
+\newtheorem{Mth}{Main Theorem}
+\newtheorem{Def}{Definition}
+\newtheorem{Rem}{Remark}
+\newtheorem{Qes}{Question}
+\newtheorem{proposition}{Proposition}
+\newtheorem{Lem}{Lemma}
+\newtheorem{Cor}{Corollary}
+\newtheorem{Exa}{Example}
+\newtheorem{Eq}{Equation}
+%\renewcommand{\baselinestretch}{1.5}
+\def\btheta{{\boldsymbol \theta}}
+\def\balpha{{\boldsymbol \alpha}}
+\def\bmu{{\boldsymbol \mu}}
+\def\bpi{{\boldsymbol \pi}}
+\def\x{{\bf x}}
+\def\a{{\bf a}}
+\def\mA{\mathcal{A}}
+\def\mB{\mathcal{B}}
+\def\mC{\mathcal{C}}
+\def\mH{\mathcal{H}}
+\def\mR{\mathcal{R}}
+\def\mD{\mathcal{D}}
+
+\newtheorem{lemm}{Lemma}[section]
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}{Corollary}[thm]
+\newtheorem{defi}{Definition}
+\newtheorem{prop}{Proposition}
+\newtheorem{example}{Example}
+
+\def\bX{{\bf X}}
+\def\bY{{\bf Y}}
+\def\bZ{{\bf Z}}
+\def\bU{{\bf U}}
+\def\bT{{\bf T}}
+\def\bV{{\bf V}}
+\def\bx{{\bf x}}
+\def\by{{\bf y}}
+\def\bz{{\bf z}}
+\def\bu{{\bf u}}
+\def\bv{{\bf v}}
+\def\bs{{\bf s}}
+\def\ba{{\bf a}}
+\def\bb{{\bf b}}
+\def\bmu{{\boldsymbol \mu}}
+\def\bbeta{{\boldsymbol \beta}}
+\def\balpha{{\boldsymbol \alpha}}
+\def\bxi{{\boldsymbol \xi}}
+\def\bdelta{{\boldsymbol \delta}}
+\def\blambda{{\boldsymbol \lambda}}
+\def\btheta{{\boldsymbol \theta}}
+\def\beeta{{\boldsymbol \eta}}
+\def\bupsilon{{\boldsymbol \upsilon}}
+\def\R{\mathbb R}
+
+
+
+\newcommand{\bin}[2]{ \left(
+	\begin{array}{@{} c @{}}
+	#1 \\ #2
+	\end{array}
+	\right)
+	}
+
+
+
+
+
+%\newcommand{\pr}{\mbox{Pr}}
+%\newcommand{\var}{\mbox{var}}
+%\newcommand{\cov}{\mbox{cov}}
+%\newcommand{\logit}{\mbox{logit }}
+\newcommand{\cp}{\stackrel{\mathcal{P}}{\rightarrow}}
+\newcommand{\cl}{\stackrel{\mathcal{D}}{\rightarrow}}
+\newcommand{\mystrut}{\vphantom{\int_0^1}}
+\newcommand{\p}{\stackrel{p}{\rightarrow}}
+\renewcommand{\d}{\stackrel{d}{\rightarrow}}
+\newcommand{\condind}{\perp\hspace{-1em}\perp}
+\newcommand{\sumi}{\ensuremath{\sum_{i=1}^{n}}}
+\newcommand{\sumj}{\ensuremath{\sum_{j=1}^{n}}}
+\newcommand{\eff}{\mbox{\scriptsize eff}}
+\def\my{\mathcal Y}
+
+
+
+
+\def\nh{\noindent\hangindent=1.5truecm\hangafter=1}
+\def\cl{\centerline}
+\def\ms{\medskip}
+\def\ni{\noindent}
+\def\ve{\vfill\eject}
+
+\def\A{{\rm A}}
+\def\ab{\allowbreak}
+\def\bigmi{\,\big|\,}
+\def\cI{{\cal I}}
+\def\cT{{\cal T}}
+\def\dt{{\dot t}}
+\def\da{{\dot a}}
+\def\dar{\downarrow}
+\def\ddt{{\ddot t}}
+\def\de{\delta}
+\def\De{\Delta}
+\def\ep{\epsilon}
+\def\gz{g_0}
+\def\ha{{\hat a}}
+\def\half{^{1/2}}
+\def\hg{{\hat g}}
+\def\hth{{\hat\th}}
+\def\hatt{{\hat t}}
+\def\hom{{\widehat\om}}
+\def\hOm{{\widehat\Om}}
+\def\lan{\langle}
+\def\ran{\rangle}
+\def\lfl{\lfloor}
+\def\rfl{\rfloor}
+\def\mhf{^{-1/2}}
+\def\mi{\,|\,}
+\def\mo{^{-1}}
+\def\mt{^{-2}}
+\def\mth{^{-3}}
+\def\mtht{^{-3/2}}
+\def\om{\omega}
+\def\Om{\Omega}
+\def\one{^{(1)}}
+\def\oqr{{\textstyle{1\over4}}}
+\def\otd{{\textstyle{1\over3}}}
+\def\ots{{\textstyle{1\over36}}}
+\def\part{\partial}
+\def\ra{\to}
+\def\rai{\ra\infty}
+\def\si{\sigma}
+\def\Si{\Sigma}
+\def\sumi{\sum_i\,}
+\def\sumion{\sum_{i=1}^n\,}
+\def\sumionu{\sum_{i=1}^\nu\,}
+\def\sumj{\sum_j\,}
+\def\sumjon{\sum_{j=1}^n\,}
+\def\sumjonu{\sum_{j=1}^\nu\,}
+\def\sumjonm{\sum_{j=1}^{n-1}\,}
+\def\sz{^0}
+\def\T{^{{\rm T}}}
+\def\th{\theta}
+\def\Th{\Theta}
+\def\thf{{\textstyle{1\over2}}}
+\def\two{^{(2)}}
+\def\var{{\rm var}}
+\def\z{_0}
+\def\R{\mathbb{R}}
+
+\def\y{\mathbf{y}}
+\def\z{\mathbf{z}}
+\def\p{\mathbf{p}}
+\def\t{\mathbf{t}}
+\def\A{\mbox{A}}
+\def\v{\mathbf{v}}
+\def\u{\mathbf{u}}
+\def\s{\mathbf{s}}
+\def\w{\mathbf{w}}
+\def\bX{{\bf X}}
+\def\bY{{\bf Y}}
+\def\bA{{\bf A}}
+\def\bZ{{\bf Z}}
+\def\bU{{\bf U}}
+\def\bT{{\bf T}}
+\def\bV{{\bf V}}
+\def\bx{{\bf x}}
+\def\by{{\bf y}}
+\def\bz{{\bf z}}
+\def\bu{{\bf u}}
+\def\bv{{\bf v}}
+\def\bs{{\bf s}}
+\def\ba{{\bf a}}
+\def\bb{{\bf b}}
+
+\def\eps{{\ensuremath\boldsymbol{\epsilon}}}
+\def\sig{{\ensuremath\boldsymbol{\sigma}}}
+\def\thet{{\ensuremath\boldsymbol{\theta}}}
+\def\bnu{{\ensuremath\boldsymbol{\nu}}}
+\def\bSigma{{\ensuremath\boldsymbol{\Sigma}}}
+\def\bomega{{\ensuremath\boldsymbol{\omega}}}
+\def\bOmega{{\ensuremath\boldsymbol{\Omega}}}
+
+\def\eps{{\ensuremath\boldsymbol{\epsilon}}}
+\def\sig{{\ensuremath\boldsymbol{\sigma}}}
+\def\thet{{\ensuremath\boldsymbol{\theta}}}
+\def\bnu{{\ensuremath\boldsymbol{\nu}}}
+\def\bSigma{{\ensuremath\boldsymbol{\Sigma}}}
+\def\bomega{{\ensuremath\boldsymbol{\omega}}}
+\def\bOmega{{\ensuremath\boldsymbol{\Omega}}}
+
+\def\bfred#1{{\color{red}\bf#1}}
+\def\bfblue#1{{\color{blue}\bf#1}}
+\def\red#1{{\color{red}#1}}
+\def\hlblue#1{{\color{blue}#1}}
+\def\blue#1{{\color{blue}#1}}
+\def\hsp{{\hspace{.25cm}}}
+
+
+\pagenumbering{arabic}
+
+\begin{document}
+\thispagestyle{empty}
+\baselineskip=28pt
+\vskip 5mm
+\begin{center} {\Large{\bf   Robust Bivariate Error Detection in Skewed  Data with Application to Historical Radiosonde Winds}}
+\end{center}
+
+
+
+\baselineskip=12pt
+\vskip 5mm
+
+\begin{center}\large
+Ying Sun,\footnote{ \baselineskip=10pt
+Division of Computer, Electrical and Mathematical Sciences and Engineering, King Abdullah University of Science and Technology, Thuwal 23955, Saudi Arabia, \\E-mail: ying.sun@kaust.edu.sa}  Amanda S. Hering,\footnote{ \baselineskip=10pt
+Applied Mathematics and Statistics, Colorado School of Mines, Golden, CO 80401,
+USA. \\E-mail: \{ahering, jbrownin\}@mines.edu} and Joshua M.~Browning$^2$ 
+
+%(Douglas Nychka,\footnote{Computational Information Systems Laboratory, National Center for Atmospheric Research, Boulder, CO 80305, USA.   E-mail:  nychka@ucar.edu}??)
+
+
+
+\end{center}
+
+\baselineskip=17pt
+\vskip 5mm
+\centerline{\today}
+\vskip 5mm
+
+\begin{center}
+{\large{\bf Abstract}}
+\end{center}
+\baselineskip=14pt
+
+The global historical radiosonde archives date back to the 1920's and contain the  only directly observed measurements of temperature, wind, and moisture in the upper atmosphere, but they contain many random errors.   Most of the focus on cleaning these large datasets has been on temperatures, but  winds are important inputs to climate models and in studies of wind climatology.  The bivariate distribution of the  wind vector does not have elliptical contours but is skewed and heavy-tailed, so we develop two methods for outlier detection based on the bivariate skew-$t$ (BST) distribution, using  either distance-based or contour-based approaches to flag observations as potential outliers.  We develop a framework to robustly estimate the parameters of the BST and then show how the tuning parameter to get these estimates is chosen.  In simulation, we compare our methods with one based on a bivariate normal distribution and a nonparametric approach based on the bagplot.  We then apply all four methods to the winds observed for over 35,000 radiosonde launches at a single station and demonstrate differences in the number of flagged outliers  across eight pressure levels and through time.  In this pilot study,  the method based on the BST contours  performs very well.
+%199 words
+
+
+%Quality control methods for multivariate observations  are generally based on using robust estimates of parameters for a particular distribution, and that particular distribution is usually the multivariate normal (MVN).  However, many multivariate data generating processes do not produce elliptical contours, and in such cases, error detection using the MVN distribution can lead to  legitimate observations being erroneously  flagged.   In this work, we  propose  non-parametric and  parametric methods for identifying errors in skewed bivariate data.  In the first method, we remove potential outliers by assigning each bivariate observation a depth score and remove those observations that fall beyond a given threshold.  In the second method, we first develop robust estimators for the parameters  in a bivariate skew-$t$ (BST) distribution, and these parameters are used in either   distance-based or contour-based approaches to flag observations as potential outliers. We test the performance of these methods in simulation against a more common MVN outlier detection method.  Finally, we show how our methods can be used in practice with radiosonde launches of horizontal and vertical wind components measured at 8 vertical pressure levels in which we demonstrate differences in the number of flagged outliers  across pressure levels and through time.
+%195 words
+
+
+\par\vfill\noindent
+{\bf Some keywords:}  Outliers, Radiosonde Winds, Skewed Multivariate Distributions
+
+\par\medskip\noindent
+{\bf Short title}:    Robust Bivariate Error Detection in Skewed  Data
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}\label{sec:intro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{doublespacing}
+
+
+
+Radiosondes  are instruments that are attached to weather balloons and are currently released twice daily at over 700 stations around the globe.  They are the only direct measurements of the upper atmosphere and include pressure, temperature, dewpoint, and winds  as the balloon rises through the atmosphere at a standard set of pressure levels.  An additional 1,300 historical stations exist that are no longer in use, and these records  date back to the 1920's and contain many millions of observations.  Several databases housing radiosonde launch measurements are maintained, such as   the Comprehensive Historical Upper-Air Network (CHUAN) (Stickler et al.~2010) and the Integrated Global Radiosonde Archive (IGRA) (Durre et al.~2004).  The National Center for Atmospheric Research (NCAR) maintains the Upper Air Database (UADB) archive of radiosonde data that contains more launch stations and reaches further back in time than the IGRA (DSS/CISL/NCAR 2014).  
+
+Such large and complex archives contain many errors.  Both systematic errors, such as differences in units of measure, changing instrumentation, and discrepancies in station locations, and random errors, such as data entry and transmission errors, can occur. In particular for wind, random errors can occur due to imprecise tracking of the ascending balloon or by the motion of the balloon relative to the atmosphere (WMO 2008). We focus this work on identifying random errors in the historical archive (i.e., data collected prior to 1980)  since  older records cannot be externally verified with numerical weather prediction models. Each of these archives contain many millions of observations and could use the procedures developed herein to either remove or down weight suspected erroneous observations.  
+
+
+ Most quality assurance systems for finding random errors in the historical radiosonde archive  have  focused on temperature (Durre et al.~2008; Anderson et al.~2016; and Browning and Hering 2016) as temperature is an important variable in studying climate change.  However, the radiosonde winds are also important as they are used in data assimilation products, such as National Centers for Environmental Prediction (NCEP) reanalyses (Kalnay et al.~1996; Kanamitsu et al.~2002), and these are used as boundary conditions in global and regional climate models.  The radiosonde winds can also be used in studies of wind climate (Jury and Pathack 1991; Frank and Landberg 1997; Br\"{o}nnimann and Luterbacher 2004); events such as severe windstorms and the Dust Bowl (Klimowksi et al.~2003; Br\"{o}nnimann et al.~2009);  and low-level jets (Walters and Winkler 2001).  Quality control of winds in current launches are typically basic and include checking that observations are within reasonable bounds; removing observations if only one of the pair is recorded; and checking for long strings of repeated values (Durre et al.~2004).  One exception is Wartenburger et al.~(2013) who use neighboring stations to identify random errors in temperature, wind speed, wind direction, and geopotential height in records from 1923 to 1966; however, each variable is assessed individually, not jointly.  Ultimately,  they note that their wind errors should be interpreted cautiously, and  they still inspect the wind observations visually. 
+
+
+In addition to the bivariate nature of wind, each launch of a radiosonde produces a function of wind over pressure level.  Figure~\ref{fig:sample_launches} shows the  horizontal $u$-component and vertical $v$-component of wind plotted as a function of pressure for yearly averaged launches over 50 years from 1962 to 2011 (left) and over 200 individual launches in 1962 (right) at the Denver, Colorado station.  In the yearly averages, there is clearly a shift  in observed winds, which may indicate a change in instrumentation or slight shift in station location, representing a systematic change.  In the individual launches, there is a substantial amount of variability with an increase in spread in the mid-pressure levels, which is consistent with the height of the jet stream.   The nonparametric bivariate wind densities at each pressure level for over 35,000 launches are shown in Figure~\ref{fig:bivariate}. The longer tails on the right-hand side of the distributions are especially evident at the middle pressure levels, which is consistent with Figure~\ref{fig:sample_launches} (right).   Our goal here is to focus on identifying random errors in the record, not systematic shifts (see wind homogenization work by Gruber and Haimberger (2008) and Ramella Pralungo and Haimberger (2014)).
+
+
+Detecting multivariate outliers is an inherently difficult problem since an observation may not be considered an outlier in any one given dimension, but it could be unusual when considered jointly across all of its dimensions.   One approach to outlier detection in multivariate data is to project the observations into a lower-dimensional subspace with a method such as principal component analysis and then summarize the observations in terms of a single monitoring statistic like Hotelling's $T^2$ or the squared prediction error (SPE) (e.g., Wold et al.~1987; Sch\"{o}lkopf  et al.~1998). The distributions of the monitoring statistics depend on the assumption that the data-generating process is either multivariate normal or  locally linear, but these  assumptions do not always hold, making it difficult to determine the threshold at which to declare that an observation is an outlier  (see Kazor et al.~2016).  The dimension reduction approach is particularly popular in process monitoring where the number of variables being monitored is large.  However, when a process of interest has only a few variables of interest,  flagging outliers in the original space of observations is preferred since this allows researchers to quickly identify possible causes of the error.  For this reason, transforming the observations with a multivariate copula is also not ideal (Joe 2015).
+
+
+Another  common approach to detecting multivariate outliers when the number of variables is small is to use  robust estimation of the parameters of a multivariate normal (MVN) distribution, such as Rousseeuw and Van Driessen (1999) or Pe\~{n}a and Prieto (2001),  since the outliers themselves can influence the parameter estimates.  Then, a  MVN based  algorithm to detect outliers is  applied using the robust estimates of location and scale in  Mahalanobis distance (Filzmoser et al.~2005; Filzmoser et al.~2008).  Good overviews are given in Rousseeuw and Leroy (2003) and Maronna et al.~(2006).  However, many processes do not fit the MVN distribution profile and may have heavy tailed and/or skewed distributions.  An alternative multivariate distribution to the MVN is the  multivariate skew-$t$ (MST) distribution.  It is flexible enough to fit  variations in the third and fourth moments of a distribution and has the MVN distribution as a special, central case (Azzalini and Capitanio 2014).
+
+
+ 
+
+
+There is an important difference between extremes of a distribution and outliers, as described by Reimann et al.~(2005) for univariate data.  Extremes of a distribution are simply observations that are consistent with the distribution but  will appear if a large enough sample is taken.  Outliers, or errors, are observations that are inconsistent with the distribution and were generated from possibly multiple different processes.  Our goal is not to remove extremes but to identify likely errors, specifically with application to winds that are observed in two-dimensional space with the $u$ and $v$ components.    Indeed, as Gupta et al.~(2014) point out in their overview of outlier detection methods in temporal data, outlier detection methods for different data types are not trivial to generalize, and while the methods described herein can be applied quite generally to any set of bivariate observations, we evaluate and assess the methods with particular interest in applying them to radiosonde launches.  
+
+In this paper, we compare two established methods and propose two new methods for handling both the bivariate and skewed nature of this data.  The aforementioned parametric method based on the bivariate normal (BVN) is applied (Filzmoser et al.~2005);  a nonparametric method based on the bagplot in Rousseeuw et al.~(1999) that preserves asymmetries in the bivariate density is tested; and finally, two  methods based on the parametric form of  the bivariate skew-t (BST) distribution are developed.  The bagplot is constructed by computing Tukey's half-space depth for each observation (Tukey 1975), and   errors are flagged and removed by identifying those observations that are greater than  the distance from the point with the greatest  depth to the edge of the region containing the largest 50\% of depth values multiplied by an appropriate factor.  Although reviewed as a method for outlier identification  in Hubert et al.~(2015), to our knowledge, this is the first time this method has been applied to wind data. The new parametric approaches we develop involve fitting the BST distribution to each pressure level, and  observations are flagged using either their squared Mahalanobis distances or the $100(1-\alpha)\%$ contour of smallest geometrical size.  The squared Mahalanobis distances from a BST follow a  scaled $F$-distribution, and their contours are elliptical but not skewed.  Thus, the   advantage of the skew-elliptical contour approach is that the contours produced are skewed and elliptical. The scaled $F$-distribution and the skew elliptical contour of the BST both depend on estimating the parameters in the BST,  but the tail-heaviness parameter in the BST  is very difficult to estimate in the presence of outliers, so we develop a robust $M$-estimator for the parameters of this distribution.  
+
+
+
+To compare these methods, we  design a simulation study in which we develop a model for simulating  winds as a function of pressure level that allows us to simulate realistic wind profiles of  radiosonde launches.  These launches are then contaminated with  different types of likely errors, and thus we are able to know whether each observation is an error or not.  We  evaluate the effect of changing skewness in simulated data on the ability of  the methods to identify outliers.  We record both the number of correctly classified errors (true positives) and incorrectly identified true observations (false negatives), with the goal of having high values of the former and low values of the latter.
+
+
+This paper is organized as follows:  in Section 2, we  explain the  Rousseeuw et al.~(1999) bagplot and the Filzmoser et al.~(2005) BVN methods, and we  introduce our new methods based on the BST. In Section 3, we describe the robust estimation of the BST parameters and present the results of a simulation study in which we investigate the choice of a tuning parameter.  In Section 4, we describe and report the results of the outlier simulation study, and Section 5 displays the results of applying the methods to the radiosonde winds at the Denver launch station.  Section 6 concludes, describes future work,  and outlines additional  considerations  to be taken into account when applying such random error detection methods to the entire radiosonde archive.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Methods}\label{sec:method}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this section, we discuss different outlier detection methods for bivariate data. In Section~\ref{subsec:dp}, we review the bagplot by Rousseeuw et al.~(1999) based on Tukey's bivariate data depth. It is rank-based and does not need distributional assumptions. In Section~\ref{subsec:bvn}, we review the method proposed by Filzmoser et al.~(2005) for data following a  multivariate normal distribution, where the squared Mahalanobis distance with robust estimates is used as the test statistic to detect multivariate outliers. Motivated by the skewed and heavy-tailed distribution of wind, we develop two approaches to detect outliers with the bivariate skew-$t$ (BST) distribution in Section~\ref{subsec:bst}, using the Mahalanobis distance whose distribution is determined by the tail-heaviness parameter, and the corresponding bivariate skewed elliptical contours (SEC) which takes the skewness into account. Since both approaches involve fitting the BST distribution,  robust estimation is necessary in the presence of outliers and is presented later in Section~\ref{sec:robust}. Throughout this section, we assume that $G$ is an absolutely continuous probability distribution in $\R^2$, and $\{\bY_1,\ldots,\bY_n\}$ is a random sample from $G$, where $\bY_i=(U,V)_i\trans$, $i=1,\ldots,n$.
+
+
+
+\subsection{Bivariate Depth}\label{subsec:dp}
+
+ When the underlying distribution is unknown, a nonparametric rank-based method is appropriate to detect multivariate outliers.
+ However,  we cannot simply extend univariate order statistics to the multivariate setting because of the absence of a natural ordering for multi-dimensional Euclidean space. Data depth is an important concept for multivariate data ordering and for understanding the close relationships among ranking quantiles, outlyingness, and robustness. There are many available notions of data depth, for example, the Mahalanobis depth (Mahalanobis 1936), the Tukey half-space location depth (Tukey 1975), the Oja depth (Oja 1983), the simplicial depth (Liu 1990), the majority depth (Singh 1991), and the likelihood depth (Fraiman and Meloche 1999), many of which were reviewed by Liu (1999). The general idea is that one can compute the depth values of all the observations for a given depth notion, and order them according to the decreasing depth values. Then, the first order statistic, $\bY_{[1]}$, associated with the largest depth value is defined as the median, which is the most central or the deepest observation.  The order statistics, $\bY_{[1]},\ldots ,\bY_{[n]}$, induced by data depth start from the most central data point and move outwards in all directions. The implication is that a larger rank is associated with a more outlying position, or less representative observation with respect to the data cloud.
+
+Here we present the Tukey half-space depth (Tukey 1975) in $\R^2$. The half-space depth of $\by$ w.r.t.~$G$ is defined to be
+$$D(G;\by)=\inf_H\{P(H):  H\mbox{ is a closed half-space in }\R^2\mbox{ and }\by\in H\},$$
+and its sample version is denoted by $D(G_n;\by)$, where $G_n$ is the empirical distribution function of  the sample $\{\bY_1,\ldots ,\bY_n\}$, and $P(H)$ is the number of data points contained in $H$. Then, the value of $D(G_n;\by)$ is given by the smallest number of data points contained in a closed half-plane of which the boundary line passes through $\by$, and the sample $100\alpha\%$ ($0<\alpha<1$) central region is naturally defined as the convex hull containing the most central $\alpha$ proportion of the deepest sample points. In particular, the sample 50\% central region is
+$$C_{0.5}=\mbox{convex hull}\{\bY_{[1]},\ldots,\bY_{[\lceil n/2\rceil]}\},$$
+where  $\lceil n/2\rceil$ is the smallest integer not less than $n/2$. Rousseeuw et al.~(1999) proposed the bagplot to inflate the boundary of the 50\% central region by a factor of 3 as the fence to detect outliers. Figure~\ref{fig:bagplot} shows a set of bivariate observations with the bivariate bagplot overlaid, where the central blue dot is the median which has the highest Tukey's depth value; the convex hull in red contains the 50\% of observations with the highest Tukey's depth values;  and the distance from the median to each vertex on the red convex hull is inflated by 3 to get the outer blue convex hull. Note that the bagplot naturally preserves asymmetry in the bivariate distribution.  
+
+
+ 
+\subsection{Bivariate Normal}\label{subsec:bvn}
+ Filzmoser et al.~(2005) assume that the  underlying data-generating process is a multivariate normal distribution and use Mahalanobis distance to measure the distance of observations from the center of the distribution, as follows: $$MD_i = ((\bY_i-\bmu)'\bSigma^{-1}(\bY_i-\bmu))^{1/2},$$ and it is well-known that $MD_i^2\sim \chi^2_p$, where $p$ is the dimension of the observations, and in our case $p=2$.   However, in place of the classical estimators of $\bmu$ and $\bSigma$, they use the Minimum Covariance Determinant (MCD) approach proposed by Rousseeuw (1985) to obtain robust estimates.  For this method, the location and covariance matrix are estimated using only the observations of size $h$ that minimizes the determinant of the sample covariance.  They use $h\approx 0.75n$, where $n$ is the sample size.  This approach is computationally fast (Rousseeuw and Van Driessen 1999), and  robust distances  are then formed as follows:  $$RD_i = ((\bY_i-\bmu_r)'\bSigma_r^{-1}(\bY_i-\bmu_r))^{1/2},$$ where $\bmu_r$ and $\bSigma_r$ are the robust estimates of $\bmu$ and $\bSigma$.
+
+
+
+Then, a threshold with which to classify the observations as outliers is required.  As the sample size increases, it is expected to observe more extreme values from the distribution, which are desirable to retain, so this threshold is adjusted for various sample sizes and data dimension ($n$ and $p$).    They let $F_n(u)$ represent the empirical distribution function of the squared robust distances, and $F(u)$ is the distribution function of $\chi^2_p$.  As $n$ gets large, $F_n(u)\rightarrow F(u)$, so the tails can be compared to detect outliers.  To measure deviations in the tails of these distributions, first define $\delta = \chi^2_{p;1-\alpha}$ for a small $\alpha$.  We use $\alpha=0.025$.  Then, deviation in the upper tail of the distribution is measured with$$p_n(\delta) = \sup_{u\geq\delta} (F(u)-F_n(u))^+,$$ where $+$ indicates the positive differences.    A critical value to distinguish between outliers and extremes is defined as $$\alpha_n(\delta) = \left\{ \begin{array}{cc} 0, & p_n(\delta) \leq p_{crit}(\delta,n,p),\\ p_n(\delta), & p_n(\delta) > p_{crit}(\delta,n,p),\end{array}\right.$$ and the threshold value is defined to be $c_n(\delta) = F_n^{-1}(1-\alpha_n(\delta))$. Filzmoser et al.~(2005) find $p_{crit}(\delta,n,p)$ through simulation of 1,000 observations for  specific combinations of $n$ and $p$.  In experimenting with $p\leq 10$, they find that the empirical relationship $$p_{crit}(\delta,n,p) = \frac{0.24-0.003p}{\sqrt{n}}$$ can be used to quickly choose $p_{crit}$.    This method is implemented and available in the \verb mvoutlier  package in \verb R. However, in skewed distributions, this method flags a substantial number of  observations in the heavy tail as outliers, making this threshold much too low.  Thus, we compute the following probability: $P(\chi^2_p > RD_i^2)$, that a $\chi^2$ random variable with $p$ degrees of freedom exceeds the squared robust distance, associating each observation with a ``$p$-value."  To control the expected false discovery rate, we apply the Benjamini-Hochberg adjustment for dependent hypothesis tests by ordering all of the $p$-values from smallest to largest as $(p_{(1)}, p_{(2)}, \ldots, p_{(n)})$.  Then, we find the largest $j$ such that $p_{(j)}< \frac{j\alpha}{n\cdot C_n},$ where $C_n=\sum_{i=1}^n 1/i$, and flag the observations  corresponding to $p_{(1)}, p_{(2)}, \ldots, p_{(j)}$ as outliers (Benjamini and Hochberg 1995; Benjamini and Yekutieli 2001).  This approach improves the performance of the BVN method in both the outlier simulation and the case study.
+%The authors go on to present a visualization technique for the identified outliers.  Not only do they use different plotting characters for observations within different quantiles of the multivariate distribution, but they also color the plotting characters based on the kind of outlier, i.e., red for unusually large values and blue for unusually small values.  They plot the observations spatially (since they have spatial data), and they are able to identify spatial patterns in the outliers.  
+
+
+
+\subsection{Bivariate Skew-T}\label{subsec:bst}
+
+Following similar notation to Azzalini and Capitanio (2003), the MST distribution is as follows:
+$$f_\bY(\y) = 2\,t_p(\y; \nu) T_1 \left\{\balpha'\bomega^{-1}(\y-\bxi)\left(\frac{\nu + p}{Q_{\by}+\nu} \right)^{1/2} ;\,\,\nu+p\right\},$$
+where $\bomega =\mbox{diag}(\omega_{11}, \ldots, \omega_{pp})^{1/2}$ for $\omega_{ij}$ the i$th$, j$th$ entry of $\bOmega$, a $p\times p$ scale matrix; $\bxi$ is  a $p\times 1$ location vector; $\balpha$ is a $p\times 1$ skewness vector; 
+$$Q_{\by} = (\by-\bxi)'\bOmega^{-1}(\by-\bxi);$$
+$t_p(\,\,\cdot\,\,;\nu)$ is the density of a $p$-dimensional $t$-distribution with $\nu$ degrees of freedom; and   $T_1(\,\,\cdot\,\,;\nu+p)$ is the distribution of the univariate $t$-distribution with $\nu+p$ degrees of freedom.  A $p$-dimensional random vector following this distribution is denoted $\bY \sim St_p(\bxi, \bOmega,\balpha, \nu)$.   When $\balpha = (0, \ldots, 0)_p^T$ and $\nu=\infty$, then the multivariate normal distribution with mean $\bxi$ and variance-covariance $\bOmega$ is recovered.  For the bivariate case with $p=2$,  there are 8 unknown parameters to estimate.
+
+\subsubsection{$F$-Distance}
+
+Our first method is based on the  quadratic form, $Q=(\bY-\bxi)'\bOmega^{-1}(\bY-\bxi)$.  In this case, $Q\sim p\cdot F(p,\nu)$, and this property has been used to construct Healy plots (Healy 1968) for assessing the fit of data to the MST by comparing this quadratic form to quantiles from the associated $F$-distribution.  The distribution of $Q$ depends on the degrees of freedom  parameter, and this parameter's estimation is extremely sensitive to the presence of outliers.  In  Section~\ref{sec:robust}, we describe how to robustly estimate this parameter.  However, given robust estimates of the parameters, denoted $\bxi_r$, $\bOmega_r$, $\balpha_r$, and $\nu_r$, we construct $Q_r = (\bY-\bxi_r)'\bOmega_r^{-1}(\bY-\bxi_r)$,  and for each observation we compute $P(F(p,\nu_r) > Q_r/p)$, the probability that a scaled $F$-distribution with $p$ and $\nu_r$ degrees of freedom exceeds $Q_r/p$. To flag outliers, we  follow the same Benjamini-Hochberg approach as is applied for the BVN method, setting the Type I error rate to $\alpha=0.025$. Note that the univariate $\alpha$ is the Type I error rate that we set to $0.025$, and $\balpha$ is the $p\times 1$ vector in the MST that controls the direction and strength of skewness in each dimension of the distribution.  
+
+ \subsubsection{Skew Elliptical Contours}
+
+%See simulated_example.R file in Code folder
+The disadvantage of the approach based on the quadratic form described above is that its distribution is invariant to the skewness of the multivariate distribution, represented by $\balpha$.  We want to flag outliers that are outside  the main cloud of points differently depending on the direction that they lay with respect to the center.  Those that are in the ``long skewed tail" of the distribution should be less likely to be flagged as outliers than those that may be relatively close to the center but in the ``short skewed tail," as illustrated in Figure~\ref{fig:dist_sec}.   The right-hand plot shows the contours produced based on the $F$-distribution, and even though the red point is outside the area of highest density, it would not be flagged as unusual.  However, in the left-hand plot, if the contours are skewed to match the density of the observations, then the red observation would be flagged.  
+
+
+   Thus, we need to find the region $R_{BST}\subset \mathbb{R}^2$ of smallest geometrical size such that $P(\bY \in R_{BST}) = (1-\alpha)$.  This is equivalent to stating that the solution must be of the type
+$$R_{BST} = \left\{\by: f_{BST}(\by; \bxi, \bOmega,\balpha,\nu) \geq f_0 \right\},$$
+where $f_{BST}$ is the pdf of the BST, and $f_0$ is a value ensuring that $P(\bY\in R_{BST}) = (1-\alpha)$.  $R_{BST}$ is a convex set since the BST density is concave, and the goal is to find a suitable $f_0$.  
+  Azzalini and Capitanio (2014) state that an exact solution for $f_0$ does not seem feasible in the  multivariate skew-normal  case, and they construct an approximation based on the  $\chi^2_p$ solution for the MVN.   Soriani (2007) extends this approximation for the MST case, and these implementations can be found in the \verb sn  package in \verb R .  
+  
+  
+  
+  
+  Thus, we flag observations as outliers when they are outside of the approximate region of smallest geometrical size  for $\alpha=0.025$ based on robust estimates of the BST parameters, defined as   
+ $$\tilde R_{BST}= \left\{\by:  f_{BST}(\by; \bxi_r, \bOmega_r,\balpha_r,\nu_r) \geq f_0 \right\}.$$
+In fact, determining whether observations are outside of $\tilde R_{BST}$ is again a multiple testing problem, so we apply the Benjamini-Hochberg adjustment for flagging multiple potential outliers.
+
+
+%Mahalanobis distance (scaled $F$); skewed elliptical contours (SEC).
+
+\section{Robust Estimation in Bivariate Skew-T}\label{sec:robust}
+
+The MST density  allows for the modeling of skewed and heavy-tailed distributions, and  estimates of the parameters are typically computed via maximum likelihood.  While maximum likelihood estimators have nice properties, they are not guaranteed to be robust to outliers, and  the ``tail-heaviness" parameter, $\nu$, is very sensitive to the presence of outliers.  In particular, the estimate of $\nu$ is negatively biased when outliers are present.  While the univariate skew-$t$ density has been used as the error term in regression models to estimate  covariate coefficients robustly (Azzalini and Genton 2008; Azzalini and Capitanio 2014), here, our goal is to construct robust estimates of the parameters in the BST directly, which has not been done for the ST distribution.   %Section~\ref{sec:ST} describes the development for the univariate skew-$t$, and Section~\ref{sec:BST} follows with the extension to the bivariate case and a simulation study.  
+
+
+ To understand the robustness of a particular estimator, it is common to look at the influence functions (IF) for each of the parameters (Huber and Ronchetti 2009). {Letting $\btheta\in\mathbb{R}^d$ represent the vector of $d$ parameters, the influence function for the estimator of the $j$th element of $\btheta$ is defined as  
+$$IF_j(\by) = \lim_{t \to 0^+} \frac{\hat{\theta}_j(t \Delta_{\by} + (1-t)G)-\hat{\theta}_j(G)}{t},\quad j=1,\ldots,d,$$}where $\hat{\theta}_j$ is the estimator of interest, $G$ is the true underlying distribution, and $\Delta_{\by}$ is the distribution of a point mass at $\by$, where $\by$ is a $p\times 1$ vector and would include the case where $\by$ is univariate.  Thus, the influence function {$IF_j(\by)$} provides a measure of how an estimator changes due to contamination at the point $\by$.  An estimator is generally considered robust if its influence function is bounded.
+
+Huber and Ronchetti (2009) discuss the general class of $M$-estimators; these are estimators computed by  {minimizing} some function {$\rho(\by;\btheta)$} with respect to $\btheta$. Note that maximum likelihood estimators (MLEs) belong to this broad class; this can be seen by choosing $\rho(\by;\btheta) = -\ell(\btheta;\by)$, where $\ell(\cdot)$ is the joint log-likelihood function of the data.  Assuming that the density, $g(\by)$, exists, the influence function for such estimators can be computed as
+
+\begin{equation*}
+	IF_j(\by)=-\frac{\psi_j(\by;\hat{\btheta})}{\int \frac{ \partial \psi_j(\bx,\btheta)}{\partial \theta_j} g(\bx) d\bx},
+\end{equation*}
+ where
+\begin{equation}\label{eq:psi}
+	\psi_j(\by;\btheta)= \frac{\partial \rho(\by;\btheta)}{\partial \theta_j}.
+\end{equation}
+
+%See appendix B of this paper for formulas.
+{For the MST distribution,  the derivatives of the negative log-likelihood for all parameters have closed forms except for $\nu$, which can be computed numerically (Azzalini and Capitanio 2003). } The solid line in Figure~\ref{fig:inf_robust}  shows   the influence functions for the MLEs of all four parameters in a univariate skew-$t$.  Both $\hat \omega_{MLE}$ and $\hat \nu_{MLE}$ appear to suffer from strongly unbounded influence functions.  Lucas (1997) also shows that the influence functions for the scale and degrees of freedom  in  a univariate student-$t$ distribution are unbounded when they are estimated from the data.  
+
+{To derive  a robust $M$-estimator for the parameters of the skew-$t$ distribution, a natural approach is to consider a redescending $M$-estimator, where the derivative of $\rho$ satisfies $\lim_{z\to\pm\infty}\rho^\prime(z)=0$. We propose the following redescending $M$-estimator for the skew-$t$ distribution by redefining $\rho(\cdot)$ as a function of $z=-\ell(\btheta;\by)$,
+\begin{equation}\label{eq:bounding}
+\rho_{r}(z) = \left\{ \begin{array}{ll}
+z, & z\leq k,\\
+2k-k\cdot\exp(-z/k+1), & z>k,
+\end{array} \right.
+\end{equation}
+where {$k>0$} is a constant controlling the threshold at which observations are considered extreme. Figure~\ref{fig:equation2} shows the trajectory of the function $\rho_r(z)$ for $k=2$. This particular choice of $\rho_r(\cdot)$ in Equation~\eqref{eq:bounding} has advantages. First of all, it makes no adjustment to observations with small (and hence reasonable) negative log-likelihoods, and it is continuously differentiable. Furthermore, when the negative log-likelihood goes to infinity, $\lim_{z\to\infty}\rho_r(z)=2k$ as shown in Figure~\ref{fig:equation2} where the limiting value is 4, and $\lim_{z\to\infty}\rho_r^\prime(z)=0$ indicating that the $M$-estimator is indeed redescending.  The corresponding IFs of all the estimators are strongly redescending to 0 as shown in dashed lines in Figure~\ref{fig:inf_robust}.  The function {$\rho_{r}(\cdot)$} could be one of many, although we do not explore other alternatives here. The optimality of redescending $M$-estimators for the skew-$t$ distribution requires future research, especially for $\omega$ and $\nu$. Similar discussions for the location parameter can be found in Shevlyakov et al.~(2008).}  
+
+An alternative approach to robust estimation with redescending $M$-estimators is trimmed likelihood, as described  in Hadi and Luce\~no (1997).  Rather than bounding the negative log-likelihood directly, a fixed percent of observations with the largest individual negative log-likelihood values, $-\ell(\btheta;\by_i)$, are removed.  We considered this method as well; but in a BST distribution,  some very unusual values still occur in the heavy tail of the distribution (see left panel of Figure~\ref{fig:k_methods}), and removing such values completely results in an overestimation of $\nu$.
+
+
+%Equation~(\ref{eq:psi}) can be easily extended to the case where $\btheta$ is a $d\times 1$ vector of parameters by computing each influence function individually
+%\begin{equation*}
+%	\psi_i(y,\btheta_i) = \frac{\partial \rho(y,\btheta)}{\partial \btheta_i},
+%\end{equation*}
+%for $i=1,\ldots, d$.  
+%Thus, all influence functions for our $M$-estimators are bounded, and  
+
+As a trade-off, we must  determine an appropriate choice of $k$ in Equation~\eqref{eq:bounding}, and we want to choose a value that will work equally well in a  variety of circumstances. We proposed and tested multiple approaches  to choosing $k$ dynamically and present two of these here.  The left panel of Figure~\ref{fig:k_methods} shows a sample simulated dataset that has been contaminated with outliers, which are marked in red, in the heavy tail.  First, we find the $k$ associated with the minimum of the density of the observations' likelihood values, denoted $k_{min}$. To do this, the non-robust maximum likelihood estimates are found, and the univariate likelihood of each observation based on these estimates is computed to form the following set:  $\{\ell(\hat\btheta;\by_1), \ell(\hat\btheta;\by_2), \ldots, \ell(\hat\btheta;\by_n)\}$.  Then, the nonparametric density of this  set of likelihood values is constructed, as shown in the center panel of Figure~\ref{fig:k_methods} with the dashed line showing the minimum value of the density.   In this case, the $k$ chosen would be $k_{min}=13.3$.   A second approach to selecting $k$ is to construct the empirical cumulative density function (ECDF) of the set of non-robust individual likelihood values, denoted $\mathcal{L}_n(\hat\btheta;\by)$.  Then,  $k_{deriv}$ is chosen such that the following criteria hold,
+$$\mathcal{L}_n'(\hat\btheta;\by)<\epsilon_1 \,\,\,\, \mbox{and} \,\,\,\, |\mathcal{L}_n''(\hat\btheta;\by)| < \epsilon_2,$$
+where we set $\epsilon_1 = 0.01$ and $\epsilon_2= 0.001$.  The right panel in Figure~\ref{fig:k_methods} illustrates the choice of $k$ for this dataset, which is 12.7.  We perform  a simulation study to evaluate the choice of $k$ on the mean square error (MSE) of the robust parameter estimates and present the study design and results in the next two subsections.
+
+
+
+
+
+\subsection{Robust BST Simulation Design}\label{sec:ksim}
+In this section, we perform a simulation study and vary features that we expect to have an impact on the robust estimation of the BST parameters.  The amount of variability in the distribution; the shape and behavior of the tails; the direction of outlier contamination; and the percent of outlier contamination are all features that can influence the parameter estimates.  For example, based on pilot studies, we know that the estimation of $\nu$ is quite sensitive to the presence of outliers, and those distributions that exhibit more variability have even more difficulty in estimating $\nu$.     Below are the steps we take to simulate data:
+
+
+\begin{enumerate}
+\item Simulate  a dataset of size $n\in\{100, 250, 500, 750, 1000\}$ from a BST with $\bxi = (16.51,-1.22)^T$ and one of the following 5 levels of variability:  $\bOmega_1 =\mathbf{I}_2$,
+    
+   $$\bOmega_2 = \left(\begin{array}{cc}
+    22.4 & -3.9\\
+    -3.9 & 25.9 \end{array} \right),   \,\,\,\,\,\,\,\, \bOmega_3 = \left(\begin{array}{cc}
+    85.6 & 10.5\\
+    10.5 & 63.8 \end{array} \right),   $$ 
+ 
+ $$ \bOmega_4 = \left(\begin{array}{cc}
+    147.9 & 38.9\\
+    38.9 & 210.0 \end{array} \right),  \,\,\,\,\mbox{or}\,\,\,\,  \bOmega_5 = \left(\begin{array}{cc}
+    171.8 & 44.6\\
+    44.6 & 242.7 \end{array} \right)$$ 
+ 
+   
+    
+    and one of the following sets of remaining parameter values:
+\begin{enumerate}
+\item Symmetric (MVN):  $\balpha=(0,0)^T$, $\nu=\infty$
+\item Observed (OBS):  $\balpha=(1,-1)^T$, $\nu=10$
+\item Extreme (EX): $\balpha=(6,0)^T$, $\nu=5$
+\end{enumerate}
+The values of the parameters chosen for the simulation are  based on the MLEs of the BST for the $u$ and $v$ components at the Denver launch station.  The $\bOmega$'s are chosen based on particular pressure levels, with $\bOmega_2$ being the least variable level and $\bOmega_5$ being the most variable level.  The others are chosen to fill in within this range.   Set (a) above corresponds to multivariate normal observations; set (b) values are similar to what was in the observed data; and set (c) is more skewed and heavy-tailed than observed.  
+
+\item Contaminate  either 0\%, 5\%, or 10\% of the observations with one of two types of outliers.   The first type introduces  errors by shifting the simulated value a  distance that is chosen  uniformly at random between 12 and 16 units anywhere around the main cloud of points.  The second method differs in that it samples a direction such that the outliers occur in the heavy tail of the distribution. Outliers of this type may occur if there is a common prevailing wind direction.  The left panel of Figure~\ref{fig:k_methods} depicts an example wherein 10\% of the observations are contaminated with outliers in the heavy tail of an EX skewed distribution.
+\end{enumerate}
+
+\ni For each of 250 datasets simulated under a given setting, as described above, the following steps are performed:
+
+\begin{enumerate}
+\item The simulated and contaminated data is denoted $\mathbf{X} = (\mathbf{u},\mathbf{v})'\in \mathbb{R}^{n\times2}$, which follows the BST, $\mathbf{X} \sim ST_2(\bxi,\bOmega_i,\balpha,\nu)$.  The variability of the simulated data  impacts the estimation, so we  first center and scale the data.  Let $\mathbf{a}=(M_u,M_v)'$ be the vector of medians of $\mathbf{u}$ and $\mathbf{v}$.  The respective medians are first subtracted from the data, and then the data is rescaled by multiplying it by  $\mathbf{A}$ where $\mathbf{A}^{-1}$ is  $$\mathbf{A}^{-1}= \left(\begin{array}{cc}
+    MAD(\mathbf{u}) & 0\\
+    0 & {MAD(\mathbf{v})} \end{array} \right),$$
+ and the $MAD(\cdot)$ is the median absolute deviation, a robust estimate of scale. Thus, the centered and scaled data is $\mathbf{Y} = \mathbf{A}(\mathbf{x}-\mathbf{a}) = \mathbf{A}\mathbf{x}-\mathbf{A}\mathbf{a}.$
+Note, that the true parameter values change when the affine transformation is applied.  Thus, the distribution of $\mathbf{Y}$ is $\mathbf{Y} \sim ST_2(\mathbf{A}(\bxi-\mathbf{a}), \mathbf{A}\bOmega_i\mathbf{A},\balpha,\nu)$.  Generally speaking, the value of $\balpha$ would change as well for such a transformation, but when $\mathbf{A}$ is diagonal, $\balpha$ is unchanged, and the proof is given in the Appendix.  Here, we will denote these transformed parameters as follows:  $\mathbf{Y} \sim ST_2(\bxi',\bOmega',\balpha,\nu)$.
+
+\item The parameters are estimated robustly with either $k_{min}$, $k_{deriv}$, or $k=10$.  In a preliminary simulation, we estimated the parameters robustly for every $k$ in the set $\{2,4,\ldots, 26\}$. We found that $k=10$ or $k=12$ was often chosen as the value of $k$ that minimized the MSE of the parameters, but in practice, we recommend the dynamic choice of $k$ since the simulated data that we generate here cannot cover all possible parameter settings.  In particular, we noticed that larger values of $k$ were chosen as the sample size increased.
+
+\item For each simulated dataset, the true parameter values and the estimates are saved.  The  MSE (variance of the estimator plus the bias squared) across all 250 simulations is computed and then averaged across all of the parameters except the degrees of freedom.  It does not make sense to compute the bias of the degrees of freedom parameter, $\hat\nu-\nu$,  under the symmetric simulation setting (a) above since $\nu=\infty$.  Thus, the median of the estimated degrees of freedom parameter is reported instead.
+
+
+
+
+\end{enumerate}
+
+
+
+
+
+\subsection{Robust BST  Simulation Results}
+
+Complete simulation results for $n=500$ are given in Table~\ref{tab:choose_k}, and findings for the other sample sizes are similar.  Across all of the simulation settings, the amount of variability present in the data does not appear to influence  results as long as the robust standardization described above is performed.  With no outliers,   all three choices of $k$ perform similarly across the first seven parameters, but using $k_{min}$ yields the best estimate of $\nu$, regardless of the shape of the distribution.  Using $k_{deriv}$ results in an overestimation of $\nu$ by about 3 units for the OBS data and by 1 unit in the EXT case, and $k=10$ performs worse than that.  The difference is due to the fact that, on average, the value of $k$ chosen with $k_{min}$ is much larger, as it should be when there is  no contamination, and it increases substantially as the strength of the skewness in the underlying simulated data increases.  
+
+Once the simulated data is contaminated with outliers, the placement of the outliers, the number of outliers, and the strength of the skewness of the distribution all play a role in how well each choice of $k$ performs in the parameter estimation.  The MSE of the first seven parameters is approximately the same for all three choices of $k$ for 5\% All, 5\% Angle, and 10\% All  in the SYM and OBS datasets.  However, the EXT skew data has lower MSE for the parameters with $k_{deriv}$ and $k=10$, and the OBS skewness with 10\% Angle contamination shows some preference for these two choices as well.  In estimating $\nu$ in the presence of contamination, we see the following:
+\begin{itemize}
+\item Higher outlier contamination makes $\nu$ more difficult to estimate.
+\item Outliers in the tail of the distribution make $\nu$ more difficult to estimate than when they are placed all around the main cloud of points.
+\item All three choices of $k$ result in a median estimate of $\nu$ that is smaller than the true value with some exceptions when the distribution is symmetric and contamination does not exceed 5\%.
+\item A choice of $k_{min}$ results in the worst estimation of $\nu$ when outliers are present.  Both $k_{deriv}$ and $k=10$ produce similar estimates of $\nu$, with $k=10$ performing better in some instances.
+\end{itemize}
+
+Based on these results, we proceed to use  $k_{deriv}$ to choose $k$ dynamically in the estimation, which gives more flexibility over using a static value such as $k=10$ but loses very little in terms of overall accuracy of the parameter estimation.  In particular, we see that the value of $k_{deriv}$ that is chosen increases with sample size and the strength of the skewness of the data and decreases by a small amount as the outlier contamination increases, all of which are desirable features.  Additionally, the parameter estimates are not strongly influenced by changing $k$ by one or two units.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{{Simulation Studies}}\label{sec:sim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this section, we  simulate radiosonde launches and contaminate them with realistic types of errors.  Then, we apply all of the methods presented herein to determine which one has the highest true negative and lowest false positive rates.
+
+\subsection{Outlier Simulation}
+To compare the methods introduced in Section~\ref{sec:method}, we generate 500 launches at 8 pressure levels from 16-dimensional skew-$t$ distributions
+with one of 3 types of skewness and degrees of freedom. Similar to the simulation study in Section~\ref{sec:ksim}, we use MVN to denote a multivariate normal distribution with no skewness and infinite degrees of freedom;
+OBS to denote a multivariate skew-$t$ (MST) distribution with similar skewness to what is observed in the Denver radiosonde data and degrees of freedom 10; and EX to denote a MST with more extreme skewness than observed in the data and degrees of freedom 5. For each distribution type, we consider one basic model (model 1) without contamination and 3 outlier models (models 2--4) with 5\% contamination. The top panel of Figure~\ref{fig:model} shows one realization from model 1 for each of the 3 distribution types. We contaminate an entire launch in model 2, random higher levels of a launch in model 3, and random half levels in model 4 as illustrated in the bottom panel of Figure~\ref{fig:model} for the OBS distribution. These types of outliers are commonly observed in radiosonde launches.  Model details are described as follows:
+
+\begin{enumerate}
+\item Model 1 is a basic model without outliers: $\bX_i=(\bY_1\trans,\ldots,\bY_8\trans)_i\trans$, $i=1,\ldots, 500$, generated from one of the 3 distribution types, where $\bY_j=(U,V)_j\trans$ is a bivariate vector at level~$j$, $j=1,\ldots,8$. In models 2--4 below, we always randomly select either the $u$ or the $v$ component to introduce different types of contamination in $\bY_j$. For simplicity, we shall only use $\bX_i(j)$ in the notation.
+\item Model 2 includes contamination of an entire launch: $\bZ_i=\bX_i+s_id_i\sigma_jK$, where $s_i$ is 1 with probability $\tau$ ($100\tau\%$ contamination), and 0 otherwise; $d_i$ is a sequence of random variables independent of $s_i$ taking values 1 and $-1$ with probability 1/2; $K=20$ is a constant indicating the contamination size; and $\sigma_j$ is the standard deviation at level $j$. 
+\item Model 3 is only contaminated at random higher levels of a launch: $\bZ_i(j)=\bX_i(j)+s_id_i\sigma_jK$, only if $j\geq \ell_i$, where $\ell_i$ is a random number uniformly generated from $\{2,\ldots,7\}$.
+\item Model 4 is similar to model 3 but contaminated by randomly selecting 4 out of 8 levels.
+\end{enumerate}
+
+Although data are generated as entire launches, we apply outlier detection methods level by level in order to identify bivariate outliers rather than across the entire launch.  Each dataset's observations are robustly centered and scaled, as described in Section~\ref{sec:ksim}. Then for each model and distribution combination, we apply all the methods introduced in Section~\ref{sec:method}:  the bivariate normal (BVN) with the Benjamini-Hochberg adjustment, setting the Type I error $\alpha=0.025$; the bivariate data depth with the inflating factor of 3; and the BST with robust estimators (robust), where the value of $k$ is chosen based on ECDF described in Section~\ref{sec:robust}. For the robust BST, two approaches detailed in Section~\ref{sec:robust} are applied, the one based on the scaled $F$-distribution of the Mahalanobis distance (F) and the one using skewed elliptical contours (SEC) with the same Benjamini-Hochberg adjustment as in the BVN method. To assess the performance of the robust estimation, we also include the results from the BST with the true parameters (true) and with the direct maximum likelihood estimates (mle).
+
+The performance of the outlier detection is summarized by true positives (TP) and false positives (FP). In this simulation, TP is the the percentage of correctly flagged outliers (number of correctly detected outliers divided by the total number of outlying observations), and FP is the percentage of falsely flagged outliers (number of falsely detected outliers divided by the total number of non-outlying observations). For example, when data is not contaminated with any outliers, TP is computed as the percentage of simulations such that each method detects no outliers;  when data are contaminated with outliers, TP is defined as the averaged percentage of correctly detected outliers out of the total number of outliers over 1000 simulations. Therefore, a high TP with a low FP is an indicator of a better method. Values in Table~\ref{tab:sim1} are percentages of the averaged TP and FP with 5\% contamination,  and all the standard errors (not shown) are fairly small.  
+
+When no outliers are present, all of the methods do reasonably well in not detecting any observations as outliers when the underlying simulated data is multivariate normal.  However, for the OBS and EX distributions, both the BVN and the depth methods fail by flagging outliers in most of the simulations when there are actually no outliers.  All of the BST methods perform much better.  When the true parameter values or the MLEs are used, these naturally do somewhat better than the robustly estimated versions.   
+
+When outliers are present, the nonparametric depth approach works relatively well and consistently across different types of outliers.  However, the depth method does not do as well as the skewness of the underlying distribution increases with the average true positives decreasing the the average false positives increasing.  To fix this problem, one may consider adjusting the inflating factor in a bagplot according to the underlying distribution. For example, in the univariate case, Hubert and Vandervieren (2006) adjusted the boxplot using a robust measure of skewness, and for functional data, Sun and Genton (2012) proposed a simulation-based method to adjust the factor in a functional boxplot (Sun and Genton 2011).  However, in this simulation study, we keep this factor fixed to show the effect of the skewness and heavy-tails.  The BVN method flags all of the introduced outliers, regardless of type and distribution, but the false positive rate is much higher as well,  especially for skewed and heavy-tailed distributions. 
+
+The results for the BST method with robust estimators for both the $F$-distance and the SEC approaches are close to those with true parameters, indicating good outlier detection performance of the proposed BST methods.  It also suggests that the proposed robust estimators are effective for the purpose of outlier detection. In contrast, the BST method with direct MLEs does very poorly, indicating that it is crucial to estimate the parameters of the BST distribution in a robust fashion in order to effectively detect outliers. Using the same robust parameter estimates, the approach based on SECs is generally better than the one based on a scaled $F$-distribution, especially when more skewness is present as hypothesized in Section~\ref{subsec:bst}. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Case Study}\label{sec:app}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ To illustrate our methods, we analyze  a set of 35,816 launches from the UADB archive at the Denver, CO station beginning on March 3, 1962 and ending on October 31, 2011, spanning a fifty year period.  Figure~\ref{fig:bivariate} shows the nonparametric densities of all 35,816 launches at each of 8 standard pressure levels.  As the radiosonde rises through the atmosphere, it becomes more likely for an error to occur, and errors are also more likely at higher wind speeds.  In addition,  the number of outliers may vary over time.  Random outliers are more likely to occur in later years as Ramella Pralungo and Haimberger (2014) note that early observations are subject to ``fair weather sampling bias," since before  radar tracking began in the 1960's, theodolites were used, which only worked when there was   good visibility, and the winds were not too strong.   Ramella Pralungo and Haimberger (2014)  also  perform their homogenization analysis independently for each pressure level since larger biases tend to occur for high wind speeds, and pressure levels are characterized by distinctly different mean wind speeds.   Thus, for the Denver launch station, we subset the observations by  pressure level for each  five year time period and for a given season, yielding 320 subsets of observations.  For sixteen of these subsets, less than 100 observations are recorded, and these are excluded from our analysis.  The remaining 304 subsets have sample sizes ranging from 121 to 971 with a median size of 731, and only four subsets have less than 400 observations.
+ 
+For each of the 304 subsets of observations, we apply all four methods of outlier detection, namely (i) Depth; (ii) BVN; (iii) BST-F; and (iv) BST-SEC.  We use $\alpha=0.025$ with the Benjamini-Hochberg adjustment for multiple dependent testing for the BVN and both BST approaches.  The Depth method flags the most outliers, 0.21\% of the observations, with the BST-SEC next with 0.15\%, then BVN with 0.11\%, and BST-F having the fewest flagged with 0.01\% percent.  Figure~\ref{fig:prop_compare} illustrates the proportion of observations that are flagged as outliers  by each method across time and for each pressure level.  From this, we see that the BVN and Depth methods flag a greater proportion of outliers between the years of 1971 and 1981, particularly for the higher pressure levels (i.e., closer to the surface).  An additional increase in flags occurs between 2001 and 2006 at the 100 Mb pressure level across all three methods, but again BVN and Depth flag more observations in this time period at additional pressure levels.  In many instances, all of the methods are flagging the same obviously erroneous observations, but Figure~\ref{fig:2examples}  shows two illustrative subsets wherein there are differences.  In both cases, the BVN method is flagging more observations in the heavier right-hand tail than is likely to be necessary.  At the same time, observations in the shorter left-hand tail are flagged by the BST-SEC method but are missed by the BST-F distance-based approach.  We should note that we had not modified the threshold for the BVN approach that is suggested by Filzmoser et al.~(2005), the BVN method would have flagged a total of 1.32\% of the observations as outliers instead of 0.11\%.
+ 
+ 
+Finally, we fit a logistic regression model for the proportion of flagged observations in each of the 304 subsets of observations using the robust estimates of $\alpha_1$, $\alpha_2$, and $\nu$ as predictors.   This model was fit for each of the BVN, BST-F, and BST-SEC methods, and the coefficients along with their associated $p$-values are given in Table~\ref{tab:logistic}.  Here, we see that as skewness of the density increases (either $\hat\alpha_1$, $\hat\alpha_2$, or both),  all three methods have significantly higher odds of flagging an observation as an outlier; however, the BST-SEC method appears to be the least affected by skewness as only one of the skewness parameters is significant, and the strength of the significance is the lowest among the three methods.  Interestingly, the estimated degrees of freedom is only significant for the BVN method, and the effect is negative.  In other words, as the estimated degrees of freedom increases (meaning that the kurtosis decreases, and the tails behave more like a normal distribution), the odds of flagging an outlier decreases as well.  Neither the BST-F nor the BST-SEC methods are  significantly influenced by the kurtosis of the distribution.  
+
+%Summary of the values of k_deriv across the 304 subsets of observations
+%   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+%9.215  11.410  11.870  11.990  12.520  15.000   
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We have applied our methods to one launch station in Denver, and the performance of the BST-SEC method produces the best results, but the ultimate goal is to extend and apply these methods to the entire radiosonde archive.  Future work will require us to find the best subsets of observations to which to apply the method of choice so that the effect of a potentially changing climate will not be a factor.  In addition, the optimization required to find the robust BST parameters needs to be improved to make it computationally feasible to apply to the entire archive.  While the depth method works reasonably well in simulation, it does not perform as well in the case study, but it does have the advantage of being fast and simple to execute.  On the other hand, the physically interpretable robust BST parameters can be used to study differences in wind climatology over space and time.
+
+Additional future work  will be to explore methods that use the entire vertical column to check for errors.  If we use a multivariate skew-$t$ distribution as a parametric model, then there would be 169  parameters to estimate, most of which come from the $16\times 16$  $\bOmega$ matrix needed for the bivariate observations collected at the 8 vertical pressure levels. In general, if $p$ is the number of variables, and $q$ is the number of pressure levels, then there will be $0.5(pq)^2+2.5(pq)+1$  parameters to estimate in the MST.  The reliability of the robust parameter estimates needs to be tested for random variables of such higher dimensions.   However, there is structure in the variability as it increases to the mid-pressure levels and then decreases, as shown in Figure~\ref{fig:sample_launches}, that can potentially be described with a smooth function, allowing us to parameterize $\bOmega$ and reduce its dimension.   Another nonparametric approach to explore is to extend the bivariate depth with a  functional depth across pressure levels, weighted by the number of observations at each level, as proposed in  Hubert et al.~(2015).   
+
+\end{doublespacing}
+
+\section*{Acknowledgements}
+The authors would like to thank Adelchi Azzalini, Douglas Nychka, Steve Worley, and Joey Comeaux for  discussions and ideas that helped to direct and focus this work.  
+
+\section*{Appendix}
+\ni \emph{Proposal:  If $\mathbf{Y}\sim ST_2(\bxi,\bOmega,\balpha,\nu)$,  $\mathbf{X}=\mathbf{A}\mathbf{Y}+\mathbf{a}$, where $\mathbf{A}$ and $\mathbf{a}$ are known constants, and $\mathbf{A}$ is diagonal, then  $\mathbf{X}\sim ST_2(\mathbf{A}\bxi+\mathbf{a}, \mathbf{A}\bOmega\mathbf{A}, \balpha,\nu)$.  }
+
+\vspace{.5cm}
+\ni \emph{Proof:}  By definition, for any $\mathbf{A}$ and $\mathbf{a}$, $\mathbf{X}\sim ST_2(\mathbf{A}\bxi+\mathbf{a}, \mathbf{A}\bOmega\mathbf{A}, \balpha',\nu)$, where 
+\begin{equation}\label{eq:alpha}\balpha'= \frac{1}{(1+\balpha^T(\bar\bOmega-\mathbf{B}\bOmega_x^{-1}\mathbf{B}^T)\balpha)^{1/2}}\cdot \omega_x \bOmega_x^{-1}\mathbf{B}^T\balpha,\end{equation}
+ where $\bOmega_x = \mathbf{A}\bOmega\mathbf{A}$; 
+ $\mathbf{B} = \omega^{-1}\bOmega\mathbf{A}^T$; 
+  $\omega = [\diag(\bOmega_{11}, \bOmega_{22})]^{1/2}$; 
+ $\omega_x = [\diag(\bOmega_{x,11}, \bOmega_{x,22})]^{1/2}$; and 
+ $\bar\bOmega = \omega^{-1}\bOmega\omega^{-1}$.
+
+
+\ni First,  the second term in the denominator of the expression in Equation~(\ref{eq:alpha}) is equal to zero.
+\begin{eqnarray*}
+\balpha^T(\bar\bOmega-\mathbf{B}\bOmega_x^{-1}\mathbf{B}^T)\balpha &=& \balpha^T(\omega^{-1}\bOmega\omega^{-1}-\omega^{-1}\Omega\bA[\bA^{-1}\bOmega^{-1}\bA^{-1}]\bA\bOmega\omega^{-1})\balpha\\
+&=& \balpha^T(\omega^{-1}\bOmega\omega^{-1}-\omega^{-1}\bOmega\omega^{-1})\balpha\\
+&=& 0.
+\end{eqnarray*}
+So, $\frac{1}{(1+\balpha^T(\bar\bOmega-\mathbf{B}\bOmega_x^{-1}\mathbf{B}^T)\balpha)^{1/2}} = 1$.
+Now, if the second part of the expression in Equation~\ref{eq:alpha} is equal to $\balpha$, then we are done.  First, note that $\mathbf{B}^T = \bA\bOmega\omega^{-1}$, and 
+\begin{eqnarray*}
+\omega_x &=& \left[\begin{array}{cc}
+   a_{11}^2\bOmega_{11} & 0\\
+    0 & a_{22}^2\bOmega_{22} \end{array} \right]^{1/2}\\
+    &=& \left[\begin{array}{cc}
+   a_{11}\bOmega_{11}^{1/2} & 0\\
+    0 & a_{22}\bOmega_{22}^{1/2} \end{array} \right].
+\end{eqnarray*} 
+Then, 
+\begin{eqnarray*}
+\omega_x \bOmega_x^{-1}\mathbf{B}^T\balpha &=& \omega_x [\bA\bOmega\bA^T]^{-1}\bA\bOmega\omega^{-1}\balpha\\
+&=&  \omega_x \bA^{-1}\bOmega^{-1}\bA^{-1}\bA\bOmega\omega^{-1}\balpha\\
+&=&  \omega_x \bA^{-1}\omega^{-1}\balpha\\
+&=&  \left[\begin{array}{cc}
+   a_{11}\bOmega_{11}^{1/2} & 0\\
+    0 & a_{22}\bOmega_{22}^{1/2} \end{array} \right] \left[\begin{array}{cc}
+   \frac{1}{a_{11}} & 0\\
+    0 & \frac{1}{a_{22}} \end{array} \right]    \left[\begin{array}{cc}
+   \bOmega_{11}^{-1/2} & 0\\
+    0 &\bOmega_{22}^{-1/2} \end{array} \right]\balpha\\
+&=&  \left[\begin{array}{cc}
+  \bOmega_{11}^{1/2} & 0\\
+    0 &\bOmega_{22}^{1/2} \end{array} \right]    \left[\begin{array}{cc}
+   \bOmega_{11}^{-1/2} & 0\\
+    0 &\bOmega_{22}^{-1/2} \end{array} \right]\balpha\\
+&=& \mathbf{I}\balpha = \balpha    .
+\end{eqnarray*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\baselineskip=13.5pt
+\section*{References}
+
+\refmark Anderson, A. N., Browning, J. M., Comeaux, J., Hering, A. S., and Nychka, D. (2016) ``A simulation study to compare statistical quality control methods for error detection in historical radiosonde temperatures,"  \emph{International Journal of Climatology}, 36: 28--42.
+
+\refmark Azzalini, A. and Capitanio, A. (2003)  ``Distributions generated by perturbation of symmetry with emphasis on a multivariate skew-$t$ distribution," \emph{Journal of the Royal Statistical Society, Series B}, 65: 367--389.
+
+\refmark Azzalini, A. and Capitanio A. (2014) \emph{The Skew-Normal and Related Families}, Cambridge University Press: New York, NY.
+
+\refmark Azzalini, A. and Genton, M. G. (2008)  ``Robust likelihood methods based on the skew-$t$ and related distributions," \emph{International Statistical Review,} 76:  106--129.
+
+\refmark Benjamini, Y. and Hochberg, Y. (1995) ``Controlling the false discovery rate: A practical and powerful approach to multiple testing," \emph{Journal of the Royal Statistical Society, Series B}, 57: 289--300.
+
+\refmark Benjamini, Y. and  Yekutieli, D. (2001) ``The control of the false discovery rate in multiple testing under dependency," \emph{The Annals of Statistics}, 29: 1165--1188.
+
+\refmark Br\"{o}nnimann, S. and Luterbacher, J. (2004) ``Reconstructing northern hemisphere upper-level fields during World War II," \emph{Climate Dynamics}, 22: 499--510.
+
+\refmark Br\"{o}nnimann, S., Stickler, A., Griesser, T., Ewen, T., Grant, A. N., Fischer, A. M., Schraner, M.,  Peter, T., Rozanov, E., and Ross, T. (2009) ``Exceptional atmospheric circulation during the `Dust Bowl',"
+ \emph{Geophysical Research Letters}, 36, L08802.
+
+\refmark Browning, J. M. and Hering, A. S. (2016) ``Simultaneous treatment of random and systematic errors in the historical radiosonde temperature archive," \emph{In Preparation}.
+
+\refmark Data Support Section/Computational and Information Systems Laboratory/National Center for Atmospheric Research/University Corporation for Atmospheric Research (2014)  NCAR Upper Air Database, 1920-ongoing. Research Data Archive at the National Center for Atmospheric Research, Computational and Information Systems Laboratory. 
+
+\hspace{.1cm}http://rda.ucar.edu/datasets/ds370.1/. Accessed 06 01 2016.
+
+\refmark Durre, I., Vose, R. S., and Wuertz, D. B. (2004) ``Overview of the integrated global radiosonde archive," \emph{Journal of Climate}, 19: 53--68.
+
+\refmark Durre, I., Vose, R. S., and Wuertz, D. B. (2008) ``Robust automated quality assurance of radiosonde temperatures," \emph{Journal of Applied Meteorology and Climatology}, 47:  2081--2095.
+
+
+\refmark Filzmoser, P.,  Reimann C., and Garrett R. G. (2005) ``Multivariate outlier detection in exploration geochemistry,'' \emph{Computers and Geosciences}, 31: 579--587.
+
+\refmark Filzmoser, P.,  Maronna, R., and  Werner, M. (2008)  ``Outlier identification in high dimensions," \emph{Computational Statistics and Data Analysis}, 52: 1694--1711.
+
+\refmark Frank, H. P. and Landberg, L. (1997) ``Modelling the wind climate of Ireland,"  \emph{Boundary Layer Meteorology}, 85: 359--377.
+
+\refmark Fraiman, R. and Meloche, J. (1999) ``Multivariate $L$-estimation," \emph{Test}, 8: 255--317.
+
+\refmark Gruber, C. and Haimberger, L. (2008) ``On the homogeneity of radiosonde wind time series," \emph{Meteorologische Zeitschrift}, 17: 631--643.
+
+\refmark Gupta, M., Gao, J., Aggarwal, C. C., and Han, J. (2014) ``Outlier detection for temporal data: A survey," \emph{IEEE Transactions on Knowledge and Data Engineering}, 25:  1--20.
+
+
+\refmark Hadi, A. S. and Luce\~no, A. (1997) ``Maximum trimmed likelihood estimators: A unified approach, examples, and algorithms,'' \emph{Computational Statistics and Data Analysis}, 25: 251--272.
+
+\refmark Healy, M. J. R. (1968) ``Multivariate normal plotting," \emph{Applied Statistics}, 17: 157--161.
+
+
+\refmark Huber, P. J.  and Ronchetti, E. M. (2009)  \emph{Robust Statistics}.  Wiley and Sons: Hoboken, NJ.
+
+
+\refmark Hubert, M., Rousseeuw, P. and Segaert, P. (2015) ``Multivariate functional outlier detection," \emph{Statistical Methods and Applications}, 24: 177--202.
+\refmark Hubert, M.  and Vandervieren E. (2006) ``An adjusted boxplot for skewed distributions," \emph{Technical report}, TR-06-11, KU Leuven.
+
+%\refmark Hyndman, R. J. and Fan, Y. (1996) ``Sample quantiles in statistical packages," \emph{American Statistician}, 50: 361--365.
+
+\refmark Joe, H. (2015) \emph{Dependence Modeling with Copulas}.  CRC Press: Boca Raton, FL.
+
+\refmark Jury, M. R. and Pathack, B. (1991) ``A study of climate and weather variability over the Tropical Southwest Indian Ocean," \emph{Meteorology and Atmospheric Physics}, 47:  37--48.
+
+\refmark Kalnay, E., Kanamitsu, M., Kistler, R., Collins, W., Deaven, D., Gandin, L., Iredell, M., Saha, S., White, G., Woollen, J., Zhu, Y., Chelliah, M., Ebisuzaki, W., Higgins, W., Janowiak, J., Mo, K. C., Ropelewski, C., Wang, J., Leetmaa, A., Reynolds, R., Jenne, R., and Joseph, D. (1996) ``The NCEP/NCAR 40-year reanalysis project," \emph{Bulletin of the American Meteorological Society}, 437--471.
+
+\refmark Kanamitsu, M., Ebisuzaki, W., Woollen, J., Yang, S., Hnilo, J. J., Fiorino, M., and Potter, G. L. (2002) ``NCEP-DOE AMIP-II Reanalysis (R-2)," \emph{Bulletin of the American Meteorological Society}, 1631--1643.
+
+\refmark  Kazor, K., Holloway, R., Cath, T., and Hering, A. S. (2016) ``Comparison of linear and nonlinear dimension reduction techniques for automated process monitoring of a decentralized wastewater treatment facility," Revision Submitted to \emph{Stochastic Environmental Research and Risk Assessment}.
+
+\refmark Klimowksi, B. A., Bunkers, M. J., Hjelmfelt, M. R., and Covert, J. N. (2003) ``Severe convective windstorms over the Northern High Plains of the United States," \emph{Weather and Forecasting}, 18: 502--519.
+
+\refmark Liu, R. (1990) ``On a notion of data depth based on random simplices," \emph{The Annals of Statistics}, 18: 405--414.
+
+\refmark Liu, R. Y., Parelius, J. M. and Singh, K. (1999) ``Multivariate analysis by data depth: descriptive statistics, graphics and inference," \emph{The Annals of Statistics}, 27: 783--858.
+
+
+\refmark Lucas, A. (1997) ``Robustness of the Student-$t$ based $M$-estimator,'' \emph{Communications in Statistics---Theory and Methods}, 26: 1165--1182.
+
+\refmark Mahalanobis, P. C. (1936) ``On the generalized distance in statistics," \emph{Proceedings of National Academy of Science of India}, 12: 49--55. 
+
+\refmark Maronna, R., Martin, R. D., and Yohai, V. J. (2006) \emph{Robust Statistics: Theory and Methods}, Wiley: New York, NY.
+
+\refmark Oja, H. (1983) ``Descriptive statistics for multivariate distributions," \emph{Statistics \& Probability Letters}, 1: 327--332.
+
+%\refmark Parker, D. E. and Cox, D. I. (2007), ``Towards a consistent global climatological rawinsonde data-base," \emph{International Journal of Climatology}, 15:  473--496.
+
+
+\refmark Pe\~{n}a, D. and Prieto, F. J. (2001) ``Multivariate outlier detection and robust covariance matrix estimation," \emph{Technometrics}, 43:  286--300.
+
+%\refmark Pe\~{n}a, D. and Prieto, F. J. (2001) ``Multivariate outlier detection and robust covariance matrix estimation--Response", \emph{Technometrics}, 43:  306--310.  
+
+\refmark Ramella Pralungo, L. and Haimberger, L. (2014) ``A Global Radiosonde and tracked-balloon archive on
+sixteen pressure levels (GRASP) going back to 1905 -- Part 2: Homogeneity adjustments for pilot balloon and radiosonde wind data," \emph{Earth System Science Data}, 6: 297--316.
+
+\refmark Reimann, C., Filzmoser, P., and Garrett, R. G. (2005) ``Background and threshold: Critical comparison of methods of determination," \emph{Science of the Total Environment}, 346:  1--16.
+
+
+%\refmark Rocke, D. M. and Woodruff, D. L. (2001), ``Multivariate outlier detection and robust covariance matrix estimation--Discussion", \emph{Technometrics}, 43: 300--303.
+
+
+\refmark Rousseeuw, P. J. (1985) ``Multivariate estimation with high breakdown point," in Grossmann, W., Pflug, G., Vincze, I. Wertz, W. (Eds.), \emph{Mathematical Statistics and Applications, Vol. B}, Akad\'{e}miai Kiad\'{o}: Budapest, Hungary, pp. 283--297.  
+
+%\refmark Rousseeuw, P. J. and Hubert, M. (2011), ``Robust statistics for outlier detection," \emph{WIREs Data Mining \& Knowledge Discovery}, 1: 73--79.
+
+\refmark Rousseeuw, P. J. and Leroy, A. M. (2003) \emph{Robust Regression and Outlier Detection}, Wiley: New York, NY.
+
+\refmark Rousseuw, P.J. and Ruts, I. (1996) ``Bivariate location depth," \emph{Applied Statistics--Journal of the Royal Statistical Society, Series C}, 45: 516--526.
+
+\refmark Rousseeuw, P. J., Ruts, I., and Tukey, J. W. (1999) ``The bagplot: A bivariate boxplot," \emph{The American Statistician}, 53: 382--387.
+
+
+\refmark Rousseeuw, P. J. and Van Driessen, K. (1999) ``A fast algorithm for the minimum covariance determinant estimator," \emph{Technometrics}, 41:  212--223.
+
+%\refmark Rousseeuw, P. J. and van Zomeren, B. C.  (1990) ``Unmasking multivariate outliers and leverage points," \emph{Journal of the American Statistical Association}, 85: 633--639.
+
+\refmark Sch\"{o}lkopf, B., Smola, A., and M\"{u}ller, K. B. (1998) ``Nonlinear component analysis as a kernel eigenvalue problem," \emph{Neural Computation}, 10: 1299--1319.
+
+\refmark Shevlyakov, G., Morgenthaler, S., and Shurygin, A. M. (2008) ``Redescending M-estimators,"  \emph{Journal of  Statistical Planning and  Inference}, 138: 2906--2917.
+
+\refmark Singh, K. (1991) ``A notion of majority depth," \emph{unpublished manuscript}, Rutgers University. 
+
+\refmark Soriani, N. (2007) ``La distribuzione t asimmetrica: Analisi discriminante e regioni di tolleranza," \emph{Tesi di laurea, Facolt\'{a} di Scienze Statistiche, Universit\'{a} di Padova,} Available online at http://tesi.cab.unipd.it/7115/.
+
+\refmark Stickler, A., Grant, A. N., Ewen, T., Ross, T. F., Vose, R. S., Comeaux, J., Bessemoulin, P., Jylh\"{a}, K., Adam, W. K., Jeannet, P., Nagurny, A., Sterin, A. M., Allan, R., Compo, G. P., Griesser, T., and Br\"{o}nnimann, S. (2010) ``The comprehensive historical upper air network (CHUAN)," \emph{Bulletin of the American Meteorological Society}, 91: 741--751.
+
+\refmark Sun, Y. and Genton, M. G. (2011) ``Functional boxplots," \JCGS, 20: 316--334. 
+
+\refmark Sun, Y. and Genton, M. G. (2012) ``Adjusted functional boxplots for spatio-temporal data visualization and outlier detection," {\it Environmetrics}, 23: 54--64.
+
+\refmark Tukey, J. W. (1975) ``Mathematics and the picturing of data," \emph{Proceedings of the International Congress of Mathematics}, Vancouver, Canada, 2: 523--531.
+
+
+\refmark Walters, C. K. and Winkler, J. A. (2001) ``Airflow configurations of warm season southerly low-level wind maxima in the Great Plains.  Part I: Spatial and temporal characteristics and relationship to convection," \emph{Weather and Forecasting}, 16:  513--530.
+
+\refmark Wartenburger, R., Br\"{o}nnimann, S., and Stickler, A. (2013) ``Observation errors in early historical upper-air observations," \emph{Journal of Geophysical Research}, 118: 12012--12028.
+
+\refmark Wold, S., Esbensen, K., and Geladi, P. (1987) ``Principal component analysis," \emph{Chemometrics and Intelligent Laboratory Systems}, 2: 37--52.
+
+\refmark World Meteorological Organization (WMO) (2008) \emph{Guide to Meteorological Instruments and Methods of Observation}, 8, 7 ed., World Meteorological Organization.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%TABLES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcolumntype{H}{>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
+\begin{landscape}
+\begin{table}[h!]
+\begin{tiny}
+\centering
+\caption{Results of simulation study to evaluate the impact of the choice of $k$ on the robust parameter estimation for $n=500$. When the median estimated $\nu$ exceeds 1,000, we note this with $>1K$.}\label{tab:choose_k}
+\vspace{.25cm}
+\resizebox{23cm}{!}{
+\begin{tabular}{cc|cHHcc|cHHcc|cHHcc|cHHcc|cHHcc}
+  \hline
+  & 					& \multicolumn{25}{c}{Average MSE of Parameters Excluding $\nu$}\\
+  \hline
+  &					& \multicolumn{5}{c|}{No Outliers} &  \multicolumn{5}{c|}{5\% All} & \multicolumn{5}{c|}{5\% Angle} & \multicolumn{5}{c|}{10\% All} & \multicolumn{5}{c}{10\% Angle} \\
+ & $\bOmega_i$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ \\
+ \hline
+ &   1 & 0.27 & 0.18 & 0.27 & 0.27 & 0.27 & 0.17 & 0.20 & 0.20 & 0.22 & 0.19 & 0.21 & 0.19 & 0.20 & 0.19 & 0.19 & 0.06 & 0.03 & 0.08 & 0.08 & 0.05 & 0.38 & 0.57 & 0.34 & 0.32 & 0.31 \\ 
+  &  2 & 0.26 & 0.18 & 0.26 & 0.26 & 0.26 & 0.16 & 0.21 & 0.19 & 0.23 & 0.19 & 0.22 & 0.19 & 0.21 & 0.19 & 0.20 & 0.05 & 0.04 & 0.07 & 0.07 & 0.05 & 0.39 & 0.57 & 0.35 & 0.32 & 0.30 \\ 
+SYM  &  3 & 0.27 & 0.19 & 0.27 & 0.27 & 0.27 & 0.19 & 0.20 & 0.20 & 0.22 & 0.21 & 0.18 & 0.20 & 0.19 & 0.20 & 0.21 & 0.07 & 0.03 & 0.08 & 0.10 & 0.06 & 0.28 & 0.47 & 0.25 & 0.24 & 0.24 \\ 
+  &  4 & 0.28 & 0.20 & 0.27 & 0.28 & 0.28 & 0.13 & 0.23 & 0.18 & 0.20 & 0.16 & 0.25 & 0.19 & 0.24 & 0.21 & 0.21 & 0.05 & 0.04 & 0.06 & 0.07 & 0.05 & 0.46 & 0.63 & 0.42 & 0.36 & 0.33 \\ 
+ &   5 & 0.28 & 0.20 & 0.27 & 0.28 & 0.28 & 0.15 & 0.22 & 0.20 & 0.22 & 0.18 & 0.25 & 0.19 & 0.23 & 0.21 & 0.21 & 0.05 & 0.04 & 0.06 & 0.07 & 0.05 & 0.45 & 0.62 & 0.40 & 0.36 & 0.32 \\ 
+ \hline
+ &   1 & 0.06 & 0.05 & 0.05 & 0.06 & 0.06 & 0.07 & 0.06 & 0.09 & 0.06 & 0.06 & 0.08 & 0.06 & 0.08 & 0.07 & 0.06 & 0.12 & 0.21 & 0.13 & 0.11 & 0.11 & 0.16 & 0.22 & 0.16 & 0.13 & 0.11 \\ 
+  &  2 & 0.06 & 0.06 & 0.06 & 0.06 & 0.06 & 0.09 & 0.06 & 0.10 & 0.07 & 0.07 & 0.11 & 0.07 & 0.11 & 0.08 & 0.07 & 0.13 & 0.23 & 0.14 & 0.12 & 0.12 & 0.20 & 0.26 & 0.19 & 0.15 & 0.13 \\ 
+OBS  &  3 & 0.06 & 0.06 & 0.06 & 0.07 & 0.06 & 0.07 & 0.07 & 0.08 & 0.07 & 0.06 & 0.07 & 0.05 & 0.07 & 0.06 & 0.05 & 0.11 & 0.20 & 0.11 & 0.10 & 0.10 & 0.13 & 0.18 & 0.13 & 0.10 & 0.10 \\ 
+  &  4 & 0.06 & 0.07 & 0.06 & 0.07 & 0.08 & 0.08 & 0.06 & 0.09 & 0.07 & 0.06 & 0.09 & 0.07 & 0.09 & 0.07 & 0.06 & 0.11 & 0.20 & 0.12 & 0.10 & 0.10 & 0.22 & 0.25 & 0.22 & 0.15 & 0.12 \\ 
+ &   5 & 0.05 & 0.07 & 0.05 & 0.06 & 0.06 & 0.07 & 0.06 & 0.08 & 0.06 & 0.06 & 0.09 & 0.06 & 0.09 & 0.07 & 0.06 & 0.12 & 0.20 & 0.13 & 0.11 & 0.11 & 0.23 & 0.26 & 0.23 & 0.15 & 0.12 \\ 
+ \hline
+  &  1 & 0.24 & 0.39 & 0.24 & 0.28 & 0.33 & 0.41 & 0.42 & 0.72 & 0.36 & 0.36 & 0.41 & 0.31 & 0.42 & 0.33 & 0.33 & 0.92 & 2.72 & 1.52 & 0.66 & 0.47 & 0.97 & 1.07 & 1.00 & 0.66 & 0.53 \\ 
+  &  2 & 0.29 & 0.38 & 0.30 & 0.32 & 0.36 & 0.44 & 0.31 & 0.83 & 0.30 & 0.28 & 0.38 & 0.32 & 0.38 & 0.33 & 0.32 & 0.90 & 2.62 & 1.46 & 0.61 & 0.44 & 0.84 & 0.80 & 0.99 & 0.64 & 0.49 \\ 
+ EXT &  3 & 0.28 & 0.39 & 0.28 & 0.32 & 0.36 & 0.33 & 0.27 & 0.72 & 0.25 & 0.23 & 0.43 & 0.43 & 0.44 & 0.41 & 0.42 & 0.86 & 2.77 & 1.43 & 0.63 & 0.45 & 0.69 & 0.88 & 0.74 & 0.54 & 0.48 \\ 
+  &  4 & 0.28 & 0.43 & 0.28 & 0.33 & 0.39 & 0.49 & 0.33 & 0.77 & 0.32 & 0.30 & 0.48 & 0.40 & 0.49 & 0.41 & 0.39 & 0.99 & 2.61 & 1.56 & 0.62 & 0.45 & 1.18 & 1.15 & 1.22 & 0.79 & 0.60 \\ 
+  &  5 & 0.30 & 0.43 & 0.30 & 0.33 & 0.39 & 0.51 & 0.33 & 0.83 & 0.33 & 0.30 & 0.41 & 0.36 & 0.41 & 0.36 & 0.35 & 1.04 & 2.64 & 1.63 & 0.69 & 0.51 & 1.15 & 1.26 & 1.17 & 0.77 & 0.61 \\ 
+
+  \hline
+
+  & 					& \multicolumn{25}{c}{Median of  Estimated $\nu$ }\\
+  \hline
+   &					& \multicolumn{5}{c|}{No Outliers} &  \multicolumn{5}{c|}{5\% All} & \multicolumn{5}{c|}{5\% Angle} & \multicolumn{5}{c|}{10\% All} & \multicolumn{5}{c}{10\% Angle} \\
+ & $\bOmega_i$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ \\
+ \hline 
+ & 1 & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & 4.84 & $>1K$ & 5.63 & 742.47 & $>1K$ & 3.77 & 1.76 & 4.32 & 4.40 & 3.56 & 2.93 & 2.22 & 3.21 & 3.28 & 3.42 \\ 
+SYM  &  2 & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & 4.75 & $>1K$ & 5.22 & 6.67 & $>1K$ & 3.72 & 1.77 & 4.11 & 4.20 & 3.52 & 2.85 & 2.24 & 3.12 & 3.24 & 3.41 \\ 
+ $\nu=\infty$ &  3 & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & 5.46 & $>1K$ & 6.42 & $>1K$ & $>1K$ & 3.69 & 1.69 & 4.19 & 4.27 & 3.64 & 3.02 & 2.12 & 3.27 & 3.37 & 3.44 \\ 
+  &  4 & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & 7.90 & $>1K$ & $>1K$ & $>1K$ & 10.15 & 4.40 & $>1K$ & 5.06 & 6.30 & $>1K$ & 3.66 & 1.84 & 3.99 & 4.16 & 3.49 & 2.76 & 2.25 & 3.05 & 3.16 & 3.42 \\ 
+ &   5 & $>1K$ & $>1K$ & $>1K$ & $>1K$ & $>1K$ & 8.13 & $>1K$ & $>1K$ & $>1K$ & 10.90 & 4.41 & $>1K$ & 5.00 & 6.38 & $>1K$ & 3.67 & 1.81 & 4.02 & 4.17 & 3.49 & 2.77 & 2.27 & 3.03 & 3.19 & 3.42 \\ 
+\hline
+ &   1 & 11.47 & 24.46 & 11.83 & 13.97 & 17.14 & 4.45 & 13.23 & 3.97 & 5.42 & 5.56 & 3.43 & 7.13 & 3.35 & 4.24 & 4.97 & 2.79 & 1.59 & 2.64 & 3.07 & 3.04 & 2.32 & 1.94 & 2.39 & 2.64 & 2.91 \\ 
+ OBS&   2 & 10.94 & 22.64 & 11.52 & 13.83 & 16.96 & 4.21 & 13.08 & 4.02 & 5.43 & 5.57 & 3.30 & 7.11 & 3.32 & 4.12 & 5.04 & 2.79 & 1.61 & 2.66 & 3.08 & 3.04 & 2.26 & 1.95 & 2.37 & 2.63 & 2.90 \\ 
+$\nu=10$ &   3 & 11.16 & 22.43 & 11.60 & 13.50 & 16.50 & 4.53 & 12.32 & 4.08 & 5.57 & 5.75 & 3.55 & 8.07 & 3.55 & 4.42 & 5.10 & 2.75 & 1.57 & 2.65 & 3.05 & 3.05 & 2.40 & 1.92 & 2.40 & 2.71 & 2.92 \\ 
+  &  4 & 11.26 & 25.17 & 11.84 & 14.24 & 17.47 & 4.07 & 10.84 & 3.76 & 5.21 & 5.26 & 3.26 & 6.70 & 3.24 & 4.00 & 4.91 & 2.79 & 1.69 & 2.64 & 3.11 & 3.00 & 2.23 & 2.02 & 2.32 & 2.57 & 2.91 \\ 
+  &  5 & 10.73 & 21.27 & 11.21 & 13.62 & 15.58 & 4.16 & 11.74 & 3.78 & 5.29 & 5.29 & 3.21 & 6.86 & 3.26 & 4.06 & 4.99 & 2.74 & 1.70 & 2.64 & 3.07 & 2.96 & 2.24 & 2.03 & 2.33 & 2.60 & 2.89 \\ 
+\hline
+ &   1 & 5.10 & 8.24 & 5.08 & 6.04 & 7.04 & 3.03 & 4.79 & 2.57 & 3.67 & 4.20 & 2.50 & 3.82 & 2.43 & 3.02 & 3.75 & 2.28 & 1.45 & 1.91 & 2.54 & 2.83 & 1.84 & 1.67 & 1.85 & 2.10 & 2.51 \\ 
+EXT  &  2 & 5.13 & 8.38 & 5.18 & 6.05 & 7.18 & 3.04 & 4.91 & 2.50 & 3.76 & 4.31 & 2.49 & 3.73 & 2.42 & 2.94 & 3.76 & 2.27 & 1.47 & 1.92 & 2.59 & 2.83 & 1.83 & 1.69 & 1.82 & 2.08 & 2.49 \\ 
+$\nu=5$ &   3 & 5.13 & 8.49 & 5.16 & 6.05 & 7.28 & 3.25 & 4.95 & 2.59 & 3.76 & 4.29 & 2.53 & 3.93 & 2.46 & 3.04 & 3.74 & 2.33 & 1.39 & 1.95 & 2.55 & 2.86 & 1.87 & 1.65 & 1.89 & 2.12 & 2.50 \\ 
+  &  4 & 5.11 & 8.40 & 5.13 & 5.99 & 7.16 & 2.89 & 4.70 & 2.54 & 3.58 & 4.19 & 2.46 & 3.67 & 2.43 & 2.93 & 3.71 & 2.23 & 1.50 & 1.94 & 2.51 & 2.81 & 1.81 & 1.69 & 1.82 & 2.06 & 2.50 \\ 
+  &  5 & 5.12 & 8.28 & 5.16 & 6.09 & 7.17 & 2.85 & 4.65 & 2.52 & 3.53 & 4.13 & 2.47 & 3.73 & 2.40 & 2.94 & 3.75 & 2.20 & 1.49 & 1.92 & 2.54 & 2.78 & 1.77 & 1.70 & 1.80 & 2.07 & 2.50 \\ 
+
+   \hline
+
+  & 					& \multicolumn{25}{c}{Average $k$ Chosen }\\
+  \hline
+   &					& \multicolumn{5}{c|}{No Outliers} &  \multicolumn{5}{c|}{5\% All} & \multicolumn{5}{c|}{5\% Angle} & \multicolumn{5}{c|}{10\% All} & \multicolumn{5}{c}{10\% Angle} \\
+ & $\bOmega_i$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ & $k_{min}$ & (b) & (c) & $k_{deriv}$ & $k=10$ \\
+ \hline
+ &   1 & 13.68 & 8.26 & 11.87 & 11.22 & 10 & 10.04 & 8.25 & 9.60 & 9.47 & 10 & 11.64 & 8.59 & 10.98 & 10.37 & 10 & 9.78 & 17.15 & 9.46 & 9.41 & 10 & 11.06 & 14.15 & 10.61 & 10.23 & 10 \\ 
+  &  2 & 13.74 & 8.25 & 11.81 & 11.10 & 10 & 10.13 & 8.20 & 9.68 & 9.46 & 10 & 11.84 & 8.61 & 11.31 & 10.53 & 10 & 9.81 & 17.00 & 9.48 & 9.41 & 10 & 11.30 & 14.02 & 10.82 & 10.28 & 10 \\ 
+SYM &   3 & 13.59 & 8.22 & 11.71 & 11.16 & 10 & 10.06 & 8.36 & 9.69 & 9.51 & 10 & 11.19 & 8.51 & 10.82 & 10.14 & 10 & 9.92 & 17.65 & 9.59 & 9.55 & 10 & 10.79 & 14.47 & 10.35 & 10.08 & 10 \\ 
+ &   4 & 13.67 & 8.20 & 11.83 & 11.16 & 10 & 10.30 & 8.16 & 9.88 & 9.55 & 10 & 12.22 & 8.68 & 11.56 & 10.60 & 10 & 9.79 & 16.52 & 9.51 & 9.35 & 10 & 11.84 & 13.91 & 11.47 & 10.43 & 10 \\ 
+  &  5 & 13.70 & 8.19 & 11.85 & 11.19 & 10 & 10.20 & 8.15 & 9.78 & 9.50 & 10 & 12.17 & 8.70 & 11.49 & 10.64 & 10 & 9.80 & 16.59 & 9.49 & 9.38 & 10 & 11.62 & 13.88 & 11.15 & 10.41 & 10 \\ 
+ \hline
+ &   1 & 16.19 & 8.52 & 14.63 & 11.95 & 10 & 10.99 & 8.64 & 11.65 & 10.07 & 10 & 12.62 & 8.95 & 12.95 & 10.88 & 10 & 10.47 & 17.43 & 10.79 & 9.92 & 10 & 12.08 & 14.54 & 12.29 & 10.72 & 10 \\ 
+ &   2 & 16.36 & 8.56 & 14.67 & 11.92 & 10 & 11.12 & 8.66 & 11.60 & 10.04 & 10 & 13.01 & 9.01 & 13.59 & 11.04 & 10 & 10.49 & 17.38 & 10.82 & 9.93 & 10 & 12.53 & 14.56 & 12.53 & 10.73 & 10 \\ 
+OBS &   3 & 16.04 & 8.43 & 14.50 & 11.85 & 10 & 10.94 & 8.74 & 11.56 & 10.08 & 10 & 12.25 & 8.85 & 12.34 & 10.66 & 10 & 10.53 & 17.55 & 10.85 & 10.01 & 10 & 11.99 & 14.56 & 12.15 & 10.48 & 10 \\ 
+ &   4 & 15.92 & 8.38 & 14.37 & 11.66 & 10 & 11.25 & 8.52 & 11.98 & 10.06 & 10 & 13.29 & 9.06 & 13.79 & 11.28 & 10 & 10.48 & 16.36 & 10.93 & 9.80 & 10 & 13.49 & 14.03 & 13.63 & 10.89 & 10 \\ 
+ &   5 & 15.97 & 8.39 & 14.42 & 11.73 & 10 & 11.27 & 8.51 & 11.95 & 10.04 & 10 & 13.46 & 9.05 & 13.68 & 11.14 & 10 & 10.46 & 16.26 & 10.89 & 9.83 & 10 & 13.48 & 14.00 & 13.74 & 10.87 & 10 \\ 
+\hline
+ &   1 & 19.60 & 8.85 & 18.96 & 12.38 & 10 & 12.33 & 9.36 & 14.53 & 10.84 & 10 & 14.64 & 9.89 & 16.05 & 11.85 & 10 & 11.37 & 17.28 & 13.13 & 10.59 & 10 & 14.43 & 15.61 & 15.47 & 11.65 & 10 \\ 
+ &   2 & 19.64 & 8.84 & 18.82 & 12.29 & 10 & 12.49 & 9.35 & 14.92 & 10.83 & 10 & 14.78 & 9.96 & 16.01 & 12.02 & 10 & 11.43 & 17.12 & 13.08 & 10.56 & 10 & 14.70 & 15.45 & 16.21 & 11.78 & 10 \\ 
+EXT &   3 & 19.73 & 8.84 & 18.81 & 12.37 & 10 & 11.84 & 9.35 & 14.39 & 10.76 & 10 & 14.09 & 9.76 & 15.18 & 11.71 & 10 & 11.30 & 17.95 & 12.98 & 10.60 & 10 & 13.58 & 15.74 & 14.59 & 11.47 & 10 \\ 
+ &   4 & 19.89 & 8.83 & 19.04 & 12.51 & 10 & 12.60 & 9.39 & 14.54 & 10.88 & 10 & 14.96 & 10.02 & 15.92 & 12.05 & 10 & 11.62 & 16.62 & 13.29 & 10.59 & 10 & 15.42 & 15.36 & 16.14 & 11.84 & 10 \\ 
+ &   5 & 19.47 & 8.83 & 18.56 & 12.32 & 10 & 12.67 & 9.39 & 14.58 & 10.96 & 10 & 15.09 & 10.01 & 16.19 & 12.00 & 10 & 11.56 & 16.63 & 13.42 & 10.56 & 10 & 15.84 & 15.39 & 16.36 & 11.84 & 10 \\ 
+ 
+  
+ 
+   \hline
+
+\end{tabular}
+}
+\end{tiny}
+\end{table}
+\end{landscape}
+
+
+
+
+
+\begin{table}
+\caption{Average true positives (TP) and false positives (FP) for Models 1 through 4 with $\tau=5\%$. }
+\begin{center}
+\begin{tabular}{c|cc|c|c|ccc|ccc}
+\hline\hline
+\multirow{2}{*}{ Model}&\multicolumn{2}{c|}{\multirow{2}{*}{Distribution}}& \multirow{2}{*}{Depth} &\multirow{2}{*}{ BVN }& \multicolumn{3}{c|}{BST-F} & \multicolumn{3}{c}{BST-SEC}\\
+\cline{6-11}
+&&&&&robust&true&mle&robust&true&mle\\
+\hline
+\multirow{6}{*}{1: No Outliers}&\multirow{2}{*}{MVN}&TP&  73.0 &98.9  &99.1& 98.6 &100&95.1&100&94.3 \\
+	&&FP&0.01 & 0.00 &0.00 & 0.00&0.00&0.01&0.00&0.00\\
+\cline{2-11}
+
+&\multirow{2}{*}{OBS}&TP& 0.1 &0.70 &83.7&98.0&99.4&63.2& 84.0&83.1\\
+&&FP & 0.37 &0.27 &0.01&0.00&0.00&0.04&0.33&0.01\\
+\cline{2-11}
+&\multirow{2}{*}{EX}&TP& 0 &0&87.7&98.3&99.2&71.5&80.8&83.8\\
+&&FP&  1.32 &1.32&0.01&0.01&0.00&0.04&0.02&0.01\\
+
+\hline
+%model 2
+\multirow{6}{*}{2: Entire Launch}&\multirow{2}{*}{MVN}&TP& 93.7 &100 &100&100&0&100&100&0  \\
+	&&FP& 0.01 &0.01 &0.01&0.02&0&0.01&0.00&0 \\
+\cline{2-11}
+
+&\multirow{2}{*}{OBS}&TP& 88.3 &100 &96.8&100&0&99.6&100&0\\
+&&FP  & 0.18 &0.37&0.02&0.02&0&0.03&0.45&0\\
+\cline{2-11}
+&\multirow{2}{*}{EX}&TP & 62.0 &100&51.3&97.8&0&83.2&100&0\\
+&&FP&  0.56 &1.04&0.00&0.01&0&0.01&0.03&0\\
+\cline{1-11}
+
+
+
+
+%model 3
+\multirow{6}{*}{3: Higher Levels}&\multirow{2}{*}{MVN}&TP& 96.8 &100&100&100&3.24&100&100&8.53 \\
+	&&FP & 0.53 &0.01&0.01&0.00&0.00&0.02&0.00&0.00\\
+\cline{2-11}
+
+&\multirow{2}{*}{OBS}&TP& 93.6 &100&98.8&100&0.74&99.8&100&5.02\\
+&&FP & 0.91 &0.27&0.02&0.01&0.00&0.04&0.37&0.00\\
+\cline{2-11}
+&\multirow{2}{*}{EX}&TP& 75.3 &100&70.7&93.2&0.01&94.8&100&1.17\\
+&&FP&1.29 &0.99&0.01&0.00&0.00&0.02&0.01&0.00\\
+\cline{1-11}
+
+
+
+%model 4
+\multirow{6}{*}{4: Random Levels}&\multirow{2}{*}{MVN}&TP&98.7 &100&100&100&0.38&100&100&4.80 \\
+	&&FP & 0.15 &0.01&0.01&0.00&0&0.02&0.00 &0\\
+\cline{2-11}
+
+&\multirow{2}{*}{OBS}&TP& 97.0 &100&100&100&0.02&100&100&2.03 \\
+&&FP &0.63 &0.30&0.03&0.01&0&0.04&0.41&0 \\
+\cline{2-11}
+&\multirow{2}{*}{EX}&TP& 85.9 &100 &82.5&92.7&0.00&94.4&100&0.33 \\
+&&FP& 1.14 & 0.97&0.01&0.00&0&0.02&0.02&0\\
+
+\hline\hline
+
+
+
+
+\end{tabular}
+\end{center}\label{tab:sim1}
+\end{table}
+
+ 
+
+
+
+\begin{table}
+\caption{Logistic regression coefficients and significance  for each method.  Any $p$-values that are significant at the $\alpha = 0.025$ levels are italicized.  }
+\begin{center}
+\begin{tabular}{c|cc|cc|cc}
+\hline
+			& \multicolumn{2}{c|}{BVN} & \multicolumn{2}{c|}{BST-F} & \multicolumn{2}{c}{BST-SEC} \\
+Predictor & Coefficient & $p$-value &  Coefficient & $p$-value & Coefficient & $p$-value\\
+\hline
+$\hat \alpha_1$ & 0.65 & \emph{0.0000} & 0.68 & \emph{0.0043} & 0.17 & \emph{0.0199} \\
+$\hat \alpha_2$ & $-0.12$ & 0.4002 & 1.13 & \emph{0.0041} & 0.01 & 0.9659\\
+$\hat \nu$ &  $-2.0\times10^{-4}$ &\emph{0.0015} & $-1.4\times 10 ^{-5}$ & 0.7998 & $1.5\times 10^{-5}$ & 0.2216\\
+\hline
+
+\end{tabular}
+\end{center}\label{tab:logistic}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%FIGURES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\clearpage
+%\graphicspath{{Code/Figures/}}
+% \begin{figure}[h!]
+%\begin{center}
+%%\includegraphics[height=5.8cm,width=5.8cm]{classical_MVN_example.pdf}\hspace{-.3cm}
+%\includegraphics[height=6.5cm,width=6.5cm]{robust_MVN_example.pdf}\hspace{-.3cm}
+%\includegraphics[height=6.5cm,width=6.5cm]{MVST_exampleF3.pdf}
+%%\includegraphics[height=6cm,width=6cm]{MVST_exampleF3.pdf}
+%\caption{Scatterplots of  bivariate components simulated from a BST distribution with robustly estimated BVN (left) and BST (right) contours overlaid.  In the left plot, the outliers that are flagged by the Filzmoser et al.~(2005) method are in red.  In the right plot, the outliers flagged are from our nonparametric method, described in Section~\ref{subsec:dp}. }\label{fig:example}
+%\end{center}
+%\end{figure}
+
+
+
+
+
+ \begin{figure}[h!]
+\begin{center}
+\includegraphics[height=7cm,width=7cm]{yearly_launches.png}
+\includegraphics[height=7cm,width=7cm]{launches02.png}
+\caption{On the left are yearly averages from 1962 to 2011 of the wind profiles at Denver with the colors of the profiles moving from red (1962) to purple (2011) through the rainbow.  On the right are 230  launches in 1962 at the Denver site. }\label{fig:sample_launches}
+\end{center}
+\end{figure}
+
+
+
+\graphicspath{{Code/Figures/}}
+ \begin{figure}
+\begin{center}
+\centering\rotatebox{270}{\epsfig{file=denver_density_700.eps, width=5.4cm,height=5.4cm}}
+\centering\rotatebox{270}{\epsfig{file=denver_density_500.eps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=denver_density_400.eps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=denver_density_300.eps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=denver_density_250.eps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=denver_density_200.eps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=denver_density_100.eps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=denver_density_70.eps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+
+\caption{Bivariate nonparametric density estimates of the distribution of $u$ and $v$ by pressure level at the Denver launch station.}\label{fig:bivariate}
+\end{center}
+\end{figure}
+
+
+
+ \begin{figure}
+\begin{center}
+\includegraphics[height=7cm,width=7cm]{depth_example.pdf}
+\caption{A set of bivariate observations with the bivariate bagplot overlaid.  The central blue dot has the highest Tukey's depth and is the median.  The convex hull that captures the 50\% of observations with the highest Tukey's depths is in red, and the distance from the median to each vertex on the red convex hull is inflated by 3 to get the outer blue convex hull.  }\label{fig:bagplot}
+
+\end{center}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[height=8cm,width=8cm]{fdist.pdf}
+		\includegraphics[height=8cm,width=8cm]{sec.pdf}
+		\caption{Differences in regions wherein outliers would be flagged with traditional distance (left) or  skew-elliptical contours (right).  }\label{fig:dist_sec}
+	\end{center}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[height=12cm,width=16cm]{st_robust_influence_functions.png}
+		\caption{Influence functions for the MLEs of the parameters of the univariate skew-$t$ distribution (solid lines) and the robust MLEs (dashed lines) with $\xi=0$, $\omega=1$, $\alpha=2$, and  $\nu=10$.}	\label{fig:inf_robust}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[height=8cm,width=8cm]{rho(z)_transformation.pdf}
+		\caption{{Trajectory of  $\rho_r(z)$ in Equation~(\ref{eq:bounding}) with $k=2$. } }	\label{fig:equation2}
+	\end{center}
+\end{figure}
+ 
+
+ 
+ 
+\vspace{1cm}
+ \begin{figure}[h!]
+\begin{center}
+\rotatebox{0}{\resizebox{5.6cm}{5.6cm}{\includegraphics{sample_data.pdf}}}
+\rotatebox{0}{\resizebox{5.6cm}{5.6cm}{\includegraphics{likelihood_density.pdf}}}
+%\rotatebox{0}{\resizebox{5.6cm}{5.6cm}{\includegraphics{method2.pdf}}}
+\rotatebox{0}{\resizebox{5.6cm}{5.6cm}{\includegraphics{method_onlyCumNP.pdf}}}
+\vspace{-.25cm}
+\caption{Illustrations of automated methods to choose  $k$ dynamically. Left: simulated dataset that has been contaminated with outliers (marked in red), centered, and standardized.  Center: Density of the individual observations' likelihood values.  Right:  Empirical cumulative density of the  individual observations' likelihood values with choice of $k$ based on the first and second derivatives of the ECDF falling within pre-specified tolerances.  }\label{fig:k_methods}
+\end{center}
+\end{figure}
+
+% 
+%\begin{figure}[h!]
+%	\begin{center}
+%		\includegraphics[height=7cm,width=8cm]{100_outliers_angle.png}
+%		\includegraphics[height=7cm,width=8cm]{100_outliers_angle_restricted.png}
+%		\caption{Example of  a simulated dataset with parameters of type (b) with 5\% of the values contaminated and  distributed evenly around the main cloud of observations (left) or within a range of directions from the main cloud (right).}	\label{fig:contamination}
+%	\end{center}
+%\end{figure}
+
+
+
+
+
+
+
+\begin{figure}[h!]
+\begin{center}
+\centering{\epsfig{file=mvn_mod1.png,width=5.65cm,height=5.65cm}}
+\centering{\epsfig{file=obs_mod1.png,width=5.65cm,height=5.65cm}}
+\centering{\epsfig{file=ex_mod1.png,width=5.65cm,height=5.65cm}}
+\centering{\epsfig{file=obs_mod2.png,width=5.65cm,height=5.65cm}}
+\centering{\epsfig{file=obs_mod3.png,width=5.65cm,height=5.65cm}}
+\centering{\epsfig{file=obs_mod4.png,width=5.65cm,height=5.65cm}}
+	\caption{Top panel: one realization from  model 1 with no outliers for each of the 3 distribution types. Bottom panel: one realization from models 2 through 4 for the OBS distribution with contaminated launches marked in blue.}
+	\label{fig:model}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[h!]
+\caption{Proportion of observations flagged by pressure level and time with  depth  (top); BVN (second);  BST-F  (third); and BST-SEC (bottom).}\label{fig:prop_compare}
+\vspace{.25cm}
+\centering
+\includegraphics[height=5cm,width=17cm]{flagged_prop_depth8.pdf}
+\includegraphics[height=5cm,width=17cm]{flagged_prop_BVN8.pdf}
+\includegraphics[height=5cm,width=17cm]{flagged_prop_F8.pdf}
+\includegraphics[height=5cm,width=17cm]{flagged_prop_SEC8.pdf}
+%\caption{Observations flagged with bagplot depth method with $F=3$.}\label{fig:depth_01}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+\caption{Select subsets of $u$ and $v$ observations with outliers flagged by each method shown in red. }\label{fig:2examples}
+\vspace{.25cm}
+\centering
+\includegraphics[height=5cm,width=17cm]{obs_flagged_40.pdf}
+\includegraphics[height=5cm,width=17cm]{obs_flagged_71.pdf}
+%\caption{Observations flagged with bagplot depth method with $F=3$.}\label{fig:depth_01}
+\end{figure}
+
+
+
+
+% \begin{figure}[h!]
+%\begin{center}
+%\centering\rotatebox{270}{\epsfig{file=sample_size_sim_boxplots.eps, width=5.4cm,height=17.4cm}}\vspace{0 cm}
+%
+%\caption{Boxplots of the multiplier selected for each sample size across multivariate normal data (left), data similar to what is observed among the Denver launches (center), and data whose skewness is more extreme than the Denver data (right).  Overlaid on each boxplot in red  is the average multiplier for each sample size.}\label{fig:sample_size_sim_boxplots}
+%\end{center}
+%\end{figure}
+
+
+
+
+% \begin{figure}[h!]
+%\begin{center}
+%\centering\rotatebox{270}{\epsfig{file=sample_size_sim_fitteds.eps, width=5.4cm,height=17.4cm}}\vspace{0 cm}
+%
+%\caption{Fitted exponential decay functions to the factor multiplier as a function of the number of launches for each type of simulated data. }\label{fig:sample_size_sim_fitteds}
+%\end{center}
+%\end{figure}
+
+
+%\#True Parameters
+%
+%\#xi=c(2.423,8.427), Omega=matrix(c(400,-121,-121,183),byrow=T,nrow=2), alpha=c(4.3,-1.5), nu=9.2)
+%\vspace{.25cm}
+%
+%\#Estimated Parameters with all of the Data
+%
+%\#xi=c(2.180254, 7.658768), Omega=matrix(c(398.8636,-103.6277,-103.6277, 159.6203),byrow=T,nrow=2), alpha=c(4.610895,-1.323875), nu= 7.360353)
+%\vspace{.25cm}
+%
+%\#Estimated Parameters with F=1.5 outliers removed
+%
+%\#xi=c(2.149431, 7.886559), Omega=matrix(c(427.2566,-118.4594,-118.4594, 174.5091),byrow=T,nrow=2), alpha=c(4.588482,-1.410424), nu= 10293.03)
+%\vspace{.25cm}
+%
+%\#Estimated Parameters with F=3 outliers removed
+%
+%\#xi=c(2.135105, 7.812226), Omega=matrix(c(416.4182,-111.0366,-111.0366, 168.4730),byrow=T,nrow=2), alpha=c(4.669110,-1.362661), nu= 11.0206)
+%\vspace{.25cm}
+%
+%\#Estimated Parameters with F=5 outliers removed
+%
+%\#xi=c(2.195617, 7.67738), Omega=matrix(c(398.9459,-103.8284,-103.8284, 160.6443),byrow=T,nrow=2), alpha=c(4.596766,-1.326871), nu= 7.584202)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\graphicspath{{Code/Figures/}}
+ \begin{figure}
+\begin{center}
+\centering\rotatebox{270}{\epsfig{file=p1_uv.ps, width=5.4cm,height=5.4cm}}
+\centering\rotatebox{270}{\epsfig{file=p2_uv.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p3_uv.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p4_uv.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p5_uv.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p6_uv.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p7_uv.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p8_uv.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+
+\caption{Scatterplots of $u$ and $v$ components at various pressure levels at Station 40477.  Observations coded as -999's were removed.}\label{fig:uv_scatters}
+\end{center}
+\end{figure}
+
+
+\graphicspath{{Code/Figures/}}
+ \begin{figure}
+\begin{center}
+\centering\rotatebox{270}{\epsfig{file=p1_uv_zoom.ps, width=5.4cm,height=5.4cm}}
+\centering\rotatebox{270}{\epsfig{file=p2_uv_zoom.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p3_uv_zoom.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p4_uv_zoom.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p5_uv_zoom.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p6_uv_zoom.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p7_uv_zoom.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p8_uv_zoom.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+
+\caption{Zoomed in scatterplots of $u$ and $v$ components at various pressure levels at Station 40477.  Observations coded as -999's were removed, and the $x$ and $y$-axis scales are the same on all figures.}\label{fig:uv_scatters_zoom}
+\end{center}
+\end{figure}
+
+
+\graphicspath{{Code/Figures/}}
+ \begin{figure}
+\begin{center}
+\centering\rotatebox{270}{\epsfig{file=p1_uv_denver.ps, width=5.4cm,height=5.4cm}}
+%\centering\rotatebox{270}{\epsfig{file=p2_uv_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p3_uv_denver.eps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p4_uv_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p5_uv_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p6_uv_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p7_uv_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p8_uv_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p9_uv_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p10_uv_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p11_uv_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+
+\caption{Scatterplots of $u$ and $v$ components at various pressure levels at Station 72469 (Denver).  Observations coded as -999's were removed.}\label{fig:uv_scatters}
+\end{center}
+\end{figure}
+
+
+
+\graphicspath{{Code/Figures/}}
+ \begin{figure}
+\begin{center}
+\centering\rotatebox{270}{\epsfig{file=p1_uv_zoom_denver.ps, width=5.4cm,height=5.4cm}}
+%\centering\rotatebox{270}{\epsfig{file=p2_uv_zoom_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p3_uv_zoom_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p4_uv_zoom_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p5_uv_zoom_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p6_uv_zoom_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p7_uv_zoom_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p8_uv_zoom_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p9_uv_zoom_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p10_uv_zoom_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\centering\rotatebox{270}{\epsfig{file=p11_uv_zoom_denver.ps, width=5.4cm,height=5.4cm}}\vspace{0 cm}
+\caption{Zoomed in scatterplots of $u$ and $v$ components at various pressure levels at Station 72469 (Denver).  Observations coded as -999's were removed, and the $x$ and $y$-axis scales are not the same for each figure.}\label{fig:uv_scatters_zoom}
+\end{center}
+\end{figure}
+
+
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%TABLES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+%
+%
+%\begin{table}
+%\caption{{Site information for each of the four meteorological towers used in this study. }}
+%\begin{center}
+%\begin{tabular}{lcccc}
+%\hline
+%           &   &  &  & Anemometer \\
+%	Tower			& Latitude		& 	Longitude			& 	Elevation		& Height\\
+%\hline
+%Vansycle, OR     		& 45$^\circ$57$^\prime$ N & 118$^\circ$41$^\prime$ W & 543 m & 31 m\\
+%Kennewick, WA    		& 46$^\circ$06$^\prime$ N & 119$^\circ$08$^\prime$ W & 671 m & 26 m\\
+%Goodnoe Hills, WA	& 45$^\circ$48$^\prime$ N & 120$^\circ$34$^\prime$ W & 774 m & 59 m\\
+%Sevenmile Hill, OR 	& 45$^\circ$39$^\prime$ N & 121$^\circ$16$^\prime$ W & 573 m & 30 m\\
+%\hline
+%\multicolumn{5}{l}{\small{See http://me.oregonstate.edu/ERRL/bpa\_info.html for more information.}}\\
+%\end{tabular}
+%\end{center}\label{tab:site_info}
+%\end{table}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%FIGURES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%
+%
+% \begin{figure}
+%\begin{center}
+%\centering\rotatebox{270}{\epsfig{file=vestas_v47_660.ps, width=6cm,height=8cm}}
+%\centering\rotatebox{270}{\epsfig{file=power_curve_low.ps, width=6cm,height=8cm}}\vspace{0 cm}
+%\centering\rotatebox{270}{\epsfig{file=power_curve_med.ps, width=6cm,height=8cm}}\vspace{0 cm}
+%\centering\rotatebox{270}{\epsfig{file=power_curve_hi.ps, width=6cm,height=8cm}}\vspace{0 cm}
+%\caption{Top left:  The Vestas manufacturer's  V47-660 kW power curve with hub height at 50 m above ground level that is used to transform wind speed into power. Top right through bottom right panels show a realization of noisy wind power data at low, medium, and high levels.}\label{fig:power_curve}
+%\end{center}
+%\end{figure}
+
+
+
+ 
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%End of Document
+\end{document}
+%%%%%%%%%%End of Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
